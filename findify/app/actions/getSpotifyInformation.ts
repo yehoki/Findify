@@ -20,7 +20,6 @@ const getSpotifyInformation = async () => {
       return null;
     }
     const spotifyData = await res.json();
-    console.log(spotifyData);
     return spotifyData;
   } catch (err) {}
 };

@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lato.className} bg-spotifyBlack`}>{children}</body>
+      <body className={`${lato.className} bg-black`}>{children}</body>
     </html>
   );
 }

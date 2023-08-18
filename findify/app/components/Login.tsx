@@ -4,16 +4,16 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 interface LoginProps {
-  off: boolean;
+  isLoggedIn: boolean;
 }
 
-const Login: React.FC<LoginProps> = ({ off }) => {
+const Login: React.FC<LoginProps> = ({ isLoggedIn }) => {
   // const checkSession = async () => {
   //   const check = await useSession();
   // }
 
   const handleLogin = async () => {
-    if (off) {
+    if (isLoggedIn) {
       return await signOut();
     }
     return await signIn('spotify');
@@ -25,10 +25,16 @@ const Login: React.FC<LoginProps> = ({ off }) => {
   "
       onClick={handleLogin}
     >
-      Login with Spotify{' '}
-      <div className="relative w-[25px] h-[25px]">
-        <Image alt="Spotify logo" src={'/images/spotify-icon.png'} fill />
-      </div>
+      {isLoggedIn ? (
+        <>
+          Login with Spotify{' '}
+          <div className="relative w-[25px] h-[25px]">
+            <Image alt="Spotify logo" src={'/images/spotify-icon.png'} fill />
+          </div>
+        </>
+      ) : (
+        <>Log out</>
+      )}
     </button>
   );
 };

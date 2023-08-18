@@ -5,43 +5,50 @@ import { getServerSession } from 'next-auth';
 
 import { options } from './config/options';
 import getSpotifyInformation from './actions/getSpotifyInformation';
+import Header from './components/header/Header';
 export default async function Home() {
   const session = await getServerSession(options);
-  console.log(session);
-  if (session) {
-    const spotifyData = await getSpotifyInformation();
-    console.log(spotifyData);
-    return (
-      <div className="text-spotifyGreen">
-        {JSON.stringify(spotifyData)}
-        Logged in
-        <Login off />
-      </div>
-    );
-  }
-  // console.log(test);
-  // if (test) {
-  //   return (
-  //     <div className="text-spotifyGreen">
-  //       Not Logged in
-  //       <Login off />
-  //     </div>
-  //   );
-  // }
-  // console.log(session);
   return (
-    <main className="text-spotifyGreen">
-      <header className="w-full py-10">
-        <div className="w-[1024px] mx-auto">
-          <nav>
-            <ul>
-              <li>
-                <Login off={false} />
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-    </main>
+    <>
+      <Header isLoggedIn={session ? true : false} />
+      <main
+        className="text-spotifyGreen
+        w-full
+        h-5/6
+      p-2
+      grid
+      sm:grid-cols-10
+      lg:grid-cols-8
+      gap-2 
+      "
+      >
+        <section
+          className="bg-spotifyBlack
+  hidden sm:block
+  sm:col-span-4 lg:col-span-2  rounded-lg
+        "
+        >
+          <ul>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+            <li>Setting 1</li>
+          </ul>
+        </section>
+        <section
+          className="bg-spotifyBlack
+          col-span-full sm:col-span-6 rounded-lg
+        "
+        >
+          Display information
+        </section>
+      </main>
+    </>
   );
 }
