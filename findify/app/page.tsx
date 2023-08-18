@@ -1,6 +1,7 @@
 import Header from './components/header/Header';
 import getUserSession from './actions/getUserSession';
 import getUserTracks from './actions/getUserTracks';
+import DisplaySingleTrack from './components/tracks/DisplaySingleTrack';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -14,19 +15,19 @@ export default async function Home() {
         h-5/6
       p-2
       grid
-      sm:grid-cols-10
+      md:grid-cols-10
       lg:grid-cols-8
       gap-2 
       "
       >
         <section
           className="bg-spotifyBlack
-  hidden sm:block
-  sm:col-span-4 lg:col-span-2  rounded-lg
+  hidden md:block
+  md:col-span-4 lg:col-span-2  rounded-lg
         "
         >
           <ul>
-            <li>Tracks</li>
+            <li>Get user tracks</li>
             <li>Setting 1</li>
             <li>Setting 1</li>
             <li>Setting 1</li>
@@ -40,18 +41,31 @@ export default async function Home() {
         </section>
         <section
           className="bg-spotifyBlack
-          col-span-full sm:col-span-6 rounded-lg
-          p-20
+          col-span-full md:col-span-6 rounded-lg
+          p-4
+          overflow-x-hidden
         "
         >
+          <h3>Your Top Tracks</h3>
           <div
             className="w-full border-neutral-800 border
-          rounded-lg
+          rounded-lg flex gap-2 overflow-x-auto
           "
           >
-            {userTracks.items.map((userTrack: any) => {
-              return <div key={userTrack.id}>{userTrack.name}</div>;
-            })}
+            {userTracks ? (
+              userTracks.items.map((userTrack) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userTrack.name}
+                    key={userTrack.id}
+                    artists={userTrack.artists.map((artist) => artist.name)}
+                    imageUrl={userTrack.album.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </section>
       </main>

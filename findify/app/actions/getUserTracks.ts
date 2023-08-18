@@ -1,3 +1,4 @@
+import { MyTopTracks } from '../types/SpotifyTypes';
 import getUserSession from './getUserSession';
 
 export default async function getUserTracks() {
@@ -7,19 +8,22 @@ export default async function getUserTracks() {
       return null;
     }
     const spotifyURL = 'https://api.spotify.com/v1/me';
-    const res = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=short_term`, {
-      headers: {
-        Authorization: `Bearer ${
-          currentUser.user.accessToken ? currentUser.user.accessToken : ''
-        }`,
-      },
-      method: 'GET',
-    });
+    const res = await fetch(
+      `https://api.spotify.com/v1/me/top/tracks?time_range=short_term`,
+      {
+        headers: {
+          Authorization: `Bearer ${
+            currentUser.user.accessToken ? currentUser.user.accessToken : ''
+          }`,
+        },
+        method: 'GET',
+      }
+    );
 
     if (!res.ok) {
       return null;
     }
-    const userTracks = await res.json();
+    const userTracks: MyTopTracks = await res.json();
     return userTracks;
   } catch (err: any) {
     console.log(err);
