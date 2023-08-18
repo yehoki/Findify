@@ -1,15 +1,19 @@
 import { MyTopTracks } from '../types/SpotifyTypes';
 import getUserSession from './getUserSession';
 
-export default async function getUserTracks() {
+export default async function getUserTracks(
+  limit = 20,
+  timeRange: 'short_term' | 'medium_term' | 'long_term' = 'medium_term',
+  offset = 0
+) {
   try {
     const currentUser = await getUserSession();
     if (!currentUser) {
       return null;
     }
-    const spotifyURL = 'https://api.spotify.com/v1/me';
+    const spotifyBaseURL = 'https://api.spotify.com/v1/me';
     const res = await fetch(
-      `https://api.spotify.com/v1/me/top/tracks?time_range=short_term`,
+      `${spotifyBaseURL}/top/tracks?time_range=${timeRange}&limit=${limit}&offset=${offset}`,
       {
         headers: {
           Authorization: `Bearer ${

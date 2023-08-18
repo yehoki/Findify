@@ -7,8 +7,8 @@ import getUserGenres from './actions/getUserGenres';
 export default async function Home() {
   const session = await getUserSession();
 
-  const userTracks = await getUserTracks();
-  const topUserArtists = await getUserArtists();
+  const userTracks = await getUserTracks(50, 'long_term');
+  const topUserArtists = await getUserArtists(50, 'long_term', 49);
   const topUserGenres = await getUserGenres();
 
   const displayUserGenres = () => {
