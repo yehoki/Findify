@@ -15,9 +15,12 @@ const DisplaySingleTrack: React.FC<DisplaySingleTrackProps> = ({
 }) => {
   return (
     <div>
-      <div className="relative w-[100px] h-[100px]">
+      <div className="relative w-[125px] h-[125px]">
         <Image src={imageUrl} alt={`${name} track cover`} fill />{' '}
       </div>
+      <h4 className="font-semibold text-sm overflow-hidden line-clamp-2">
+        {name}
+      </h4>
     </div>
   );
 };

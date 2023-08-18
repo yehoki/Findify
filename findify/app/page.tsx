@@ -2,10 +2,38 @@ import Header from './components/header/Header';
 import getUserSession from './actions/getUserSession';
 import getUserTracks from './actions/getUserTracks';
 import DisplaySingleTrack from './components/tracks/DisplaySingleTrack';
+import getUserArtists from './actions/getUserArtists';
+import getUserGenres from './actions/getUserGenres';
 export default async function Home() {
   const session = await getUserSession();
 
   const userTracks = await getUserTracks();
+  const topUserArtists = await getUserArtists();
+  const topUserGenres = await getUserGenres();
+
+  const displayUserGenres = () => {
+    if (!topUserGenres) {
+      return <div>No Genres</div>;
+    }
+    const genreArray: { genre: string; genreCount: number }[] = [];
+    topUserGenres.forEach((genreCount, genre) => {
+      genreArray.push({ genre: genre, genreCount: genreCount });
+    });
+    const sortedGenres = genreArray.sort((objOne, objTwo) => {
+      if (objOne.genreCount < objTwo.genreCount) {
+        return 1;
+      } else if (objOne.genreCount > objTwo.genreCount) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return sortedGenres.map((genreDiv) => (
+      <div key={genreDiv.genre}>
+        {genreDiv.genre}: {genreDiv.genreCount}
+      </div>
+    ));
+  };
   return (
     <>
       <Header isLoggedIn={session ? true : false} />
@@ -26,17 +54,10 @@ export default async function Home() {
   md:col-span-4 lg:col-span-2  rounded-lg
         "
         >
-          <ul>
+          <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
             <li>Get user tracks</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
-            <li>Setting 1</li>
+            <li>Get user artists</li>
+            <li>Single track display</li>
           </ul>
         </section>
         <section
@@ -50,6 +71,7 @@ export default async function Home() {
           <div
             className="w-full border-neutral-800 border
           rounded-lg flex gap-2 overflow-x-auto
+          pb-8
           "
           >
             {userTracks ? (
@@ -66,6 +88,36 @@ export default async function Home() {
             ) : (
               <></>
             )}
+          </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {displayUserGenres()}
           </div>
         </section>
       </main>
