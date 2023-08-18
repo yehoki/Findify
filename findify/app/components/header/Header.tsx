@@ -14,7 +14,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
     rounded-lg h-full
     "
       >
-        Login & Nav
         <Login isLoggedIn={isLoggedIn} />
       </section>
     </header>

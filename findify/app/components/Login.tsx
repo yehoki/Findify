@@ -8,10 +8,6 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ isLoggedIn }) => {
-  // const checkSession = async () => {
-  //   const check = await useSession();
-  // }
-
   const handleLogin = async () => {
     if (isLoggedIn) {
       return await signOut();
@@ -25,7 +21,7 @@ const Login: React.FC<LoginProps> = ({ isLoggedIn }) => {
   "
       onClick={handleLogin}
     >
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <>
           Login with Spotify{' '}
           <div className="relative w-[25px] h-[25px]">

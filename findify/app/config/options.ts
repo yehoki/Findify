@@ -1,12 +1,20 @@
 import { NextAuthOptions } from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
+const spotifyScope =
+  'user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
+
 export const options: NextAuthOptions = {
   secret: process.env.NEXT_AUTH_SECRET as string,
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENTID as string,
       clientSecret: process.env.SPOTIFY_SECRET as string,
+      authorization: {
+        params: {
+          scope: spotifyScope,
+        },
+      },
       profile(profile) {
         return {
           id: profile.id,
@@ -19,6 +27,9 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
     async session({ session, token, user }) {
       const newSession = {
         expires: session.expires,

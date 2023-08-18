@@ -1,13 +1,10 @@
-import Image from 'next/image';
-import { signIn, getSession, useSession } from 'next-auth/react';
-import Login from './components/Login';
-import { getServerSession } from 'next-auth';
-
-import { options } from './config/options';
-import getSpotifyInformation from './actions/getSpotifyInformation';
 import Header from './components/header/Header';
+import getUserSession from './actions/getUserSession';
+import getUserTracks from './actions/getUserTracks';
 export default async function Home() {
-  const session = await getServerSession(options);
+  const session = await getUserSession();
+
+  const userTracks = await getUserTracks();
   return (
     <>
       <Header isLoggedIn={session ? true : false} />
@@ -29,7 +26,7 @@ export default async function Home() {
         "
         >
           <ul>
-            <li>Setting 1</li>
+            <li>Tracks</li>
             <li>Setting 1</li>
             <li>Setting 1</li>
             <li>Setting 1</li>
@@ -44,9 +41,18 @@ export default async function Home() {
         <section
           className="bg-spotifyBlack
           col-span-full sm:col-span-6 rounded-lg
+          p-20
         "
         >
-          Display information
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg
+          "
+          >
+            {userTracks.items.map((userTrack: any) => {
+              return <div key={userTrack.id}>{userTrack.name}</div>;
+            })}
+          </div>
         </section>
       </main>
     </>
