@@ -1,13 +1,22 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
-interface LoginProps {}
+interface LoginProps {
+  off: boolean;
+}
 
-const Login: React.FC<LoginProps> = ({}) => {
+const Login: React.FC<LoginProps> = ({ off }) => {
+  // const checkSession = async () => {
+  //   const check = await useSession();
+  // }
+
   const handleLogin = async () => {
-    await signIn('spotify');
+    if (off) {
+      return await signOut();
+    }
+    return await signIn('spotify');
   };
   return (
     <button

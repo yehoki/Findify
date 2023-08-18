@@ -1,7 +1,30 @@
 import Image from 'next/image';
-import { signIn } from 'next-auth/react';
+import { signIn, getSession, useSession } from 'next-auth/react';
 import Login from './components/Login';
-export default function Home() {
+import { getServerSession } from 'next-auth';
+
+import { options } from './config/options';
+export default async function Home() {
+  const session = await getServerSession(options);
+  console.log(session);
+  if (session) {
+    return (
+      <div>
+        Logged in
+        <Login off />
+      </div>
+    );
+  }
+  // console.log(test);
+  // if (test) {
+  //   return (
+  //     <div className="text-spotifyGreen">
+  //       Not Logged in
+  //       <Login off />
+  //     </div>
+  //   );
+  // }
+  // console.log(session);
   return (
     <main className="text-spotifyGreen">
       <header className="w-full py-10">
@@ -9,7 +32,7 @@ export default function Home() {
           <nav>
             <ul>
               <li>
-                <Login />
+                <Login off={false} />
               </li>
             </ul>
           </nav>
