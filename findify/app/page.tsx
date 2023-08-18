@@ -4,12 +4,16 @@ import Login from './components/Login';
 import { getServerSession } from 'next-auth';
 
 import { options } from './config/options';
+import getSpotifyInformation from './actions/getSpotifyInformation';
 export default async function Home() {
   const session = await getServerSession(options);
   console.log(session);
   if (session) {
+    const spotifyData = await getSpotifyInformation();
+    console.log(spotifyData);
     return (
-      <div>
+      <div className="text-spotifyGreen">
+        {JSON.stringify(spotifyData)}
         Logged in
         <Login off />
       </div>

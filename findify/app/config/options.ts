@@ -19,6 +19,26 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async session({ session, token, user }) {
+      const newSession = {
+        expires: session.expires,
+        user: {
+          ...session.user,
+          tokenId: token.id,
+          accessToken: token.accessToken,
+        },
+      };
+      return newSession;
+    },
+    async jwt({ token, user, account, profile }) {
+      if (user) {
+        token.id = user.id;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
     signIn({ account, profile, user }) {
       console.log(account, profile, user);
       return true;
