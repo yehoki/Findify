@@ -4,6 +4,8 @@ import getUserTracks from './actions/getUserTracks';
 import DisplaySingleTrack from './components/tracks/DisplaySingleTrack';
 import getUserArtists from './actions/getUserArtists';
 import getUserGenres from './actions/getUserGenres';
+import Carousel from './components/Carousel';
+import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -36,22 +38,48 @@ export default async function Home() {
   };
   return (
     <>
-      <Header isLoggedIn={session ? true : false} />
+      {/* <Header isLoggedIn={session ? true : false} /> */}
+      {/* <main className="grid grid-cols-2 grid-rows-2">
+        <div className="col-span-1 row-span-1  bg-blue-300">Home</div>
+        <div className="col-span-1 row-start-2  bg-pink-300">List</div>
+        <div className="col-span-1 row-span-2 bg-yellow-400">main</div>
+      </main> */}
       <main
         className="text-spotifyGreen
         w-full
-        h-5/6
+        h-full
       p-2
       grid
-      md:grid-cols-10
-      lg:grid-cols-8
+      grid-rows-6
+      grid-cols-12
       gap-2 
       "
       >
         <section
+          className="col-span-4 lg:col-span-3 2xl:col-span-2 row-span-1
+        bg-spotifyBlack rounded-lg
+        "
+        >
+          <div
+            className="text-[#b3b3b3] hover:text-white transition 
+          flex gap-2 items-center"
+          >
+            <AiFillHome size={24} />
+            <span>Home</span>
+          </div>
+          <div
+            className="text-[#b3b3b3] hover:text-white transition 
+          flex gap-2 items-center"
+          >
+            <AiOutlineSearch size={24} />
+            <span>Search</span>
+          </div>
+          <div></div>
+        </section>
+        <section
           className="bg-spotifyBlack
-  hidden md:block
-  md:col-span-4 lg:col-span-2  rounded-lg
+        row-start-2 row-end-7
+  col-span-4 lg:col-span-3 2xl:col-span-2 rounded-lg
         "
         >
           <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
@@ -62,12 +90,15 @@ export default async function Home() {
         </section>
         <section
           className="bg-spotifyBlack
-          col-span-full md:col-span-6 rounded-lg
-          p-4
-          overflow-x-hidden
-        "
+          col-span-8 lg:col-span-9 2xl:col-span-10 row-span-6   
+          rounded-lg p-4
+          overflow-x-hidden"
         >
-          <h3>Your Top Tracks</h3>
+          <header className="w-full bg-blue-200 h-12"></header>
+          <div className="py-4 border border-white overflow-x-hidden">
+            <Carousel />
+          </div>
+          {/* <h3>Your Top Tracks</h3>
           <div
             className="w-full border-neutral-800 border
           rounded-lg flex gap-2 overflow-x-auto
@@ -111,6 +142,50 @@ export default async function Home() {
               <></>
             )}
           </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
           <div
             className="w-full border-neutral-800 border
           rounded-lg flex gap-2 overflow-x-auto
@@ -118,7 +193,7 @@ export default async function Home() {
           "
           >
             {displayUserGenres()}
-          </div>
+          </div> */}
         </section>
       </main>
     </>
