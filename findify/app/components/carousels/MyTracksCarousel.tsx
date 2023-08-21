@@ -1,15 +1,14 @@
 'use client';
 
+import { TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
 
-interface CarouselProps {}
+interface MyTracksCarouselProps {
+  myTracks: TrackObject[];
+}
 
-const Carousel: React.FC<CarouselProps> = ({}) => {
-  const images = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26,
-  ];
+const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   const singleWidth = 198;
   const [carouselTranslate, setCarouselTranslate] = useState(0);
   const [width, setWidth] = useState(0);
@@ -52,7 +51,7 @@ const Carousel: React.FC<CarouselProps> = ({}) => {
         setCurrentScrolled((prev) => prev - perScroll);
       }
     } else {
-      if (currentScrolled + perScroll <= images.length - 1) {
+      if (currentScrolled + perScroll <= myTracks.length - 1) {
         setCarouselTranslate((prev) => prev - perScroll * singleWidth);
         setCurrentScrolled((prev) => prev + perScroll);
       }
@@ -62,7 +61,6 @@ const Carousel: React.FC<CarouselProps> = ({}) => {
   return (
     <>
       <div className="flex gap-4 mb-4">
-        {width},{currentScrolled}
         <button
           draggable={true}
           className="bg-yellow-100 h-5 w-20"
@@ -83,24 +81,27 @@ const Carousel: React.FC<CarouselProps> = ({}) => {
           translate: `translateX(${carouselTranslate}px)`,
         }}
         className="grid transition duration-500 gap-4
-        grid-rows-1 grid-flow-col
-        "
+    grid-rows-1 grid-flow-col
+    "
       >
-        {images.map((numb) => (
+        {myTracks.map((track, index) => (
           <div
-            className="
-rounded-md p-4
-  bg-[#282828]
-  cursor-pointer
-  "
-            key={numb}
+            className="rounded-md p-4 bg-[#282828] cursor-pointer"
+            key={track.id}
           >
-            <div className="relative w-[150px] h-[150px] mb-4">
-              <Image src={'/images/spotify-icon.png'} fill alt="spotify icon" />
+            <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg">
+              <Image
+                src={`${track.album.images[0].url}`}
+                fill
+                alt={`${track.name} album cover`}
+                className="rounded-md"
+              />
             </div>
             <div>
-              <div>Title</div>
-              <div>Artist(s)</div>
+              <div className="text-white font-semibold line-clamp-2">
+                {index + 1}. {track.name}
+              </div>
+              <div className="text-[#6a6a6a]">Artist(s)</div>
             </div>
           </div>
         ))}
@@ -109,4 +110,4 @@ rounded-md p-4
   );
 };
 
-export default Carousel;
+export default MyTracksCarousel;

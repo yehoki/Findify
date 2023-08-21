@@ -6,6 +6,8 @@ import getUserArtists from './actions/getUserArtists';
 import getUserGenres from './actions/getUserGenres';
 import Carousel from './components/Carousel';
 import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
+import MyTracksCarousel from './components/carousels/MyTracksCarousel';
+import Login from './components/Login';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -66,6 +68,7 @@ export default async function Home() {
           >
             <AiFillHome size={24} />
             <span>Home</span>
+            <Login isLoggedIn={session ? true : false} />
           </div>
           <div
             className="text-[#b3b3b3] hover:text-white transition 
@@ -95,10 +98,11 @@ export default async function Home() {
           overflow-x-hidden"
         >
           <header className="w-full bg-blue-200 h-12"></header>
-          <div className="py-4 border border-white overflow-x-hidden">
-            <Carousel />
+          <div className="py-4 overflow-x-hidden">
+            <h3>Your Top Tracks</h3>
+            <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
           </div>
-          {/* <h3>Your Top Tracks</h3>
+          {/* 
           <div
             className="w-full border-neutral-800 border
           rounded-lg flex gap-2 overflow-x-auto
