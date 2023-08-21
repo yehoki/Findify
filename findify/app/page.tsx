@@ -9,6 +9,7 @@ import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
 import MyTracksCarousel from './components/carousels/MyTracksCarousel';
 import Login from './components/Login';
 import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
+import Image from 'next/image';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -98,9 +99,34 @@ export default async function Home() {
           rounded-lg p-4
           overflow-x-hidden"
         >
-          <header className="w-full bg-blue-200 h-12"></header>
+          <header className="w-ful h-12 relative">
+            <div className="absolute right-2 top-2">
+              <div className="rounded-full bg-purple-300 w-6 h-6 p-1 border-4 border-black cursor-pointer active:opacity-75">
+                <Image
+                  src={
+                    session?.user.image
+                      ? session.user.image
+                      : '/images/spotify-icon.png'
+                  }
+                  fill
+                  alt="User image"
+                  className="rounded-full"
+                />
+              </div>
+            </div>
+          </header>
           <div className="py-4 overflow-x-hidden">
             <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
+          </div>
+          <div className="py-4 overflow-x-hidden">
+            <MyArtistsCarousel
+              myArtists={topUserArtists ? topUserArtists.items : []}
+            />
+          </div>
+          <div className="py-4 overflow-x-hidden">
+            <MyArtistsCarousel
+              myArtists={topUserArtists ? topUserArtists.items : []}
+            />
           </div>
           <div className="py-4 overflow-x-hidden">
             <MyArtistsCarousel

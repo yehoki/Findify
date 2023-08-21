@@ -1,9 +1,8 @@
 'use client';
 
-import { TrackObject } from '@/app/types/SpotifyTypes';
+import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 interface MyTracksCarouselProps {
   myTracks: TrackObject[];
@@ -59,6 +58,20 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     }
   };
 
+  const parseArtists = (artists: string[]) => {
+    if (artists.length === 0) {
+      return '';
+    }
+    if (artists.length === 1) {
+      return artists[0];
+    }
+    let parsedArtists = artists[0];
+    for (let i = 1; i < artists.length; i++) {
+      parsedArtists += `, ${artists[i]}`;
+    }
+    return parsedArtists;
+  };
+
   return (
     <div>
       <div className="flex justify-between">
@@ -72,7 +85,8 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
             <PiCaretLeftLight size={18} />
           </button>
           <button
-            className="text-white rounded-full p-2 bg-[#282828]"
+            className="text-white rounded-full p-2 bg-[#282828]
+            "
             onClick={() => handleButtonClick('right')}
           >
             <PiCaretRightLight size={18} />
@@ -105,7 +119,9 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
               <div className="text-white font-semibold line-clamp-2">
                 {index + 1}. {track.name}
               </div>
-              <div className="text-[#6a6a6a]">Artist(s)</div>
+              <div className="text-[#a7a7a7] line-clamp-2">
+                {parseArtists(track.artists.map((artist) => artist.name))}
+              </div>
             </div>
           </div>
         ))}

@@ -3,7 +3,6 @@
 import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 interface MyArtistsCarouselProps {
   myArtists: ArtistObject[];
