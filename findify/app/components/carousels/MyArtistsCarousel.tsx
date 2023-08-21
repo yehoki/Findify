@@ -1,15 +1,15 @@
 'use client';
 
-import { TrackObject } from '@/app/types/SpotifyTypes';
+import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
-interface MyTracksCarouselProps {
-  myTracks: TrackObject[];
+interface MyArtistsCarouselProps {
+  myArtists: ArtistObject[];
 }
 
-const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
+const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
   const singleWidth = 198;
   const [carouselTranslate, setCarouselTranslate] = useState(0);
   const [width, setWidth] = useState(0);
@@ -52,7 +52,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
         setCurrentScrolled((prev) => prev - perScroll);
       }
     } else {
-      if (currentScrolled + perScroll <= myTracks.length - 1) {
+      if (currentScrolled + perScroll <= myArtists.length - 1) {
         setCarouselTranslate((prev) => prev - perScroll * singleWidth);
         setCurrentScrolled((prev) => prev + perScroll);
       }
@@ -62,7 +62,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   return (
     <div>
       <div className="flex justify-between">
-        <h3 className="text-white text-xl font-semibold">Your Top Tracks</h3>
+        <h3 className="text-white text-xl font-semibold">Your Top Artists</h3>
         <div className="flex gap-4 mb-4">
           <button
             draggable={true}
@@ -88,24 +88,23 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     grid-rows-1 grid-flow-col
     "
       >
-        {myTracks.map((track, index) => (
+        {myArtists.map((artist, index) => (
           <div
             className="rounded-md p-4 bg-[#282828] cursor-pointer"
-            key={track.id}
+            key={artist.id}
           >
-            <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg">
+            <div className="relative w-[150px] h-[150px] mb-4 rounded-full shadow-2xl">
               <Image
-                src={`${track.album.images[0].url}`}
+                src={`${artist.images[0].url}`}
                 fill
-                alt={`${track.name} album cover`}
-                className="rounded-md"
+                alt={`${artist.name} artist image`}
+                className="rounded-full"
               />
             </div>
             <div>
               <div className="text-white font-semibold line-clamp-2">
-                {index + 1}. {track.name}
+                {index + 1}. {artist.name}
               </div>
-              <div className="text-[#6a6a6a]">Artist(s)</div>
             </div>
           </div>
         ))}
@@ -114,4 +113,4 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   );
 };
 
-export default MyTracksCarousel;
+export default MyArtistsCarousel;

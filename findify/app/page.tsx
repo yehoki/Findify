@@ -8,11 +8,12 @@ import Carousel from './components/Carousel';
 import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
 import MyTracksCarousel from './components/carousels/MyTracksCarousel';
 import Login from './components/Login';
+import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 export default async function Home() {
   const session = await getUserSession();
 
-  const userTracks = await getUserTracks(50, 'long_term');
-  const topUserArtists = await getUserArtists(50, 'long_term', 49);
+  const userTracks = await getUserTracks(50, 'medium_term');
+  const topUserArtists = await getUserArtists(50, 'medium_term');
   const topUserGenres = await getUserGenres();
 
   const displayUserGenres = () => {
@@ -99,8 +100,12 @@ export default async function Home() {
         >
           <header className="w-full bg-blue-200 h-12"></header>
           <div className="py-4 overflow-x-hidden">
-            <h3>Your Top Tracks</h3>
             <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
+          </div>
+          <div className="py-4 overflow-x-hidden">
+            <MyArtistsCarousel
+              myArtists={topUserArtists ? topUserArtists.items : []}
+            />
           </div>
           {/* 
           <div
