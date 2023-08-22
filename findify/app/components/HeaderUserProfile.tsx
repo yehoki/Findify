@@ -81,7 +81,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
         <>
           <button
             className="
-          absolute top-0 right-0
+          absolute top-6 right-10
           bg-white rounded-full py-3 px-8 text-black font-semibold
           hover:scale-105 hover:opacity-90
           "

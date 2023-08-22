@@ -8,7 +8,6 @@ import HeaderUserProfile from './components/HeaderUserProfile';
 import Menu from './components/Menu/Menu';
 export default async function Home() {
   const session = await getUserSession();
-
   const userTracks = await getUserTracks(50, 'medium_term');
   const topUserArtists = await getUserArtists(50, 'medium_term');
   const topUserGenres = await getUserGenres();
@@ -38,6 +37,7 @@ export default async function Home() {
   };
   return (
     <>
+      {/* <ClientCheckSession /> */}
       {/* <Header isLoggedIn={session ? true : false} /> */}
       {/* <main className="grid grid-cols-2 grid-rows-2">
         <div className="col-span-1 row-span-1  bg-blue-300">Home</div>
