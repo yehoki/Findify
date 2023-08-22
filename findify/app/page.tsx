@@ -1,16 +1,11 @@
-import Header from './components/header/Header';
 import getUserSession from './actions/getUserSession';
 import getUserTracks from './actions/getUserTracks';
-import DisplaySingleTrack from './components/tracks/DisplaySingleTrack';
 import getUserArtists from './actions/getUserArtists';
 import getUserGenres from './actions/getUserGenres';
-import Carousel from './components/Carousel';
-import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
 import MyTracksCarousel from './components/carousels/MyTracksCarousel';
-import Login from './components/Login';
 import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
-import Image from 'next/image';
 import HeaderUserProfile from './components/HeaderUserProfile';
+import Menu from './components/Menu/Menu';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -55,35 +50,21 @@ export default async function Home() {
         h-full
       p-2
       grid
-      grid-rows-6
+      grid-rows-16
       grid-cols-12
       gap-2 
       "
       >
         <section
-          className="col-span-4 lg:col-span-3 2xl:col-span-2 row-span-1
+          className="col-span-4 lg:col-span-3 2xl:col-span-2 row-span-2
         bg-spotifyBlack rounded-lg
         "
         >
-          <div
-            className="text-[#b3b3b3] hover:text-white transition 
-          flex gap-2 items-center"
-          >
-            <AiFillHome size={24} />
-            <span>Home</span>
-          </div>
-          <div
-            className="text-[#b3b3b3] hover:text-white transition 
-          flex gap-2 items-center"
-          >
-            <AiOutlineSearch size={24} />
-            <span>Search</span>
-          </div>
-          <div></div>
+          <Menu />
         </section>
         <section
           className="bg-spotifyBlack
-        row-start-2 row-end-7
+        row-start-3 row-end-[17]
   col-span-4 lg:col-span-3 2xl:col-span-2 rounded-lg
         "
         >
@@ -95,31 +76,34 @@ export default async function Home() {
         </section>
         <section
           className="bg-spotifyBlack
-          col-span-8 lg:col-span-9 2xl:col-span-10 row-span-6   
+          col-span-8 lg:col-span-9 2xl:col-span-10 row-span-full
           rounded-lg p-4
           overflow-x-hidden"
         >
-          <header className="w-ful h-12 relative">
+          <header className="w-full h-16">
             <HeaderUserProfile session={session} />
           </header>
-          <div className="py-4 overflow-x-hidden">
-            <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
+          <div className="">
+            <div className="py-4 overflow-x-hidden">
+              <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
+            </div>
+            <div className="py-4 overflow-x-hidden">
+              <MyArtistsCarousel
+                myArtists={topUserArtists ? topUserArtists.items : []}
+              />
+            </div>
+            <div className="py-4 overflow-x-hidden">
+              <MyArtistsCarousel
+                myArtists={topUserArtists ? topUserArtists.items : []}
+              />
+            </div>
+            <div className="py-4 overflow-x-hidden">
+              <MyArtistsCarousel
+                myArtists={topUserArtists ? topUserArtists.items : []}
+              />
+            </div>
           </div>
-          <div className="py-4 overflow-x-hidden">
-            <MyArtistsCarousel
-              myArtists={topUserArtists ? topUserArtists.items : []}
-            />
-          </div>
-          <div className="py-4 overflow-x-hidden">
-            <MyArtistsCarousel
-              myArtists={topUserArtists ? topUserArtists.items : []}
-            />
-          </div>
-          <div className="py-4 overflow-x-hidden">
-            <MyArtistsCarousel
-              myArtists={topUserArtists ? topUserArtists.items : []}
-            />
-          </div>
+
           {/* 
           <div
             className="w-full border-neutral-800 border

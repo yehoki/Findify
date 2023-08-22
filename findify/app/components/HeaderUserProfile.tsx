@@ -22,7 +22,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
         <>
           <button
             onClick={handleOnClick}
-            className="absolute right-0 top-0 active:opacity-75"
+            className="absolute right-10 top-6 hover:opacity-90 hover:scale-105"
           >
             <div className="w-fit h-fit rounded-full p-1 bg-black">
               <div className="relative rounded-full w-6 h-6 bg-black">
@@ -41,9 +41,9 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
           </button>
           {isExpanded && (
             <div
-              className="absolute right-0 top-10 
+              className="absolute right-10 top-16 
         text-spotifyOffWhite bg-spotifyGray p-1
-        min-w-[196px] z-[1000]
+        min-w-[196px] z-[9999] shadow-md
         "
             >
               <ul>

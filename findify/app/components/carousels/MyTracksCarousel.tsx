@@ -107,7 +107,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
             className="rounded-md p-4 bg-[#282828] cursor-pointer"
             key={track.id}
           >
-            <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg">
+            <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg z-0">
               <Image
                 src={`${track.album.images[0].url}`}
                 fill

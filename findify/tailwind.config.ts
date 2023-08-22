@@ -13,7 +13,7 @@ const config: Config = {
         spotifyBlack: '#191414',
         spotifyGray: '#282828',
         spotifyOffWhite: '#b3b3b3',
-        spotifyLighterGray: '#3e3e3e'
+        spotifyLighterGray: '#3e3e3e',
       },
       textColor: {
         spotifyGreen: '#1DB954',
@@ -24,6 +24,9 @@ const config: Config = {
       borderColor: {
         spotifyGreen: '#1DB954',
         spotifyBlack: '#191414',
+      },
+      gridTemplateRows: {
+        '16': 'repeat(16, minmax(0, 1fr))',
       },
     },
   },
