@@ -71,7 +71,6 @@ export default async function Home() {
           >
             <AiFillHome size={24} />
             <span>Home</span>
-            <Login isLoggedIn={session ? true : false} />
           </div>
           <div
             className="text-[#b3b3b3] hover:text-white transition 
