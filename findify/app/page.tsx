@@ -10,6 +10,7 @@ import MyTracksCarousel from './components/carousels/MyTracksCarousel';
 import Login from './components/Login';
 import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 import Image from 'next/image';
+import HeaderUserProfile from './components/HeaderUserProfile';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -100,20 +101,7 @@ export default async function Home() {
           overflow-x-hidden"
         >
           <header className="w-ful h-12 relative">
-            <div className="absolute right-2 top-2">
-              <div className="rounded-full bg-purple-300 w-6 h-6 p-1 border-4 border-black cursor-pointer active:opacity-75">
-                <Image
-                  src={
-                    session?.user.image
-                      ? session.user.image
-                      : '/images/spotify-icon.png'
-                  }
-                  fill
-                  alt="User image"
-                  className="rounded-full"
-                />
-              </div>
-            </div>
+            <HeaderUserProfile session={session} />
           </header>
           <div className="py-4 overflow-x-hidden">
             <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
