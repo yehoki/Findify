@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 import SingleUserTrack from '../tracks/SingleUserTrack';
+import CarouselButton from './Buttons/CarouselButton';
 interface MyTracksCarouselProps {
   myTracks: TrackObject[];
 }
@@ -65,20 +66,16 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
       <div className="flex justify-between">
         <h3 className="text-white text-xl font-semibold">Your Top Tracks</h3>
         <div className="flex gap-4 mb-4">
-          <button
-            draggable={true}
-            className="text-white rounded-full p-2 bg-[#282828]"
+          <CarouselButton
+            icon={PiCaretLeftLight}
             onClick={() => handleButtonClick('left')}
-          >
-            <PiCaretLeftLight size={18} />
-          </button>
-          <button
-            className="text-white rounded-full p-2 bg-[#282828]
-            "
+            isDisabled={carouselTranslate === 0}
+          />
+          <CarouselButton
+            icon={PiCaretRightLight}
             onClick={() => handleButtonClick('right')}
-          >
-            <PiCaretRightLight size={18} />
-          </button>
+            isDisabled={currentScrolled + perScroll > myTracks.length - 1}
+          />
         </div>
       </div>
       <div
