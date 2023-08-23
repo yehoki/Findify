@@ -26,6 +26,7 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
   useLayoutEffect(() => {
     setWidth(window.innerWidth);
     const decideSingleWidth = () => {
+      setWidth(window.innerWidth);
       if (window.innerWidth > 1835) {
         setPerScroll(8);
       }
@@ -107,11 +108,13 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
       <div className="flex justify-between">
         <h3 className="text-white text-xl font-semibold">Your Top Artists</h3>
         <div className="flex gap-4 mb-4">
-          <CarouselButton
-            icon={PiCaretDoubleLeftLight}
-            onClick={() => handleButtonClick('start')}
-            isDisabled={carouselTranslate === 0}
-          />
+          {width > 1024 && (
+            <CarouselButton
+              icon={PiCaretDoubleLeftLight}
+              onClick={() => handleButtonClick('start')}
+              isDisabled={carouselTranslate === 0}
+            />
+          )}
           <CarouselButton
             icon={PiCaretLeftLight}
             onClick={() => handleButtonClick('left')}
@@ -122,11 +125,13 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
             onClick={() => handleButtonClick('right')}
             isDisabled={currentScrolled + perScroll >= myArtists.length - 1}
           />
-          <CarouselButton
-            icon={PiCaretDoubleRightLight}
-            onClick={() => handleButtonClick('end')}
-            isDisabled={currentScrolled + perScroll >= myArtists.length - 1}
-          />
+          {width > 1024 && (
+            <CarouselButton
+              icon={PiCaretDoubleRightLight}
+              onClick={() => handleButtonClick('end')}
+              isDisabled={currentScrolled + perScroll >= myArtists.length - 1}
+            />
+          )}
         </div>
       </div>
       <div
