@@ -16,6 +16,7 @@ const CarouselButton: React.FC<CarouselButtonProps> = ({
   return (
     <button
       className={`
+      active:scale-95
       ${isDisabled ? 'opacity-50' : ''}
       text-white rounded-full p-2 bg-[#282828]`}
       onClick={onClick}
