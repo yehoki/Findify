@@ -2,6 +2,7 @@ import getUserSession from '../actions/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';
+import Search from '../components/search/Search';
 import MenuProvider from '../providers/MenuProvider';
 
 interface SearchPageProps {}
@@ -47,6 +48,7 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           flex justify-between items-center md:block
           relative"
         >
+          <Search />
           <HeaderUserProfile session={session} />
           <MobileHeader session={session} />
         </header>
