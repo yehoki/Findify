@@ -16,16 +16,21 @@ interface MyArtistsCarouselProps {
 }
 
 const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
-  const singleWidth = 198;
   const [carouselTranslate, setCarouselTranslate] = useState(0);
   const [width, setWidth] = useState(1920);
   const [perScroll, setPerScroll] = useState(0);
   const [currentScrolled, setCurrentScrolled] = useState(0);
+  const [singleWidth, setSingleWidth] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useLayoutEffect(() => {
     setWidth(window.innerWidth);
     const decideSingleWidth = () => {
+      if (window.innerWidth <= 768) {
+        setSingleWidth(148);
+      } else {
+        setSingleWidth(198);
+      }
       setWidth(window.innerWidth);
       if (window.innerWidth > 1835) {
         setPerScroll(8);
@@ -39,7 +44,16 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
       if (window.innerWidth <= 1390 && window.innerWidth > 1155) {
         setPerScroll(4);
       }
-      if (window.innerWidth <= 1155) {
+      if (window.innerWidth <= 1155 && window.innerWidth > 768) {
+        setPerScroll(2);
+      }
+      if (window.innerWidth <= 768 && window.innerWidth > 600) {
+        setPerScroll(4);
+      }
+      if (window.innerWidth <= 600 && window.innerWidth > 445) {
+        setPerScroll(3);
+      }
+      if (window.innerWidth <= 445) {
         setPerScroll(2);
       }
     };
@@ -105,33 +119,33 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({ myArtists }) => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between px-2">
         <h3 className="text-white text-xl font-semibold">Your Top Artists</h3>
-        <div className="flex gap-4 mb-4">
-          {width > 1024 && (
-            <CarouselButton
-              icon={PiCaretDoubleLeftLight}
-              onClick={() => handleButtonClick('start')}
-              isDisabled={carouselTranslate === 0}
-            />
-          )}
+        <div className="flex gap-2 md:gap-4 mb-4">
+          <CarouselButton
+            icon={PiCaretDoubleLeftLight}
+            onClick={() => handleButtonClick('start')}
+            isDisabled={width === 0 || carouselTranslate === 0}
+          />
           <CarouselButton
             icon={PiCaretLeftLight}
             onClick={() => handleButtonClick('left')}
-            isDisabled={carouselTranslate === 0}
+            isDisabled={width === 0 || carouselTranslate === 0}
           />
           <CarouselButton
             icon={PiCaretRightLight}
             onClick={() => handleButtonClick('right')}
-            isDisabled={currentScrolled + perScroll >= myArtists.length - 1}
+            isDisabled={
+              width === 0 || currentScrolled + perScroll >= myArtists.length - 1
+            }
           />
-          {width > 1024 && (
-            <CarouselButton
-              icon={PiCaretDoubleRightLight}
-              onClick={() => handleButtonClick('end')}
-              isDisabled={currentScrolled + perScroll >= myArtists.length - 1}
-            />
-          )}
+          <CarouselButton
+            icon={PiCaretDoubleRightLight}
+            onClick={() => handleButtonClick('end')}
+            isDisabled={
+              width === 0 || currentScrolled + perScroll >= myArtists.length - 1
+            }
+          />
         </div>
       </div>
       <div

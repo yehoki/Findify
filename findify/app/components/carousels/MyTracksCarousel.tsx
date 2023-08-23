@@ -121,31 +121,31 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     <div>
       <div className="flex justify-between px-2">
         <h3 className="text-white text-xl font-semibold">Your Top Tracks</h3>
-        <div className="flex gap-4 mb-4">
-          {width !== 0 && (
-            <>
-              <CarouselButton
-                icon={PiCaretDoubleLeftLight}
-                onClick={() => handleButtonClick('start')}
-                isDisabled={carouselTranslate === 0}
-              />
-              <CarouselButton
-                icon={PiCaretLeftLight}
-                onClick={() => handleButtonClick('left')}
-                isDisabled={carouselTranslate === 0}
-              />
-              <CarouselButton
-                icon={PiCaretRightLight}
-                onClick={() => handleButtonClick('right')}
-                isDisabled={currentScrolled + perScroll >= myTracks.length - 1}
-              />
-              <CarouselButton
-                icon={PiCaretDoubleRightLight}
-                onClick={() => handleButtonClick('end')}
-                isDisabled={currentScrolled + perScroll >= myTracks.length - 1}
-              />
-            </>
-          )}
+        <div className="flex gap-2 md:gap-4 mb-4">
+          <CarouselButton
+            icon={PiCaretDoubleLeftLight}
+            onClick={() => handleButtonClick('start')}
+            isDisabled={width === 0 || carouselTranslate === 0}
+          />
+          <CarouselButton
+            icon={PiCaretLeftLight}
+            onClick={() => handleButtonClick('left')}
+            isDisabled={width === 0 || carouselTranslate === 0}
+          />
+          <CarouselButton
+            icon={PiCaretRightLight}
+            onClick={() => handleButtonClick('right')}
+            isDisabled={
+              width === 0 || currentScrolled + perScroll >= myTracks.length - 1
+            }
+          />
+          <CarouselButton
+            icon={PiCaretDoubleRightLight}
+            onClick={() => handleButtonClick('end')}
+            isDisabled={
+              width === 0 || currentScrolled + perScroll >= myTracks.length - 1
+            }
+          />
         </div>
       </div>
       <div

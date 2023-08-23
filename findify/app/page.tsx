@@ -102,7 +102,7 @@ export default async function Home() {
                 <UserTracks session={session} />
               </Suspense>
             </div>
-            <div className="py-4 overflow-x-auto md:overflow-x-hidden ">
+            <div className="py-4 overflow-x-hidden ">
               <Suspense fallback={<EmptyArtistsState />}>
                 <UserArtists session={session} />
               </Suspense>

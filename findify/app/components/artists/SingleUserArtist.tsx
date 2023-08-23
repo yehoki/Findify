@@ -15,10 +15,12 @@ const SingleUserArtist: React.FC<SingleUserArtistProps> = ({
   return (
     <div
       className="rounded-md p-4 bg-[#181818] 
-    hover:bg-[#252525] transition duration-300 cursor-pointer"
+    hover:bg-[#252525] transition duration-300 cursor-pointer
+    max-w-[132px] md:max-w-fit
+    "
     >
       <div
-        className="relative w-[150px] h-[150px] mb-4 
+        className="relative h-[100px] w-[100px] md:w-[150px] md:h-[150px] mb-4 
       rounded-full shadow-lg shadow-[#181818]"
       >
         <Image
@@ -29,7 +31,10 @@ const SingleUserArtist: React.FC<SingleUserArtistProps> = ({
         />
       </div>
       <div>
-        <div className="text-white font-semibold line-clamp-2">
+        <div
+          className="text-white font-semibold overflow-clip text-ellipsis
+         md:line-clamp-2"
+        >
           {index + 1}. {artist.name}
         </div>
       </div>
