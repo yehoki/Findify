@@ -15,7 +15,7 @@ const SingleUserTrack: React.FC<SingleUserTrackProps> = ({ track, index }) => {
       className="rounded-md p-4 bg-[#181818] 
     hover:bg-[#252525] transition duration-300 cursor-pointer"
     >
-      <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg z-0">
+      <div className="relative h-[100px] w-[100px] md:w-[150px] md:h-[150px] mb-4 rounded-md shadow-lg z-0">
         <Image
           src={`${track.album.images[0].url}`}
           fill
