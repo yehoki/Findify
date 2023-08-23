@@ -86,12 +86,14 @@ export default async function Home() {
           className="bg-spotifyBlack
           h-full
           col-span-8 lg:col-span-9 2xl:col-span-10 row-span-full
-          md:rounded-lg md:p-4 
+          md:rounded-lg md:p-4
           overflow-x-hidden"
         >
           <header
-            className="w-full bg-black md:bg-spotifyBlack py-4 md:h-16 
-          flex justify-between items-center md:block"
+            className="bg-black md:bg-spotifyBlack py-4 md:py-0 md:h-16 w-full
+          flex justify-between items-center md:block
+          relative
+          "
           >
             <HeaderUserProfile session={session} />
             <MobileHeader session={session} />
@@ -100,6 +102,16 @@ export default async function Home() {
             <div className="py-4 overflow-x-hidden">
               <Suspense fallback={<EmptyTracksState />}>
                 <UserTracks session={session} />
+              </Suspense>
+            </div>
+            <div className="py-4 overflow-x-hidden ">
+              <Suspense fallback={<EmptyArtistsState />}>
+                <UserArtists session={session} />
+              </Suspense>
+            </div>
+            <div className="py-4 overflow-x-hidden ">
+              <Suspense fallback={<EmptyArtistsState />}>
+                <UserArtists session={session} />
               </Suspense>
             </div>
             <div className="py-4 overflow-x-hidden ">

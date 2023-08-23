@@ -11,7 +11,6 @@ interface HeaderUserProfileProps {
 
 const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
   const handleOnClick = useCallback(() => {
     setIsExpanded((prev) => !prev);
   }, []);
@@ -23,7 +22,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
           <button
             onClick={handleOnClick}
             className="
-            hidden md:block absolute right-10 top-6 hover:opacity-90 hover:scale-105"
+            hidden md:block absolute right-0 top-0 hover:opacity-90 hover:scale-105"
           >
             <div className="w-fit h-fit rounded-full p-1 bg-black">
               <div className="relative rounded-full w-6 h-6 bg-black">
@@ -42,7 +41,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
           </button>
           {isExpanded && (
             <div
-              className="absolute right-10 top-16 
+              className="absolute right-0 top-10
         text-spotifyOffWhite bg-spotifyGray p-1
         min-w-[196px] z-[9999] shadow-md
         "
