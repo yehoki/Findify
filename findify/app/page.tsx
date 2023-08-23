@@ -65,13 +65,13 @@ export default async function Home() {
       >
         <section
           className="hidden md:block col-span-4 lg:col-span-3 2xl:col-span-2 row-span-2
-        bg-spotifyBlack md:rounded-lg
+          bg-spotifyBlackBase md:rounded-lg
         "
         >
           <Menu />
         </section>
         <section
-          className="bg-spotifyBlack
+          className="bg-spotifyBlackBase
         row-start-3 row-end-[17]
   col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
   hidden md:block
@@ -85,14 +85,14 @@ export default async function Home() {
           </ul>
         </section>
         <section
-          className="bg-spotifyBlack
+          className="bg-spotifyBlackBase
           h-full
           col-span-8 lg:col-span-9 2xl:col-span-10 row-span-full
           md:rounded-lg md:p-4
           overflow-x-hidden"
         >
           <header
-            className="bg-black md:bg-spotifyBlack py-4 md:py-0 md:h-16 w-full
+            className="bg-black md:bg-spotifyBlackBase py-4 md:py-0 md:h-16 w-full
           flex justify-between items-center md:block
           relative
           "

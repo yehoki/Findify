@@ -14,6 +14,7 @@ const config: Config = {
         spotifyGray: '#282828',
         spotifyOffWhite: '#b3b3b3',
         spotifyLighterGray: '#3e3e3e',
+        spotifyBlackBase: '#121212',
       },
       textColor: {
         spotifyGreen: '#1DB954',
