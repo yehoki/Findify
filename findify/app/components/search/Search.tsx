@@ -1,16 +1,33 @@
 'use client';
+import { Session } from 'next-auth';
 import { FormEvent } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-interface SearchProps {}
+interface SearchProps {
+  session: Session | null;
+}
 
-const Search: React.FC<SearchProps> = ({}) => {
+const Search: React.FC<SearchProps> = ({ session }) => {
   const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!session) {
+      return console.log('Please log in');
+    }
     const formData = new FormData(e.currentTarget);
-    const query = formData.get('search-query');
-    // const res = await fetch(`https://api.spotify.com/v1/search?q=${query}`);
-    // const data = await res.json();
-    // console.log(data);
+    const query = formData.get('search-query')?.toString();
+    const spotifyBaseURL = 'https://api.spotify.com/v1/search';
+    const res = await fetch(
+      `${spotifyBaseURL}?q=${query}&type=album,track,artist`,
+      {
+        headers: {
+          Authorization: `Bearer ${
+            session.user.accessToken ? session.user.accessToken : ''
+          }`,
+        },
+        method: 'GET',
+      }
+    );
+    const searchData = await res.json();
+    console.log(searchData);
   };
   return (
     <div

@@ -48,7 +48,7 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           flex justify-between items-center md:block
           relative"
         >
-          <Search />
+          <Search session={session} />
           <HeaderUserProfile session={session} />
           <MobileHeader session={session} />
         </header>
