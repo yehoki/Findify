@@ -53,15 +53,16 @@ export default async function Home() {
         w-full
         h-full
       p-2
-      grid
+      flex flex-col
+      md:grid
       grid-rows-16
       grid-cols-12
-      gap-2 
+      md:gap-2
       "
       >
         <section
           className="col-span-4 lg:col-span-3 2xl:col-span-2 row-span-2
-        bg-spotifyBlack rounded-lg
+        bg-spotifyBlack md:rounded-lg
         "
         >
           <Menu />
@@ -69,31 +70,32 @@ export default async function Home() {
         <section
           className="bg-spotifyBlack
         row-start-3 row-end-[17]
-  col-span-4 lg:col-span-3 2xl:col-span-2 rounded-lg
+  col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
         "
         >
           <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
-            <li>Get user tracks</li>
+            {/* <li>Get user tracks</li>
             <li>Get user artists</li>
-            <li>Single track display</li>
+            <li>Single track display</li> */}
           </ul>
         </section>
         <section
           className="bg-spotifyBlack
+          h-full
           col-span-8 lg:col-span-9 2xl:col-span-10 row-span-full
-          rounded-lg p-4
+          md:rounded-lg p-4
           overflow-x-hidden"
         >
           <header className="w-full h-16">
             <HeaderUserProfile session={session} />
           </header>
           <div className="">
-            <div className="py-4 overflow-x-hidden">
+            <div className="py-4 overflow-x-auto md:overflow-x-hidden">
               <Suspense fallback={<EmptyTracksState />}>
                 <UserTracks session={session} />
               </Suspense>
             </div>
-            <div className="py-4 overflow-x-hidden">
+            <div className="py-4 overflow-x-auto md:overflow-x-hidden ">
               <Suspense fallback={<EmptyArtistsState />}>
                 <UserArtists session={session} />
               </Suspense>

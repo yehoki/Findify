@@ -11,7 +11,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
 
   return (
     <>
-      <ul className="py-2 px-3 h-full flex flex-col justify-center items-start gap-2">
+      <ul className="py-2 px-3 h-full hidden md:flex flex-col justify-center items-start gap-2">
         <MenuItem label="" icon={AiFillHome} selectedName={selected} />
         <MenuItem
           label="Search"

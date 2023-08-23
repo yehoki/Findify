@@ -22,7 +22,8 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
         <>
           <button
             onClick={handleOnClick}
-            className="absolute right-10 top-6 hover:opacity-90 hover:scale-105"
+            className="
+            hidden md:block absolute right-10 top-6 hover:opacity-90 hover:scale-105"
           >
             <div className="w-fit h-fit rounded-full p-1 bg-black">
               <div className="relative rounded-full w-6 h-6 bg-black">
@@ -81,6 +82,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
         <>
           <button
             className="
+            hidden md:block
           absolute top-6 right-10
           bg-white rounded-full py-3 px-8 text-black font-semibold
           hover:scale-105 hover:opacity-90
