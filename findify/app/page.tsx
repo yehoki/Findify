@@ -11,6 +11,7 @@ import EmptyTracksState from './components/tracks/EmptyTracksState';
 import UserArtists from './components/artists/UserArtists';
 import EmptyArtistsState from './components/artists/EmptyArtistsState';
 import MobileHeader from './components/header/MobileHeader';
+import UserGenres from './components/genres/UserGenres';
 export default async function Home() {
   const session = await getUserSession();
   const userTracks = await getUserTracks(50, 'medium_term');
@@ -109,14 +110,9 @@ export default async function Home() {
                 <UserArtists session={session} />
               </Suspense>
             </div>
-            <div className="py-4 overflow-x-hidden ">
-              <Suspense fallback={<EmptyArtistsState />}>
-                <UserArtists session={session} />
-              </Suspense>
-            </div>
-            <div className="py-4 overflow-x-hidden ">
-              <Suspense fallback={<EmptyArtistsState />}>
-                <UserArtists session={session} />
+            <div className="py-4">
+              <Suspense fallback={<p>Getting genres...</p>}>
+                <UserGenres session={session} />
               </Suspense>
             </div>
           </div>
