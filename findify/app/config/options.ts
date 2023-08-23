@@ -29,7 +29,7 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return url;
     },
     async session({ session, token, user }) {
       const newSession = {

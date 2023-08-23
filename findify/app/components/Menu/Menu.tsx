@@ -7,12 +7,12 @@ import MenuItem from './MenuItem';
 interface MenuProps {}
 
 const Menu: React.FC<MenuProps> = ({}) => {
-  const [selected, setSelected] = useState<'Home' | 'Search'>('Home');
+  const [selected, setSelected] = useState<'' | 'Search'>('');
 
   return (
     <>
       <ul className="py-2 px-3 h-full flex flex-col justify-center items-start gap-2">
-        <MenuItem label="Home" icon={AiFillHome} selectedName={selected} />
+        <MenuItem label="" icon={AiFillHome} selectedName={selected} />
         <MenuItem
           label="Search"
           icon={AiOutlineSearch}
