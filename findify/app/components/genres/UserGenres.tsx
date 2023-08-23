@@ -1,6 +1,7 @@
 import getUserGenres from '@/app/actions/getUserGenres';
 import { Session } from 'next-auth';
 import SingleGenre from './SingleGenre';
+import EmptyGenreState from './EmptyGenreState';
 
 interface UserGenresProps {
   session: Session | null;
@@ -8,13 +9,13 @@ interface UserGenresProps {
 
 const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
   if (!session) {
-    return <div>Empty genre state </div>;
+    return <EmptyGenreState />;
   }
 
   const userGenres = await getUserGenres();
 
   if (!userGenres) {
-    return <div>Empty genre state</div>;
+    return <EmptyGenreState />;
   }
   const sortedGenres = () => {
     const genreArray: { genre: string; genreCount: number }[] = [];
