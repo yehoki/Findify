@@ -19,7 +19,7 @@ interface MyTracksCarouselProps {
 const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   const singleWidth = 198;
   const [carouselTranslate, setCarouselTranslate] = useState(0);
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(1920);
   const [perScroll, setPerScroll] = useState(0);
   const [currentScrolled, setCurrentScrolled] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);

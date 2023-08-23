@@ -2,13 +2,14 @@ import getUserSession from './actions/getUserSession';
 import getUserTracks from './actions/getUserTracks';
 import getUserArtists from './actions/getUserArtists';
 import getUserGenres from './actions/getUserGenres';
-import MyTracksCarousel from './components/carousels/MyTracksCarousel';
 import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 import HeaderUserProfile from './components/HeaderUserProfile';
 import Menu from './components/Menu/Menu';
 import UserTracks from './components/tracks/UserTracks';
 import { Suspense } from 'react';
 import EmptyTracksState from './components/tracks/EmptyTracksState';
+import UserArtists from './components/artists/UserArtists';
+import EmptyArtistsState from './components/artists/EmptyArtistsState';
 export default async function Home() {
   const session = await getUserSession();
   const userTracks = await getUserTracks(50, 'medium_term');
@@ -93,9 +94,9 @@ export default async function Home() {
               </Suspense>
             </div>
             <div className="py-4 overflow-x-hidden">
-              <MyArtistsCarousel
-                myArtists={topUserArtists ? topUserArtists.items : []}
-              />
+              <Suspense fallback={<EmptyArtistsState />}>
+                <UserArtists session={session} />
+              </Suspense>
             </div>
           </div>
 
