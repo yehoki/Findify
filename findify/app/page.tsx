@@ -7,6 +7,8 @@ import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 import HeaderUserProfile from './components/HeaderUserProfile';
 import Menu from './components/Menu/Menu';
 import UserTracks from './components/tracks/UserTracks';
+import { Suspense } from 'react';
+import EmptyTracksState from './components/tracks/EmptyTracksState';
 export default async function Home() {
   const session = await getUserSession();
   const userTracks = await getUserTracks(50, 'medium_term');
@@ -86,7 +88,9 @@ export default async function Home() {
           </header>
           <div className="">
             <div className="py-4 overflow-x-hidden">
-              <UserTracks session={session} />
+              <Suspense fallback={<EmptyTracksState />}>
+                <UserTracks session={session} />
+              </Suspense>
             </div>
             <div className="py-4 overflow-x-hidden">
               <MyArtistsCarousel

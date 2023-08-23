@@ -2,6 +2,7 @@ import getUserTracks from '@/app/actions/getUserTracks';
 import { Session } from 'next-auth';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import EmptyTracksState from './EmptyTracksState';
+import { Suspense } from 'react';
 
 interface UserTracksProps {
   session: Session | null;

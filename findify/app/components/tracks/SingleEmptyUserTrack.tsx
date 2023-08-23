@@ -8,6 +8,7 @@ const SingleEmptyUserTrack: React.FC<SingleEmptyUserTrackProps> = ({}) => {
       className="rounded-md p-4 bg-[#181818] 
   hover:bg-[#252525] transition duration-300 cursor-pointer
   group
+  animate-pulse
   "
     >
       <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg z-0 bg-[#4a4a4c]"></div>
