@@ -6,6 +6,7 @@ import MyTracksCarousel from './components/carousels/MyTracksCarousel';
 import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 import HeaderUserProfile from './components/HeaderUserProfile';
 import Menu from './components/Menu/Menu';
+import UserTracks from './components/tracks/UserTracks';
 export default async function Home() {
   const session = await getUserSession();
   const userTracks = await getUserTracks(50, 'medium_term');
@@ -85,17 +86,7 @@ export default async function Home() {
           </header>
           <div className="">
             <div className="py-4 overflow-x-hidden">
-              <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />
-            </div>
-            <div className="py-4 overflow-x-hidden">
-              <MyArtistsCarousel
-                myArtists={topUserArtists ? topUserArtists.items : []}
-              />
-            </div>
-            <div className="py-4 overflow-x-hidden">
-              <MyArtistsCarousel
-                myArtists={topUserArtists ? topUserArtists.items : []}
-              />
+              <UserTracks session={session} />
             </div>
             <div className="py-4 overflow-x-hidden">
               <MyArtistsCarousel

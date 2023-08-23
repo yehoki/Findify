@@ -1,9 +1,11 @@
 'use client';
 
+import { parseArtists } from '@/app/config/helper';
 import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { useLayoutEffect, useState } from 'react';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
+import SingleUserTrack from '../tracks/SingleUserTrack';
 interface MyTracksCarouselProps {
   myTracks: TrackObject[];
 }
@@ -58,20 +60,6 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     }
   };
 
-  const parseArtists = (artists: string[]) => {
-    if (artists.length === 0) {
-      return '';
-    }
-    if (artists.length === 1) {
-      return artists[0];
-    }
-    let parsedArtists = artists[0];
-    for (let i = 1; i < artists.length; i++) {
-      parsedArtists += `, ${artists[i]}`;
-    }
-    return parsedArtists;
-  };
-
   return (
     <div>
       <div className="flex justify-between">
@@ -103,27 +91,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     "
       >
         {myTracks.map((track, index) => (
-          <div
-            className="rounded-md p-4 bg-[#282828] cursor-pointer"
-            key={track.id}
-          >
-            <div className="relative w-[150px] h-[150px] mb-4 rounded-md shadow-lg z-0">
-              <Image
-                src={`${track.album.images[0].url}`}
-                fill
-                alt={`${track.name} album cover`}
-                className="rounded-md"
-              />
-            </div>
-            <div>
-              <div className="text-white font-semibold line-clamp-2">
-                {index + 1}. {track.name}
-              </div>
-              <div className="text-[#a7a7a7] line-clamp-2">
-                {parseArtists(track.artists.map((artist) => artist.name))}
-              </div>
-            </div>
-          </div>
+          <SingleUserTrack key={track.id} track={track} index={index} />
         ))}
       </div>
     </div>
