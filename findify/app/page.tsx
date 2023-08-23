@@ -90,13 +90,13 @@ export default async function Home() {
           overflow-x-hidden"
         >
           <header
-            className="w-full bg-black md:bg-spotifyBlack py-2 md:h-16 
+            className="w-full bg-black md:bg-spotifyBlack py-4 md:h-16 
           flex justify-between items-center md:block"
           >
             <HeaderUserProfile session={session} />
             <MobileHeader session={session} />
           </header>
-          <div className="">
+          <div className="mt-10 md:mt-0">
             <div className="py-4 overflow-x-hidden">
               <Suspense fallback={<EmptyTracksState />}>
                 <UserTracks session={session} />

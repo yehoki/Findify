@@ -118,8 +118,8 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   };
 
   return (
-    <div>
-      <div className="flex justify-between px-2">
+    <div className="px-2">
+      <div className="flex justify-between">
         <h3 className="text-white text-xl font-semibold">Your Top Tracks</h3>
         <div className="flex gap-2 md:gap-4 mb-4">
           <CarouselButton
