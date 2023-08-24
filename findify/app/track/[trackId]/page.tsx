@@ -61,7 +61,7 @@ const TrackPage: React.FC<TrackPageProps> = async ({ params }) => {
           <div className="text-white px-4">
             <h4 className="mt-8 lg:mt-12 mb-2 hidden md:block">Song</h4>
             <h2
-              className="text-4xl md:text-7xl lg:text-8xl 
+              className="text-4xl md:text-4xl lg:text-5xl 
             font-semibold md:font-extrabold 
             "
             >
@@ -78,15 +78,14 @@ const TrackPage: React.FC<TrackPageProps> = async ({ params }) => {
                   {singleTrack.artists[0].name}
                 </span>
                 <span className="hidden md:block mx-[2px]"> · </span>
-                <span className="flex gap-2 items-center">
-                  {' '}
+                <span className="flex items-center gap-[2px] flex-wrap">
+                  <p>{singleTrack.album.name} ·</p>
+                  <p>{singleTrack.album.release_date.slice(0, 4)} ·</p>
                   <p>
-                    {singleTrack.album.name} ·{' '}
-                    {singleTrack.album.release_date.slice(0, 4)} ·{' '}
                     {convertSecondsToMinutes(singleTrack.duration_ms / 1000)}
                   </p>
                   <Link
-                    className="text-[#3e3e3e] hover:text-spotifyGreen 
+                    className="text-[#3e3e3e] hover:text-spotifyGreen ml-[2px]
             transition"
                     href={`https://open.spotify.com/track/${singleTrack.id}`}
                   >
@@ -102,7 +101,7 @@ const TrackPage: React.FC<TrackPageProps> = async ({ params }) => {
             <div
               key={artist.id}
               className="flex gap-4 p-2 hover:bg-spotifyLighterGray rounded-md
-              w-1/4 items-center cursor-pointer
+              w-full md:w-1/2 lg:w-1/3 items-center cursor-pointer
               "
             >
               <div className="relative w-20 h-20 rounded-full">
