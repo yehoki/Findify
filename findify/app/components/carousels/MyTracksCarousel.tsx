@@ -3,7 +3,7 @@
 import { parseArtists } from '@/app/config/helper';
 import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import {
   PiCaretDoubleLeftLight,
   PiCaretDoubleRightLight,
@@ -12,17 +12,30 @@ import {
 } from 'react-icons/pi';
 import SingleUserTrack from '../tracks/SingleUserTrack';
 import CarouselButton from './Buttons/CarouselButton';
+import { useRouter } from 'next/navigation';
 interface MyTracksCarouselProps {
   myTracks: TrackObject[];
+  isIndex?: boolean;
+  heading?: string;
 }
 
-const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
+const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({
+  myTracks,
+  isIndex = true,
+  heading = 'Your Top Tracks',
+}) => {
   const [carouselTranslate, setCarouselTranslate] = useState(0);
   const [width, setWidth] = useState(0);
   const [perScroll, setPerScroll] = useState(0);
   const [currentScrolled, setCurrentScrolled] = useState(0);
   const [singleWidth, setSingleWidth] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const router = useRouter();
+
+  useLayoutEffect(() => {
+    setCarouselTranslate(0);
+    setCurrentScrolled(0);
+  }, [myTracks]);
 
   useLayoutEffect(() => {
     setWidth(window.innerWidth);
@@ -60,7 +73,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     return () => {
       window.removeEventListener('resize', decideSingleWidth);
     };
-  }, []);
+  }, [router]);
 
   const handleButtonClick = (direction: 'start' | 'left' | 'right' | 'end') => {
     if (isScrolling) {
@@ -117,7 +130,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
   return (
     <div className="px-2">
       <div className="flex justify-between">
-        <h3 className="text-white text-xl font-semibold">Your Top Tracks</h3>
+        <h3 className="text-white text-xl font-semibold">{heading}</h3>
         <div className="flex gap-2 md:gap-4 mb-4">
           <CarouselButton
             icon={PiCaretDoubleLeftLight}
@@ -154,8 +167,13 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
     grid-rows-1 grid-flow-col
     "
       >
-        {myTracks.map((track, index) => (
-          <SingleUserTrack key={track.id} track={track} index={index} />
+        {myTracks.map((track, index: number) => (
+          <SingleUserTrack
+            key={track.id}
+            track={track}
+            index={index}
+            isIndex={isIndex}
+          />
         ))}
       </div>
     </div>

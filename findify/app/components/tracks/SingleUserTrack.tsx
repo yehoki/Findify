@@ -6,10 +6,15 @@ import Image from 'next/image';
 
 interface SingleUserTrackProps {
   track: TrackObject;
-  index: any;
+  index: number;
+  isIndex?: boolean;
 }
 
-const SingleUserTrack: React.FC<SingleUserTrackProps> = ({ track, index }) => {
+const SingleUserTrack: React.FC<SingleUserTrackProps> = ({
+  track,
+  index,
+  isIndex,
+}) => {
   return (
     <div
       className="rounded-md p-4 bg-[#181818] 
@@ -25,7 +30,8 @@ const SingleUserTrack: React.FC<SingleUserTrackProps> = ({ track, index }) => {
       </div>
       <div>
         <div className="text-white font-semibold line-clamp-2">
-          {index + 1}. {track.name}
+          {isIndex ? index + 1 + '. ' : ''}
+          {track.name}
         </div>
         <div className="text-[#a7a7a7] line-clamp-2">
           {parseArtists(track.artists.map((artist) => artist.name))}
