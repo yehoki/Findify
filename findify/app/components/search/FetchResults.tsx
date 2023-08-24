@@ -26,7 +26,7 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
   return (
     <div>
       {searchData && searchData.tracks.href !== '' && (
-        <div className="mb-8">
+        <div className="mt-12 md:mt-0 mb-8">
           <MyTracksCarousel
             myTracks={searchData.tracks.items}
             isIndex={false}
@@ -35,7 +35,7 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
         </div>
       )}
       {searchData && searchData.artists.href !== '' && (
-        <div className="mb-8">
+        <div className="mt-4 md:mt-0 mb-8">
           <MyArtistsCarousel
             myArtists={searchData.artists.items}
             isIndex={false}
@@ -44,7 +44,7 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
         </div>
       )}
       {searchData && searchData.albums.href !== '' && (
-        <div className="mb-8">
+        <div className="mt-4 md:mt-0 mb-8">
           <MyAlbumsCarousel
             myAlbums={searchData.albums.items}
             isIndex={false}
