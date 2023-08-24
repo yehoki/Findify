@@ -21,7 +21,7 @@ export interface SearchReturnObject<
   ItemObject extends
     | TrackObject
     | SimplifiedAlbumObject
-    | SimplifiedArtistObject
+    | ArtistObject
 > {
   href: string;
   limit: number;

@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import menuReducer from '../reducers/menuReducer';
+import searchResultReducer from '../reducers/searchResultReducer';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
-    menuReducer,
+    searchResultReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useMenuSelector: TypedUseSelectorHook<RootState> = useSelector;
+// export const useMenuSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useSearchSelector: TypedUseSelectorHook<RootState> = useSelector;

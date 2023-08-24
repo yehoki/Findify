@@ -4,6 +4,7 @@ import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';
 import Search from '../components/search/Search';
 import MenuProvider from '../providers/MenuProvider';
+import SearchProvider from '../providers/SearchProvider';
 
 interface SearchPageProps {}
 
@@ -48,7 +49,9 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           flex justify-between items-center md:block
           relative"
         >
-          <Search session={session} />
+          <SearchProvider>
+            <Search session={session} />
+          </SearchProvider>
           <HeaderUserProfile session={session} />
           <MobileHeader session={session} />
         </header>
