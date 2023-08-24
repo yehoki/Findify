@@ -1,7 +1,6 @@
 'use client';
 
 import { useSearchSelector } from '@/app/store/store';
-import UserTracks from '../tracks/UserTracks';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import MyArtistsCarousel from '../carousels/MyArtistsCarousel';
 
@@ -18,16 +17,16 @@ const DisplayResults: React.FC<DisplayResultsProps> = ({}) => {
     (state) => state.searchResultReducer.isEmpty
   );
 
-  if ((isEmpty && !isSearching) || (isEmpty && isSearching)) {
-    return <div>Nothing</div>;
-  }
-  if (!isEmpty && isSearching) {
-    return <div>Empty searching state</div>;
-  }
+  // if ((isEmpty && !isSearching) || (isEmpty && isSearching)) {
+  //   return <div>Nothing</div>;
+  // }
+  // if (!isEmpty && isSearching) {
+  //   return <div>Empty searching state</div>;
+  // }
 
   return (
     <>
-      <div className="mb-">
+      {/* <div className="mb-">
         <ul className="flex gap-2">
           <li>All</li>
           <li>Artists</li>
@@ -37,20 +36,20 @@ const DisplayResults: React.FC<DisplayResultsProps> = ({}) => {
       </div>
       {searchResults.tracks.href !== '' && (
         <div>
-          {/* <h2>Tracks</h2> */}
+          <h2>Tracks</h2>
           <MyTracksCarousel myTracks={searchResults.tracks.items} />
-          {/* {searchResults.tracks.items.map((track) => (
+          {searchResults.tracks.items.map((track) => (
             <div key={track.id}>{track.name}</div>
-          ))} */}
+          ))}
         </div>
       )}
       {searchResults.artists.href !== '' && (
         <div>
-          {/* <h2>Artists</h2> */}
+          <h2>Artists</h2>
           <MyArtistsCarousel myArtists={searchResults.artists.items} />
-          {/* {searchResults.artists.items.map((artist) => (
+          {searchResults.artists.items.map((artist) => (
             <div key={artist.id}>{artist.name}</div>
-          ))} */}
+          ))}
         </div>
       )}
       {searchResults.albums.href !== '' && (
@@ -60,7 +59,7 @@ const DisplayResults: React.FC<DisplayResultsProps> = ({}) => {
             <div key={album.id}>{album.name}</div>
           ))}
         </div>
-      )}
+      )} */}
     </>
   );
 };

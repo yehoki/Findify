@@ -11,6 +11,7 @@ import {
   TrackObject,
 } from '@/app/types/SpotifyTypes';
 import { Session } from 'next-auth';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
@@ -26,33 +27,22 @@ export interface FullSearchResults {
 
 const Search: React.FC<SearchProps> = ({ session }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setSearching());
     if (!session) {
       return console.log('Please log in');
     }
     const formData = new FormData(e.currentTarget);
     const query = formData.get('search-query')?.toString();
-    if (query === '') {
-      return console.log('Need some search parameters');
-    }
-    const spotifyBaseURL = 'https://api.spotify.com/v1/search';
-    const res = await fetch(
-      `${spotifyBaseURL}?q=${query}&type=album,track,artist&limit=50`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            session.user.accessToken ? session.user.accessToken : ''
-          }`,
-        },
-        method: 'GET',
-      }
-    );
-    const searchData: FullSearchResults = await res.json();
-    dispatch(setSearchResults(searchData));
-    console.log(searchData);
+    dispatch(setSearching());
+    return router.push(`/search?q=${query}`);
+    // if (query === '') {
+    //   return console.log('Need some search parameters');
+    // }
+    // dispatch(setSearchResults(searchData));
+    // console.log(searchData);
   };
   return (
     <div

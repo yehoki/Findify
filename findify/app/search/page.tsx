@@ -1,16 +1,22 @@
+import { Suspense } from 'react';
 import getUserSession from '../actions/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';
 import DisplayResults from '../components/search/DisplayResults';
+import FetchResults from '../components/search/FetchResults';
 import Search from '../components/search/Search';
 import MenuProvider from '../providers/MenuProvider';
 import SearchProvider from '../providers/SearchProvider';
 
-interface SearchPageProps {}
+interface SearchPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-const SearchPage: React.FC<SearchPageProps> = async ({}) => {
+const SearchPage: React.FC<SearchPageProps> = async ({ searchParams }) => {
   const session = await getUserSession();
+  const searchQuery = searchParams['q'];
+
   return (
     <main
       className="text-spotifyGreen
@@ -60,6 +66,9 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           <SearchProvider>
             <DisplayResults />
           </SearchProvider>
+          <Suspense fallback={'...'}>
+            <FetchResults searchQuery={searchQuery} session={session} />
+          </Suspense>
         </div>
       </section>
     </main>
