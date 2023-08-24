@@ -33,11 +33,8 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({ myTracks }) => {
         setSingleWidth(198);
       }
       setWidth(window.innerWidth);
-      if (window.innerWidth > 1835) {
-        setPerScroll(8);
-      }
-      if (window.innerWidth <= 1835 && window.innerWidth > 1540) {
-        setPerScroll(7);
+      if (window.innerWidth > 1540) {
+        setPerScroll(6);
       }
       if (window.innerWidth <= 1540 && window.innerWidth > 1390) {
         setPerScroll(5);

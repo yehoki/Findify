@@ -46,6 +46,7 @@ const Search: React.FC<SearchProps> = ({ session }) => {
       >
         <AiOutlineSearch size={24} />
         <input
+          autoComplete="off"
           name="search-query"
           type="text"
           className="bg-transparent outline-none
