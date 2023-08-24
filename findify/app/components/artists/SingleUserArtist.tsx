@@ -2,6 +2,7 @@
 
 import { ArtistObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
+import { AiOutlineUser } from 'react-icons/ai';
 
 interface SingleUserArtistProps {
   artist: ArtistObject;
@@ -21,14 +22,21 @@ const SingleUserArtist: React.FC<SingleUserArtistProps> = ({
     >
       <div
         className="relative h-[100px] w-[100px] md:w-[150px] md:h-[150px] mb-4 
-      rounded-full shadow-lg shadow-[#181818]"
+      rounded-full shadow-lg shadow-[#181818] "
       >
-        <Image
-          src={`${artist.images[0].url}`}
-          fill
-          alt={`${artist.name} artist image`}
-          className="rounded-full "
-        />
+        {artist.images && artist.images[0] && (
+          <Image
+            src={`${artist.images[0].url}`}
+            fill
+            alt={`${artist.name} artist image`}
+            className="rounded-full "
+          />
+        )}
+        {(!artist.images || !artist.images[0]) && (
+          <div className="w-full h-full flex justify-center items-center bg-[#333] text-spotifyOffWhite rounded-full">
+            <AiOutlineUser size={50} />
+          </div>
+        )}
       </div>
       <div>
         <div

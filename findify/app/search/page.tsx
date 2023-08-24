@@ -2,6 +2,7 @@ import getUserSession from '../actions/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';
+import DisplayResults from '../components/search/DisplayResults';
 import Search from '../components/search/Search';
 import MenuProvider from '../providers/MenuProvider';
 import SearchProvider from '../providers/SearchProvider';
@@ -55,6 +56,11 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           <HeaderUserProfile session={session} />
           <MobileHeader session={session} />
         </header>
+        <div>
+          <SearchProvider>
+            <DisplayResults />
+          </SearchProvider>
+        </div>
       </section>
     </main>
   );

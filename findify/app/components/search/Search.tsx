@@ -26,6 +26,7 @@ export interface FullSearchResults {
 
 const Search: React.FC<SearchProps> = ({ session }) => {
   const dispatch = useDispatch<AppDispatch>();
+
   const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setSearching());
@@ -39,7 +40,7 @@ const Search: React.FC<SearchProps> = ({ session }) => {
     }
     const spotifyBaseURL = 'https://api.spotify.com/v1/search';
     const res = await fetch(
-      `${spotifyBaseURL}?q=${query}&type=album,track,artist`,
+      `${spotifyBaseURL}?q=${query}&type=album,track,artist&limit=50`,
       {
         headers: {
           Authorization: `Bearer ${
