@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { BsSpotify } from 'react-icons/bs';
 import SingleTrackArtistList from './SingleTrackArtistList';
 import getArtistsTopTracks from '@/app/actions/getArtistsTopTracks';
+import SingleTrackPopularity from './SingleTrackPopularity';
 
 interface SingleTrackProps {
   session: Session | null;
@@ -87,14 +88,15 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
         <div className="text-lg font-semibold">
           {singleTrack.artists[0].name}
         </div>
-        <ul>
+        <ul className="pt-4">
           {artistTopTracks.tracks.map((track, index) => (
             <li
               key={track.id}
-              className="flex justify-between hover:bg-[#313131] rounded-lg"
+              className="flex justify-between items-center hover:bg-[#313131] 
+              rounded-lg px-4 py-2"
             >
               <div
-                className="text-spotifyOffWhite px-4 py-2
+                className="text-spotifyOffWhite 
               flex items-center gap-4"
               >
                 {/* <span>{index + 1}</span> {track.name} */}
@@ -112,7 +114,9 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
                   </Link>
                 </div>
               </div>
-              <div>Popularity:{track.popularity}</div>
+              <div>
+                <SingleTrackPopularity popularity={track.popularity} />
+              </div>
             </li>
           ))}
         </ul>

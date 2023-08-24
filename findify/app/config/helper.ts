@@ -19,5 +19,6 @@ export const convertSecondsToMinutes = (seconds: number) => {
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
-  return `${minutes}:${remainingSeconds === 0 ? '00': remainingSeconds}`;
+  const fixedSeconds = remainingSeconds === 0 ? '00' : remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
+  return `${minutes}:${fixedSeconds}`;
 };
