@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BsSpotify } from 'react-icons/bs';
 import SingleTrackArtistList from './SingleTrackArtistList';
+import getArtistsTopTracks from '@/app/actions/getArtistsTopTracks';
 
 interface SingleTrackProps {
   session: Session | null;
@@ -19,6 +20,13 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
   if (!singleTrack) {
     return <>Could not get track with id {trackId}</>;
   }
+
+  const firstArtist = singleTrack.artists[0];
+  const artistTopTracks = await getArtistsTopTracks(firstArtist.id);
+  if (!artistTopTracks) {
+    return <>Could not get artist top tracks</>;
+  }
+
   return (
     <>
       <div className="flex flex-col md:flex-row gap-4 md:gap-8">
@@ -72,6 +80,43 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
         </div>
       </div>
       <SingleTrackArtistList singleTrack={singleTrack} />
+      <div className="mt-12 text-white px-2">
+        <div className="text-spotifyOffWhite font-light">
+          Popular tracks by{' '}
+        </div>
+        <div className="text-lg font-semibold">
+          {singleTrack.artists[0].name}
+        </div>
+        <ul>
+          {artistTopTracks.tracks.map((track, index) => (
+            <li
+              key={track.id}
+              className="flex justify-between hover:bg-[#313131] rounded-lg"
+            >
+              <div
+                className="text-spotifyOffWhite px-4 py-2
+              flex items-center gap-4"
+              >
+                {/* <span>{index + 1}</span> {track.name} */}
+                <div className="min-w-[20px]">{index + 1}</div>
+                <div className="relative w-10 h-10">
+                  <Image
+                    src={track.album.images[0].url}
+                    alt={`${track.album.name} album cover`}
+                    fill
+                  />
+                </div>
+                <div className="text-white">
+                  <Link href={`/track/${track.id}`} className="hover:underline">
+                    {track.name}
+                  </Link>
+                </div>
+              </div>
+              <div>Popularity:{track.popularity}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
