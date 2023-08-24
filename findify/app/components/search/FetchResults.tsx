@@ -2,6 +2,8 @@ import { Session } from 'next-auth';
 import { FullSearchResults } from './Search';
 import getSearchFromQuery from '@/app/actions/getSearchFromQuery';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
+import MyArtistsCarousel from '../carousels/MyArtistsCarousel';
+import MyAlbumsCarousel from '../carousels/MyAlbumsCarousel';
 
 interface FetchResultsProps {
   searchQuery: string | string[] | undefined;
@@ -29,6 +31,20 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
             myTracks={searchData.tracks.items}
             isIndex={false}
             heading="Songs"
+          />
+        )}
+        {searchData && searchData.artists.href !== '' && (
+          <MyArtistsCarousel
+            myArtists={searchData.artists.items}
+            isIndex={false}
+            heading="Artists"
+          />
+        )}
+        {searchData && searchData.albums.href !== '' && (
+          <MyAlbumsCarousel
+            myAlbums={searchData.albums.items}
+            isIndex={false}
+            heading="Albums"
           />
         )}
       </div>

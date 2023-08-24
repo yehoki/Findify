@@ -6,12 +6,14 @@ import { AiOutlineUser } from 'react-icons/ai';
 
 interface SingleUserArtistProps {
   artist: ArtistObject;
-  index: any;
+  index: number;
+  isIndex?: boolean;
 }
 
 const SingleUserArtist: React.FC<SingleUserArtistProps> = ({
   artist,
   index,
+  isIndex,
 }) => {
   return (
     <div
@@ -43,7 +45,7 @@ const SingleUserArtist: React.FC<SingleUserArtistProps> = ({
           className="text-white font-semibold overflow-clip text-ellipsis
          md:line-clamp-2"
         >
-          {index + 1}. {artist.name}
+          {isIndex ? index + 1 + '. ' : ''} {artist.name}
         </div>
       </div>
     </div>

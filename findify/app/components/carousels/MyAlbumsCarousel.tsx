@@ -1,38 +1,46 @@
 'use client';
 
-import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
+import { parseArtists } from '@/app/config/helper';
+import {
+  ArtistObject,
+  SimplifiedAlbumObject,
+  TrackObject,
+} from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import {
   PiCaretDoubleLeftLight,
   PiCaretDoubleRightLight,
   PiCaretLeftLight,
   PiCaretRightLight,
 } from 'react-icons/pi';
-import SingleUserArtist from '../artists/SingleUserArtist';
+import SingleUserTrack from '../tracks/SingleUserTrack';
 import CarouselButton from './Buttons/CarouselButton';
-interface MyArtistsCarouselProps {
-  myArtists: ArtistObject[];
+import { useRouter } from 'next/navigation';
+import SingleAlbum from '../albums/SingleAlbum';
+interface MyAlbumsCarouselProps {
+  myAlbums: SimplifiedAlbumObject[];
   isIndex?: boolean;
   heading?: string;
 }
 
-const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
-  myArtists,
+const MyAlbumsCarousel: React.FC<MyAlbumsCarouselProps> = ({
+  myAlbums,
   isIndex = true,
-  heading = 'Your Top Artists',
+  heading = 'Albums',
 }) => {
   const [carouselTranslate, setCarouselTranslate] = useState(0);
-  const [width, setWidth] = useState(1920);
+  const [width, setWidth] = useState(0);
   const [perScroll, setPerScroll] = useState(0);
   const [currentScrolled, setCurrentScrolled] = useState(0);
   const [singleWidth, setSingleWidth] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const router = useRouter();
 
   useLayoutEffect(() => {
     setCarouselTranslate(0);
     setCurrentScrolled(0);
-  }, [myArtists]);
+  }, [myAlbums]);
 
   useLayoutEffect(() => {
     setWidth(window.innerWidth);
@@ -70,7 +78,7 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
     return () => {
       window.removeEventListener('resize', decideSingleWidth);
     };
-  }, []);
+  }, [router]);
 
   const handleButtonClick = (direction: 'start' | 'left' | 'right' | 'end') => {
     if (isScrolling) {
@@ -90,7 +98,6 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
         setIsScrolling(true);
         setCarouselTranslate(0);
         setCurrentScrolled(0);
-
         setTimeout(() => {
           setIsScrolling(false);
         }, 500);
@@ -103,7 +110,7 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
         }, 500);
       }
     } else if (direction === 'right') {
-      if (currentScrolled + perScroll <= myArtists.length - 1) {
+      if (currentScrolled + perScroll <= myAlbums.length - 1) {
         setIsScrolling(true);
         setCarouselTranslate((prev) => prev - perScroll * singleWidth);
         setCurrentScrolled((prev) => prev + perScroll);
@@ -112,12 +119,12 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
         }, 500);
       }
     } else {
-      if (currentScrolled + perScroll <= myArtists.length - 1) {
+      if (currentScrolled + perScroll <= myAlbums.length - 1) {
         setIsScrolling(true);
         setCarouselTranslate(
-          -1 * (myArtists.length - (perScroll - 1)) * singleWidth
+          -1 * (myAlbums.length - (perScroll - 1)) * singleWidth
         );
-        setCurrentScrolled(myArtists.length - 1 - perScroll);
+        setCurrentScrolled(myAlbums.length - 1 - perScroll);
         setTimeout(() => {
           setIsScrolling(false);
         }, 500);
@@ -127,7 +134,7 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
 
   return (
     <div className="px-2">
-      <div className="flex justify-between ">
+      <div className="flex justify-between">
         <h3 className="text-white text-xl font-semibold">{heading}</h3>
         <div className="flex gap-2 md:gap-4 mb-4">
           <CarouselButton
@@ -144,14 +151,14 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
             icon={PiCaretRightLight}
             onClick={() => handleButtonClick('right')}
             isDisabled={
-              width === 0 || currentScrolled + perScroll >= myArtists.length - 1
+              width === 0 || currentScrolled + perScroll >= myAlbums.length - 1
             }
           />
           <CarouselButton
             icon={PiCaretDoubleRightLight}
             onClick={() => handleButtonClick('end')}
             isDisabled={
-              width === 0 || currentScrolled + perScroll >= myArtists.length - 1
+              width === 0 || currentScrolled + perScroll >= myAlbums.length - 1
             }
           />
         </div>
@@ -165,10 +172,10 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
     grid-rows-1 grid-flow-col
     "
       >
-        {myArtists.map((artist, index) => (
-          <SingleUserArtist
-            key={artist.id}
-            artist={artist}
+        {myAlbums.map((album, index: number) => (
+          <SingleAlbum
+            key={album.id}
+            album={album}
             index={index}
             isIndex={isIndex}
           />
@@ -178,4 +185,4 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
   );
 };
 
-export default MyArtistsCarousel;
+export default MyAlbumsCarousel;
