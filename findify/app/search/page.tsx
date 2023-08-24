@@ -8,6 +8,7 @@ import FetchResults from '../components/search/FetchResults';
 import Search from '../components/search/Search';
 import MenuProvider from '../providers/MenuProvider';
 import SearchProvider from '../providers/SearchProvider';
+import LoadingSearchResults from '../components/search/LoadingSearchResults';
 
 interface SearchPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -63,10 +64,7 @@ col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
           <MobileHeader session={session} />
         </header>
         <div>
-          <SearchProvider>
-            <DisplayResults />
-          </SearchProvider>
-          <Suspense fallback={'...'}>
+          <Suspense fallback={<LoadingSearchResults />}>
             <FetchResults searchQuery={searchQuery} session={session} />
           </Suspense>
         </div>

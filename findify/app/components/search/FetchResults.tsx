@@ -14,10 +14,10 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
   searchQuery,
   session,
 }) => {
-  if (searchQuery === '') {
+  if (searchQuery === '' || !searchQuery) {
     return <></>;
   }
-  if (!session || !searchQuery || Array.isArray(searchQuery)) {
+  if (!session || Array.isArray(searchQuery)) {
     return <div>Empty state</div>;
   }
 
@@ -25,29 +25,33 @@ const FetchResults: React.FC<FetchResultsProps> = async ({
 
   return (
     <div>
-      <div>
-        {searchData && searchData.tracks.href !== '' && (
+      {searchData && searchData.tracks.href !== '' && (
+        <div className="mb-8">
           <MyTracksCarousel
             myTracks={searchData.tracks.items}
             isIndex={false}
             heading="Songs"
           />
-        )}
-        {searchData && searchData.artists.href !== '' && (
+        </div>
+      )}
+      {searchData && searchData.artists.href !== '' && (
+        <div className="mb-8">
           <MyArtistsCarousel
             myArtists={searchData.artists.items}
             isIndex={false}
             heading="Artists"
           />
-        )}
-        {searchData && searchData.albums.href !== '' && (
+        </div>
+      )}
+      {searchData && searchData.albums.href !== '' && (
+        <div className="mb-8">
           <MyAlbumsCarousel
             myAlbums={searchData.albums.items}
             isIndex={false}
             heading="Albums"
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
