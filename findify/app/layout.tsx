@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
+import Menu from './components/Menu/Menu';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -20,7 +21,174 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lato.className} bg-black`}>{children}</body>
+      <body className={`${lato.className} bg-black`}>
+        <main
+          className="text-spotifyGreen
+        w-full
+        h-full
+      md:p-2
+      flex flex-col
+      md:grid
+      grid-rows-16
+      grid-cols-12
+      md:gap-2
+      "
+        >
+          <section
+            className="hidden md:block col-span-4 lg:col-span-3 2xl:col-span-2 row-span-2
+          bg-spotifyBlackBase md:rounded-lg
+        "
+          >
+            <Menu />
+          </section>
+          <section
+            className="bg-spotifyBlackBase
+        row-start-3 row-end-[17]
+  col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
+  hidden md:block
+  
+        "
+          >
+            <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
+              <li>Get user tracks</li>
+              <li>Get user artists</li>
+              <li>Single track display</li>
+            </ul>
+          </section>
+          <section
+            className="bg-spotifyBlackBase
+          h-full
+          col-span-8 lg:col-span-9 2xl:col-span-10 row-span-full
+          md:rounded-lg md:p-4
+          overflow-x-hidden"
+          >
+            {/* <header
+            className="bg-black md:bg-spotifyBlackBase py-4 md:py-0 md:h-16 w-full
+          flex justify-between items-center md:block
+          relative
+          "
+          >
+            <HeaderUserProfile session={session} />
+            <MobileHeader session={session} />
+          </header>
+          <div className="mt-10 md:mt-0">
+            <div className="py-4 overflow-x-hidden">
+              <Suspense fallback={<EmptyTracksState />}>
+                <UserTracks session={session} />
+              </Suspense>
+            </div>
+            <div className="py-4 overflow-x-hidden ">
+              <Suspense fallback={<EmptyArtistsState />}>
+                <UserArtists session={session} />
+              </Suspense>
+            </div>
+            <div className="py-4">
+              <Suspense fallback={<EmptyGenreState />}>
+                <UserGenres session={session} />
+              </Suspense>
+            </div>
+          </div> */}
+
+            {children}
+            {/* 
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {userTracks ? (
+              userTracks.items.map((userTrack) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userTrack.name}
+                    key={userTrack.id}
+                    artists={userTrack.artists.map((artist) => artist.name)}
+                    imageUrl={userTrack.album.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <h3>Your Top Artists</h3>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {topUserArtists ? (
+              topUserArtists.items.map((userArtist) => {
+                return (
+                  <DisplaySingleTrack
+                    name={userArtist.name}
+                    key={userArtist.id}
+                    artists={[]}
+                    imageUrl={userArtist.images[0].url}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+          <div
+            className="w-full border-neutral-800 border
+          rounded-lg flex gap-2 overflow-x-auto
+          pb-8
+          "
+          >
+            {displayUserGenres()}
+          </div> */}
+          </section>
+        </main>
+      </body>
     </html>
   );
 }

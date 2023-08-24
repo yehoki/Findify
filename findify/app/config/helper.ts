@@ -11,3 +11,13 @@ export const parseArtists = (artists: string[]) => {
   }
   return parsedArtists;
 };
+
+export const convertSecondsToMinutes = (seconds: number) => {
+  if (seconds <= 0) {
+    return 0;
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${minutes}:${remainingSeconds}`;
+};
