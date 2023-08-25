@@ -16,12 +16,8 @@ export interface MyTopArtists {
   items: ArtistObject[];
 }
 
-
 export interface SearchReturnObject<
-  ItemObject extends
-    | TrackObject
-    | SimplifiedAlbumObject
-    | ArtistObject
+  ItemObject extends TrackObject | SimplifiedAlbumObject | ArtistObject
 > {
   href: string;
   limit: number;
@@ -162,3 +158,28 @@ export interface SimplifiedArtistObject {
   type: string;
   uri: string;
 }
+
+export type RecentlyPlayedTracks = {
+  href: string;
+  limit: number;
+  next: string | null;
+  cursors: {
+    after: string;
+    before: string;
+  };
+  total: number;
+  items: PlayHistoryObject[];
+};
+
+export type PlayHistoryObject = {
+  track: TrackObject;
+  played_at: string;
+  context: {
+    type: string;
+    href: string;
+    external_uris: {
+      spotify: string;
+    };
+    uri: string;
+  } | null;
+};
