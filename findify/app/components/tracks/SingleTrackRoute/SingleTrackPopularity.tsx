@@ -11,7 +11,7 @@ const SingleTrackPopularity: React.FC<SingleTrackPopularityProps> = ({
 }) => {
   return (
     <div
-      className="w-full flex border-[2px] border-[#b3b3b3]
+      className="w-full hidden lg:flex border-[2px] border-[#b3b3b3]
     rounded-md"
     >
       <SingleTrackPopularityBox boxCount={1} popularity={popularity} />

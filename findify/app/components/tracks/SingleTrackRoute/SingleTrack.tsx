@@ -122,7 +122,12 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
                   />
                 </div>
                 <div className="text-white">
-                  <Link href={`/track/${track.id}`} className="hover:underline">
+                  <Link
+                    href={`/track/${track.id}`}
+                    className="hover:underline
+                  line-clamp-2
+                  "
+                  >
                     {track.name}
                   </Link>
                 </div>
