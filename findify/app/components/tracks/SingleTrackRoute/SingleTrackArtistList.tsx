@@ -1,6 +1,7 @@
 import getArtistsFromList from '@/app/actions/artists/getArtistsFromList';
 import { TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AiOutlineUser } from 'react-icons/ai';
 
 interface SingleTrackArtistListProps {
@@ -22,7 +23,7 @@ const SingleTrackArtistList: React.FC<SingleTrackArtistListProps> = async ({
         <div
           key={artist.id}
           className="flex gap-4 p-2 hover:bg-spotifyLighterGray rounded-md
-      w-full md:w-1/2 lg:w-1/3 items-center cursor-pointer
+w-full items-center cursor-pointer
       "
         >
           <div className="relative w-20 h-20 rounded-full">
@@ -38,7 +39,9 @@ const SingleTrackArtistList: React.FC<SingleTrackArtistListProps> = async ({
           </div>
           <div className="text-white">
             <div>Artist</div>
-            <div className="font-semibold hover:underline">{artist.name}</div>
+            <div className="font-semibold hover:underline">
+              <Link href={`/artist/${artist.id}`}>{artist.name}</Link>
+            </div>
           </div>
         </div>
       ))}

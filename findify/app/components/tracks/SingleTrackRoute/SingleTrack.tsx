@@ -25,22 +25,6 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
   }
 
   const firstArtist = singleTrack.artists[0];
-  const artistTopTracks = await getArtistsTopTracks(firstArtist.id);
-  if (!artistTopTracks) {
-    return <>Could not get artist top tracks</>;
-  }
-
-  const topTracksByPopularity = artistTopTracks.tracks.sort(
-    (trackOne, trackTwo) => {
-      if (trackOne.popularity < trackTwo.popularity) {
-        return 1;
-      } else if (trackOne.popularity > trackTwo.popularity) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  );
 
   return (
     <>
@@ -78,17 +62,17 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
             >
               <span className="font-normal">{singleTrack.artists[0].name}</span>
               <span className="hidden md:block mx-[2px]"> · </span>
-              <span className="flex items-center gap-[2px] flex-wrap">
+              <span className="flex items-center gap-1 flex-wrap">
                 <p>{singleTrack.album.name} ·</p>
                 <p>{singleTrack.album.release_date.slice(0, 4)} ·</p>
                 <p>{convertSecondsToMinutes(singleTrack.duration_ms / 1000)}</p>
-                <Link
+                <a
                   className="text-[#3e3e3e] hover:text-spotifyGreen ml-[2px]
     transition"
                   href={`https://open.spotify.com/track/${singleTrack.id}`}
                 >
                   <BsSpotify size={24} />
-                </Link>
+                </a>
               </span>
             </h3>
           </div>
