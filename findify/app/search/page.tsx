@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import getUserSession from '../actions/getUserSession';
+import getUserSession from '../actions/user/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';

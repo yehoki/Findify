@@ -1,16 +1,16 @@
-import { ArtistObject } from '../types/SpotifyTypes';
-import getUserSession from './getUserSession';
+import { TrackObject } from '../../types/SpotifyTypes';
+import getUserSession from '../user/getUserSession';
 
-export default async function getSimilarArtists(artistId: string) {
+export default async function getArtistsTopTracks(artistId: string) {
   try {
     const currentUser = await getUserSession();
     if (!currentUser) {
       return null;
     }
 
-    const spotifyBaseUrl = 'https://api.spotify.com/v1/artists'
+    const spotifyBaseUrl = 'https://api.spotify.com/v1/artists';
     const res = await fetch(
-      `${spotifyBaseUrl}/${artistId}/related-artists`,
+      `${spotifyBaseUrl}/${artistId}/top-tracks?market=GB`,
       {
         headers: {
           Authorization: `Bearer ${
@@ -24,11 +24,11 @@ export default async function getSimilarArtists(artistId: string) {
     if (!res.ok) {
       return null;
     }
-    const similarArtists: { artists: ArtistObject[] } = await res.json();
-    if (!similarArtists) {
+    const topArtistTracks: { tracks: TrackObject[] } = await res.json();
+    if (!topArtistTracks) {
       return null;
     }
-    return similarArtists;
+    return topArtistTracks;
   } catch (err) {
     console.error(err);
     return null;

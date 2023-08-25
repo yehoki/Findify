@@ -1,4 +1,4 @@
-import getSimilarArtists from '@/app/actions/getSimilarArtists';
+import getSimilarArtists from '@/app/actions/artists/getSimilarArtists';
 import MyArtistsCarousel from '../../carousels/MyArtistsCarousel';
 
 interface SimilarArtistsProps {

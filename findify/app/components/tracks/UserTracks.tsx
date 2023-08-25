@@ -1,4 +1,4 @@
-import getUserTracks from '@/app/actions/getUserTracks';
+import getUserTracks from '@/app/actions/user/getUserTracks';
 import { Session } from 'next-auth';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import EmptyTracksState from './EmptyTracksState';

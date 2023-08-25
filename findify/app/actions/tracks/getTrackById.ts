@@ -1,5 +1,5 @@
-import { TrackObject } from '../types/SpotifyTypes';
-import getUserSession from './getUserSession';
+import { TrackObject } from '../../types/SpotifyTypes';
+import getUserSession from '../user/getUserSession';
 
 export default async function getTrackById(trackId: string) {
   try {

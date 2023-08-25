@@ -1,5 +1,5 @@
-import getTrackById from '@/app/actions/getTrackById';
-import getUserSession from '../../actions/getUserSession';
+import getTrackById from '@/app/actions/tracks/getTrackById';
+import getUserSession from '../../actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import { convertSecondsToMinutes } from '@/app/config/helper';
 import { BsSpotify } from 'react-icons/bs';
 import Link from 'next/link';
 import { AiOutlineUser } from 'react-icons/ai';
-import getArtistsFromList from '@/app/actions/getArtistsFromList';
+import getArtistsFromList from '@/app/actions/artists/getArtistsFromList';
 import SingleTrack from '@/app/components/tracks/SingleTrackRoute/SingleTrack';
 
 interface TrackPageProps {

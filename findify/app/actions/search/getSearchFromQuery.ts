@@ -1,5 +1,5 @@
-import { FullSearchResults } from '../components/search/Search';
-import getUserSession from './getUserSession';
+import { FullSearchResults } from '../../components/search/Search';
+import getUserSession from '../user/getUserSession';
 
 export default async function getSearchFromQuery(query: string) {
   try {

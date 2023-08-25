@@ -1,11 +1,11 @@
-import getTrackById from '@/app/actions/getTrackById';
+import getTrackById from '@/app/actions/tracks/getTrackById';
 import { convertSecondsToMinutes } from '@/app/config/helper';
 import { Session } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsSpotify } from 'react-icons/bs';
 import SingleTrackArtistList from './SingleTrackArtistList';
-import getArtistsTopTracks from '@/app/actions/getArtistsTopTracks';
+import getArtistsTopTracks from '@/app/actions/artists/getArtistsTopTracks';
 import SingleTrackPopularity from './SingleTrackPopularity';
 import SimilarArtists from './SimilarArtists';
 

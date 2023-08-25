@@ -1,4 +1,4 @@
-import getUserSession from './getUserSession';
+import getUserSession from './user/getUserSession';
 
 export default async function getSpotifyInformation() {
   try {

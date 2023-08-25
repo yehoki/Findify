@@ -1,4 +1,4 @@
-import getUserArtists from '@/app/actions/getUserArtists';
+import getUserArtists from '@/app/actions/user/getUserArtists';
 import { Session } from 'next-auth';
 import MyArtistsCarousel from '../carousels/MyArtistsCarousel';
 import EmptyArtistsState from './EmptyArtistsState';

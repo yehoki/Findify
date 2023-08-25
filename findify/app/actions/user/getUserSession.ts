@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { options } from '../config/options';
+import { options } from '../../config/options';
 
 export default async function getUserSession() {
   try {

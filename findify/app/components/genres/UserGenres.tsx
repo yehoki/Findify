@@ -1,4 +1,4 @@
-import getUserGenres from '@/app/actions/getUserGenres';
+import getUserGenres from '@/app/actions/user/getUserGenres';
 import { Session } from 'next-auth';
 import SingleGenre from './SingleGenre';
 import EmptyGenreState from './EmptyGenreState';

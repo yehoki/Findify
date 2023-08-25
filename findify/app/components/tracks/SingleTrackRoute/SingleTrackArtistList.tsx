@@ -1,4 +1,4 @@
-import getArtistsFromList from '@/app/actions/getArtistsFromList';
+import getArtistsFromList from '@/app/actions/artists/getArtistsFromList';
 import { TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import { AiOutlineUser } from 'react-icons/ai';

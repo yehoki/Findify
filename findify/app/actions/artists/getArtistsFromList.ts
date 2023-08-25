@@ -1,5 +1,5 @@
-import { ArtistObject } from '../types/SpotifyTypes';
-import getUserSession from './getUserSession';
+import { ArtistObject } from '../../types/SpotifyTypes';
+import getUserSession from '../user/getUserSession';
 
 export default async function getArtistsFromList(artistList: string[]) {
   try {
