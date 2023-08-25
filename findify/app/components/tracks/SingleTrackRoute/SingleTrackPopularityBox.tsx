@@ -20,19 +20,18 @@ const SingleTrackPopularityBox: React.FC<SingleTrackPopularityBoxProps> = ({
     } else {
       return 0;
     }
-    // if (popularity < boxCount * 10) {
-    //   return popularity - boxCount * 10;
-    // } else if (popularity === boxCount * 10){
-    //   return 10;
-    // } else {
-    //   return 10
-    // }
   };
   return (
-    <div className="h-5 w-5">
+    <div
+      className={`h-5 w-5 
+    ${boxCount === 10 ? '' : 'border-r-[2px] '} border-[#121212]`}
+    >
       <div
         style={{ width: `${calculateWidth() * 10}%` }}
-        className="h-full bg-spotifyGreen"
+        className={`h-full bg-spotifyGreen
+        ${boxCount === 1 ? 'rounded-l-sm' : ''}
+        ${boxCount === 10 ? 'rounded-r-sm' : ''}    
+        `}
       ></div>
     </div>
   );

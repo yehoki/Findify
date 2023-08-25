@@ -7,6 +7,7 @@ import { BsSpotify } from 'react-icons/bs';
 import SingleTrackArtistList from './SingleTrackArtistList';
 import getArtistsTopTracks from '@/app/actions/getArtistsTopTracks';
 import SingleTrackPopularity from './SingleTrackPopularity';
+import SimilarArtists from './SimilarArtists';
 
 interface SingleTrackProps {
   session: Session | null;
@@ -27,6 +28,18 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
   if (!artistTopTracks) {
     return <>Could not get artist top tracks</>;
   }
+
+  const topTracksByPopularity = artistTopTracks.tracks.sort(
+    (trackOne, trackTwo) => {
+      if (trackOne.popularity < trackTwo.popularity) {
+        return 1;
+      } else if (trackOne.popularity > trackTwo.popularity) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  );
 
   return (
     <>
@@ -89,7 +102,7 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
           {singleTrack.artists[0].name}
         </div>
         <ul className="pt-4">
-          {artistTopTracks.tracks.map((track, index) => (
+          {topTracksByPopularity.map((track, index) => (
             <li
               key={track.id}
               className="flex justify-between items-center hover:bg-[#313131] 
@@ -114,12 +127,18 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
                   </Link>
                 </div>
               </div>
-              <div>
+              <div className="flex items-center gap-8">
+                <p className="font-light text-spotifyOffWhite">
+                  {convertSecondsToMinutes(track.duration_ms / 1000)}
+                </p>
                 <SingleTrackPopularity popularity={track.popularity} />
               </div>
             </li>
           ))}
         </ul>
+        <div className="mt-10 overflow-x-hidden">
+          <SimilarArtists artistId={firstArtist.id} />
+        </div>
       </div>
     </>
   );
