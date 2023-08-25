@@ -6,15 +6,21 @@ import SingleTrackPopularity from '../tracks/SingleTrackRoute/SingleTrackPopular
 
 interface ArtistTopTracksProps {
   artistId: string;
+  artistName?: string;
 }
 
 const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
   artistId,
+  artistName,
 }) => {
   const artistTopTracks = await getArtistsTopTracks(artistId);
 
-  if (!artistTopTracks) {
-    return <>Could not get artist top tracks</>;
+  if (!artistTopTracks || artistTopTracks.tracks.length === 0) {
+    return (
+      <div className="text-white px-4">
+        Could not get artist&apos;s top tracks...
+      </div>
+    );
   }
 
   const topTracksByPopularity = artistTopTracks.tracks.sort(
@@ -30,46 +36,53 @@ const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
   );
 
   return (
-    <ul className="pt-4">
-      {topTracksByPopularity.map((track, index) => (
-        <li
-          key={track.id}
-          className="flex justify-between items-center hover:bg-[#313131] 
+    <>
+      {artistName && (
+        <h3 className="text-white font-semibold text-xl px-4">
+          Top Tracks by {artistName}
+        </h3>
+      )}
+      <ul className="pt-4">
+        {topTracksByPopularity.map((track, index) => (
+          <li
+            key={track.id}
+            className="flex justify-between items-center hover:bg-[#313131] 
               rounded-lg px-4 py-2"
-        >
-          <div
-            className="text-spotifyOffWhite 
-              flex items-center gap-4"
           >
-            {/* <span>{index + 1}</span> {track.name} */}
-            <div className="min-w-[20px]">{index + 1}</div>
-            <div className="relative w-10 h-10">
-              <Image
-                src={track.album.images[0].url}
-                alt={`${track.album.name} album cover`}
-                fill
-              />
-            </div>
-            <div className="text-white">
-              <Link
-                href={`/track/${track.id}`}
-                className="hover:underline
+            <div
+              className="text-spotifyOffWhite 
+              flex items-center gap-4"
+            >
+              {/* <span>{index + 1}</span> {track.name} */}
+              <div className="min-w-[20px]">{index + 1}</div>
+              <div className="relative w-10 h-10">
+                <Image
+                  src={track.album.images[0].url}
+                  alt={`${track.album.name} album cover`}
+                  fill
+                />
+              </div>
+              <div className="text-white">
+                <Link
+                  href={`/track/${track.id}`}
+                  className="hover:underline
                   line-clamp-2
                   "
-              >
-                {track.name}
-              </Link>
+                >
+                  {track.name}
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-8">
-            <p className="font-light text-spotifyOffWhite">
-              {convertSecondsToMinutes(track.duration_ms / 1000)}
-            </p>
-            <SingleTrackPopularity popularity={track.popularity} />
-          </div>
-        </li>
-      ))}
-    </ul>
+            <div className="flex items-center gap-8">
+              <p className="font-light text-spotifyOffWhite">
+                {convertSecondsToMinutes(track.duration_ms / 1000)}
+              </p>
+              <SingleTrackPopularity popularity={track.popularity} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

@@ -8,8 +8,10 @@ interface SimilarArtistsProps {
 const SimilarArtists: React.FC<SimilarArtistsProps> = async ({ artistId }) => {
   const similarArtists = await getSimilarArtists(artistId);
 
-  if (!similarArtists) {
-    return <>Could not find similar artists</>;
+  if (!similarArtists || similarArtists.artists.length === 0) {
+    return (
+      <div className="text-white px-2">Could not find similar artists</div>
+    );
   }
   return (
     <MyArtistsCarousel

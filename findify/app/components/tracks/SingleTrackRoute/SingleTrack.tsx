@@ -9,6 +9,8 @@ import getArtistsTopTracks from '@/app/actions/artists/getArtistsTopTracks';
 import SingleTrackPopularity from './SingleTrackPopularity';
 import SimilarArtists from './SimilarArtists';
 import ArtistTopTracks from '../../artists/ArtistTopTracks';
+import { Suspense } from 'react';
+import ArtistTopTracksEmptyState from '../../artists/ArtistTopTracksEmptyState';
 
 interface SingleTrackProps {
   session: Session | null;
@@ -86,7 +88,9 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
         <div className="text-lg font-semibold">
           {singleTrack.artists[0].name}
         </div>
-        <ArtistTopTracks artistId={firstArtist.id} />
+        <Suspense fallback={<ArtistTopTracksEmptyState />}>
+          <ArtistTopTracks artistId={firstArtist.id} />
+        </Suspense>
         <div className="mt-10 overflow-x-hidden">
           <SimilarArtists artistId={firstArtist.id} />
         </div>
