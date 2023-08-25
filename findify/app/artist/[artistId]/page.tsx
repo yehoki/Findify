@@ -3,11 +3,13 @@ import getArtistsTopTracks from '@/app/actions/artists/getArtistsTopTracks';
 import getUserSession from '@/app/actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';
 import ArtistTopTracks from '@/app/components/artists/ArtistTopTracks';
+import ArtistTopTracksEmptyState from '@/app/components/artists/ArtistTopTracksEmptyState';
 import SingleGenre from '@/app/components/genres/SingleGenre';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import SimilarArtists from '@/app/components/tracks/SingleTrackRoute/SimilarArtists';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { BsSpotify } from 'react-icons/bs';
 
 interface ArtistPageProps {
@@ -67,7 +69,7 @@ const ArtistPage: React.FC<ArtistPageProps> = async ({ params }) => {
                 </h2>
               </div>
               <div className="flex gap-2">
-                <h3 className="text-sm md:text-base text-spotifyOffWhite pl-2">
+                <h3 className="text-sm md:text-base text-spotifyOffWhite pl-1">
                   {/* Converts to commas */}
                   {Intl.NumberFormat('en-US').format(
                     singleArtist.followers.total
@@ -123,7 +125,9 @@ const ArtistPage: React.FC<ArtistPageProps> = async ({ params }) => {
             <h3 className="text-white font-semibold text-xl px-4">
               Top Tracks by {singleArtist.name}
             </h3>
-            <ArtistTopTracks artistId={singleArtist.id} />
+            <Suspense fallback={<ArtistTopTracksEmptyState />}>
+              <ArtistTopTracks artistId={singleArtist.id} />
+            </Suspense>
           </div>
           <div className="mt-4 overflow-x-hidden">
             <SimilarArtists artistId={singleArtist.id} />
