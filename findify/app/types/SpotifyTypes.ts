@@ -98,7 +98,7 @@ export interface ArtistObject {
   };
   followers: {
     href: string;
-    total: string;
+    total: number;
   };
   genres: string[];
   href: string;
