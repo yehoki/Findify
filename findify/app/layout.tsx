@@ -49,11 +49,11 @@ export default function RootLayout({
   
         "
           >
-            <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
+            {/* <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
               <li>Get user tracks</li>
               <li>Get user artists</li>
               <li>Single track display</li>
-            </ul>
+            </ul> */}
           </section>
           <section
             className="bg-spotifyBlackBase

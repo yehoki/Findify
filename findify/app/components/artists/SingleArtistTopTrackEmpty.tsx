@@ -18,7 +18,7 @@ const SingleArtistTopTrackEmpty: React.FC<
       "
       >
         <div className="relative w-10 h-10 bg-spotifyOffWhite"></div>
-        <div className="bg-white/20 w-1/3 h-6 rounded-full"></div>
+        <div className="bg-white/20 w-1/6 h-6 rounded-full"></div>
       </div>
     </li>
   );

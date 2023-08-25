@@ -1,5 +1,4 @@
 import getArtistById from '@/app/actions/artists/getArtistById';
-import getArtistsTopTracks from '@/app/actions/artists/getArtistsTopTracks';
 import getUserSession from '@/app/actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';
 import ArtistTopTracks from '@/app/components/artists/ArtistTopTracks';
@@ -7,13 +6,9 @@ import ArtistTopTracksEmptyState from '@/app/components/artists/ArtistTopTracksE
 import EmptyArtistsState from '@/app/components/artists/EmptyArtistsState';
 import SingleArtist from '@/app/components/artists/SingleArtistRoute/SingleArtist';
 import SingleArtistEmptyState from '@/app/components/artists/SingleArtistRoute/SingleArtistEmptyState';
-import SingleGenre from '@/app/components/genres/SingleGenre';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import SimilarArtists from '@/app/components/tracks/SingleTrackRoute/SimilarArtists';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Suspense } from 'react';
-import { BsSpotify } from 'react-icons/bs';
 
 interface ArtistPageProps {
   params: { artistId: string };
