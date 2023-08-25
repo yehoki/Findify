@@ -3,19 +3,23 @@ import { convertSecondsToMinutes } from '@/app/config/helper';
 import Image from 'next/image';
 import Link from 'next/link';
 import SingleTrackPopularity from '../tracks/SingleTrackRoute/SingleTrackPopularity';
+import getArtistById from '@/app/actions/artists/getArtistById';
 
 interface ArtistTopTracksProps {
   artistId: string;
-  artistName?: string;
 }
 
 const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
   artistId,
-  artistName,
 }) => {
+  const singleArtist = await getArtistById(artistId);
   const artistTopTracks = await getArtistsTopTracks(artistId);
 
-  if (!artistTopTracks || artistTopTracks.tracks.length === 0) {
+  if (
+    !artistTopTracks ||
+    artistTopTracks.tracks.length === 0 ||
+    !singleArtist
+  ) {
     return (
       <div className="text-white px-4">
         Could not get artist&apos;s top tracks...
@@ -37,11 +41,9 @@ const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
 
   return (
     <>
-      {artistName && (
-        <h3 className="text-white font-semibold text-xl px-4">
-          Top Tracks by {artistName}
-        </h3>
-      )}
+      <h3 className="text-white font-semibold text-xl px-4">
+        Top Tracks by {singleArtist.name}
+      </h3>
       <ul className="pt-4">
         {topTracksByPopularity.map((track, index) => (
           <li
