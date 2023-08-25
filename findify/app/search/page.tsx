@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Suspense } from 'react';
 import getUserSession from '../actions/user/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';

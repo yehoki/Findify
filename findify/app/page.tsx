@@ -1,10 +1,8 @@
+export const dynamic = 'force-dynamic';
+
 import getUserSession from './actions/user/getUserSession';
-import getUserTracks from './actions/user/getUserTracks';
-import getUserArtists from './actions/user/getUserArtists';
 import getUserGenres from './actions/user/getUserGenres';
-import MyArtistsCarousel from './components/carousels/MyArtistsCarousel';
 import HeaderUserProfile from './components/HeaderUserProfile';
-import Menu from './components/Menu/Menu';
 import UserTracks from './components/tracks/UserTracks';
 import { Suspense } from 'react';
 import EmptyTracksState from './components/tracks/EmptyTracksState';
@@ -15,33 +13,7 @@ import UserGenres from './components/genres/UserGenres';
 import EmptyGenreState from './components/genres/EmptyGenreState';
 export default async function Home() {
   const session = await getUserSession();
-  const userTracks = await getUserTracks(50, 'medium_term');
-  const topUserArtists = await getUserArtists(50, 'medium_term');
-  const topUserGenres = await getUserGenres();
 
-  const displayUserGenres = () => {
-    if (!topUserGenres) {
-      return <div>No Genres</div>;
-    }
-    const genreArray: { genre: string; genreCount: number }[] = [];
-    topUserGenres.forEach((genreCount, genre) => {
-      genreArray.push({ genre: genre, genreCount: genreCount });
-    });
-    const sortedGenres = genreArray.sort((objOne, objTwo) => {
-      if (objOne.genreCount < objTwo.genreCount) {
-        return 1;
-      } else if (objOne.genreCount > objTwo.genreCount) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
-    return sortedGenres.map((genreDiv) => (
-      <div key={genreDiv.genre}>
-        {genreDiv.genre}: {genreDiv.genreCount}
-      </div>
-    ));
-  };
   return (
     <>
       <header

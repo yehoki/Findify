@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import getArtistById from '@/app/actions/artists/getArtistById';
 import getUserSession from '@/app/actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';

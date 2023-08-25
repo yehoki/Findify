@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import getTrackById from '@/app/actions/tracks/getTrackById';
 import getUserSession from '../../actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';
