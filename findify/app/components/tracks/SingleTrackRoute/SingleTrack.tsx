@@ -62,7 +62,11 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
       flex flex-col md:flex-row
       "
             >
-              <span className="font-normal">{singleTrack.artists[0].name}</span>
+              <span className="font-normal hover:underline">
+                <Link href={`/artists/${singleTrack.artists[0].id}`}>
+                  {singleTrack.artists[0].name}
+                </Link>
+              </span>
               <span className="hidden md:block mx-[2px]"> · </span>
               <span className="flex items-center gap-1 flex-wrap">
                 <p>{singleTrack.album.name} ·</p>

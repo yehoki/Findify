@@ -83,11 +83,14 @@ const DisplayRecentlyPlayedTracks: React.FC<
                     <div>
                       <h4
                         className="font-semibold 
-            text-lg text-white line-clamp-1"
+            text-lg text-white line-clamp-1 max-w-[175px]"
                       >
                         {track.track.name}
                       </h4>
-                      <h5 className="font-semibold text-sm text-spotifyOffWhite line-clamp-1">
+                      <h5
+                        className="font-semibold text-sm text-spotifyOffWhite line-clamp-1
+                      max-w-[150px]"
+                      >
                         {parseArtists(
                           track.track.artists.map((artist) => artist.name)
                         )}{' '}
