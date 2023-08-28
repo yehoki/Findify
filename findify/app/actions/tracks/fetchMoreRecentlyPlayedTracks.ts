@@ -1,30 +1,22 @@
-import { RecentlyPlayedTracks } from '@/app/types/SpotifyTypes';
-import getUserSession from '../user/getUserSession';
+import { RecentlyPlayedTracks } from "@/app/types/SpotifyTypes";
 
-export default async function getRecentlyPlayedTracks(
-  limit = 50,
-  before = new Date().getTime()
-) {
+export const fetchMoreTracks = async (
+  limit = 20,
+  before: number,
+  accessToken: string
+) => {
   try {
-    const currentUser = await getUserSession();
-    if (!currentUser) {
-      return null;
-    }
-
     const spotifyBaseURL =
       'https://api.spotify.com/v1/me/player/recently-played';
     const res = await fetch(
       `${spotifyBaseURL}?limit=${limit}&before=${before}`,
       {
         headers: {
-          Authorization: `Bearer ${
-            currentUser.user.accessToken ? currentUser.user.accessToken : ''
-          }`,
+          Authorization: `Bearer ${accessToken}`,
         },
         method: 'GET',
-      },
+      }
     );
-
     if (!res.ok) {
       return null;
     }
@@ -38,4 +30,4 @@ export default async function getRecentlyPlayedTracks(
     console.error(err);
     return null;
   }
-}
+};

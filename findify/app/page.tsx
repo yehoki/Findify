@@ -1,7 +1,6 @@
 export const dynamic = 'force-dynamic';
 
 import getUserSession from './actions/user/getUserSession';
-import getUserGenres from './actions/user/getUserGenres';
 import HeaderUserProfile from './components/HeaderUserProfile';
 import UserTracks from './components/tracks/UserTracks';
 import { Suspense } from 'react';
@@ -11,10 +10,6 @@ import EmptyArtistsState from './components/artists/EmptyArtistsState';
 import MobileHeader from './components/header/MobileHeader';
 import UserGenres from './components/genres/UserGenres';
 import EmptyGenreState from './components/genres/EmptyGenreState';
-import getRecentlyPlayedTracks from './actions/tracks/getRecentlyPlayedTracks';
-import Image from 'next/image';
-import { getTimeFromNow, parseArtists } from './config/helper';
-import Link from 'next/link';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
 
 interface HomeProps {
@@ -23,7 +18,6 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
-  console.log(searchParams);
 
   return (
     <>
@@ -52,7 +46,7 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             <UserGenres session={session} />
           </Suspense>
         </div>
-        <RecentlyPlayedTracks />
+        <RecentlyPlayedTracks session={session} />
       </div>
     </>
   );

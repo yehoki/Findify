@@ -2,71 +2,25 @@ import getRecentlyPlayedTracks from '@/app/actions/tracks/getRecentlyPlayedTrack
 import { getTimeFromNow, parseArtists } from '@/app/config/helper';
 import Image from 'next/image';
 import Link from 'next/link';
+import DisplayRecentlyPlayedTracks from './DisplayRecentlyPlayedTracks';
+import { Session } from 'next-auth';
 
-interface RecentlyPlayedTracksProps {}
+interface RecentlyPlayedTracksProps {
+  session: Session | null;
+}
 
-const RecentlyPlayedTracks: React.FC<
-  RecentlyPlayedTracksProps
-> = async ({}) => {
-  const recentlyPlayedTracks = await getRecentlyPlayedTracks();
-  if (!recentlyPlayedTracks) {
+const RecentlyPlayedTracks: React.FC<RecentlyPlayedTracksProps> = async ({
+  session,
+}) => {
+  const recentlyPlayedTracks = await getRecentlyPlayedTracks(20);
+  if (!recentlyPlayedTracks || !session) {
     return <>No recently played tracks available</>;
   }
   return (
-    <div className="text-white mx-2">
-      <h3 className="text-xl font-semibold mb-4">Recently played tracks</h3>
-      <ul>
-        {recentlyPlayedTracks.items.map((track) => {
-          const epochTime = new Date(track.played_at);
-          return (
-            <li
-              key={track.track.id + Math.floor(Math.random() * 10000)}
-              className="py-2 mb-2 px-4 
-        w-full rounded-md 
-        bg-[#191919] hover:bg-spotifyGray
-        transition
-        "
-            >
-              <Link href={`/track/${track.track.id}`}>
-                <div className="flex justify-between">
-                  <div className="flex gap-4">
-                    <div className="relative min-w-[50px] h-[50px] aspect-[1/1]">
-                      <Image
-                        src={track.track.album.images[0].url}
-                        alt={`${track.track.name} album cover`}
-                        fill
-                      />
-                    </div>
-                    <div>
-                      <h4
-                        className="font-semibold 
-                text-lg text-white line-clamp-1"
-                      >
-                        {track.track.name}
-                      </h4>
-                      <h5 className="font-semibold text-sm text-spotifyOffWhite line-clamp-1">
-                        {parseArtists(
-                          track.track.artists.map((artist) => artist.name)
-                        )}{' '}
-                        · {track.track.album.name}
-                      </h5>
-                    </div>
-                  </div>
-                  <div>
-                    <p
-                      className="text-sm text-spotifyOffWhite 
-              font-semibold line-clamp-1 max-w-[72px] sm:max-w-[125px]"
-                    >
-                      {getTimeFromNow(epochTime.getTime())}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <DisplayRecentlyPlayedTracks
+      session={session}
+      initialTracks={recentlyPlayedTracks}
+    />
   );
 };
 
