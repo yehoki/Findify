@@ -9,7 +9,7 @@ import {
 import { Session } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import RecentlyPlayedTracksLoadingState from './RecentlyPlayedTracksLoadingState';
 
@@ -56,7 +56,7 @@ const DisplayRecentlyPlayedTracks: React.FC<
   }, [inView, loadMoreTracks]);
 
   return (
-    <div className="text-white mx-2">
+    <div className="text-white mx-2 py-4">
       <h3 className="text-xl font-semibold mb-4">Recently played tracks</h3>
       <ul>
         {tracks.map((track) => {
@@ -100,7 +100,7 @@ const DisplayRecentlyPlayedTracks: React.FC<
                       className="text-sm text-spotifyOffWhite 
           font-semibold line-clamp-1 max-w-[72px] sm:max-w-[125px]"
                     >
-                      {getTimeFromNow(epochTime.getTime())}
+                      <Suspense>{getTimeFromNow(epochTime.getTime())}</Suspense>
                     </p>
                   </div>
                 </div>
@@ -110,7 +110,7 @@ const DisplayRecentlyPlayedTracks: React.FC<
         })}
       </ul>
       <div ref={loadingRef}>
-        <RecentlyPlayedTracksLoadingState loading={loading} />
+        {loading === 'loading' && <RecentlyPlayedTracksLoadingState />}
       </div>
     </div>
   );

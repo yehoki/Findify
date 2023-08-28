@@ -11,6 +11,7 @@ import MobileHeader from './components/header/MobileHeader';
 import UserGenres from './components/genres/UserGenres';
 import EmptyGenreState from './components/genres/EmptyGenreState';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
+import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -46,7 +47,9 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             <UserGenres session={session} />
           </Suspense>
         </div>
-        <RecentlyPlayedTracks session={session} />
+        <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
+          <RecentlyPlayedTracks session={session} />
+        </Suspense>
       </div>
     </>
   );

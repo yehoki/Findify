@@ -36,10 +36,14 @@ const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
 
   return (
     <>
-      <h3 className="text-white text-xl font-semibold mb-2 px-2">
+      <h3 className="text-white text-xl font-semibold mb-2 px-2 pt-4">
         Your Top Genres
       </h3>
-      <ul className="flex gap-2 overflow-x-auto py-1 mx-2" id="user-genres">
+      <ul
+        className="flex gap-2 overflow-x-auto py-1 mx-2 pb-4
+      "
+        id="user-genres"
+      >
         {sortedGenres().map((genre) => {
           return <SingleGenre label={genre.genre} key={genre.genre} />;
         })}
