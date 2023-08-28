@@ -62,3 +62,9 @@ export const getTimeFromNow = (epoch: number) => {
   }
   return 'A few seconds ago';
 };
+
+export const parseGenre = (genre: string) => {
+  const replaceUrlSpaces = genre.replaceAll('%20', '%2B');
+  const replacesSpaces = replaceUrlSpaces.replaceAll(' ', '%2B');
+  return replacesSpaces;
+};
