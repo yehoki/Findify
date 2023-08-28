@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 interface SingleGenreProps {
   label: string;
 }
@@ -13,7 +15,7 @@ const SingleGenre: React.FC<SingleGenreProps> = ({ label }) => {
     hover:bg-[#252525] transition duration-300 cursor-pointer
     "
     >
-      {label}
+      <Link href={`/genre/${label.toLowerCase()}`}>{label}</Link>
     </li>
   );
 };
