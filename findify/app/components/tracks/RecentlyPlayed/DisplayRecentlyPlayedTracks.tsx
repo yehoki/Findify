@@ -9,7 +9,8 @@ import {
 import { Session } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 interface DisplayRecentlyPlayedTracksProps {
   initialTracks: RecentlyPlayedTracks;
@@ -24,11 +25,12 @@ const DisplayRecentlyPlayedTracks: React.FC<
   );
   const [nextBefore, setNextBefore] = useState(initialTracks.cursors.before);
   const [buttonText, setButtonText] = useState('Load more');
+  const [buttonRef, inView] = useInView();
 
-  const loadMoreTracks = async () => {
-    setButtonText('...');
+  const loadMoreTracks = useCallback(async () => {
+    setButtonText('Loading...');
     const nextTracks = await fetchMoreTracks(
-      20,
+      10,
       parseInt(nextBefore),
       session.user.accessToken ? session.user.accessToken : ''
     );
@@ -39,7 +41,13 @@ const DisplayRecentlyPlayedTracks: React.FC<
     setTracks((previousTracks) => [...previousTracks, ...nextTracks.items]);
     setNextBefore(nextTracks.cursors.before);
     setButtonText('Load more');
-  };
+  }, [nextBefore, session.user.accessToken]);
+
+  useEffect(() => {
+    if (inView) {
+      loadMoreTracks();
+    }
+  }, [inView, loadMoreTracks]);
 
   return (
     <div className="text-white mx-2">
@@ -96,13 +104,7 @@ const DisplayRecentlyPlayedTracks: React.FC<
         })}
       </ul>
       <div className="mt-4 flex justify-center items-center">
-        <button
-          onClick={loadMoreTracks}
-          className=""
-          disabled={!buttonText.includes('Load more')}
-        >
-          {buttonText}
-        </button>
+        <p ref={buttonRef}>{buttonText}</p>
       </div>
     </div>
   );
