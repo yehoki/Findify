@@ -1,5 +1,6 @@
 import getMultipleTrackAnalysis from '../actions/tracks/getMultipleTrackAnalysis';
 import getUserTracks from '../actions/user/getUserTracks';
+import RecommendationForm from '../components/tracks/Recommendations/RecommendationForm';
 import RecommendationSlider from '../components/tracks/Recommendations/RecommendationSlider';
 
 const RecommendationsPage = async ({}) => {
@@ -103,18 +104,7 @@ const RecommendationsPage = async ({}) => {
   ];
   return (
     <div>
-      <ul>
-        {analysisPoints.map((point) => (
-          <RecommendationSlider
-            average={point.average}
-            label={point.label}
-            key={point.label}
-            min={point.min}
-            max={point.max}
-            extra={point.extraInfo}
-          />
-        ))}
-      </ul>
+      <RecommendationForm analysisData={analysisPoints} />
     </div>
   );
 };

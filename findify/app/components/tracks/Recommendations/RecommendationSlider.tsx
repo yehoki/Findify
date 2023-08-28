@@ -48,23 +48,23 @@ const RecommendationSlider: React.FC<RecommendationSliderProps> = ({
   return (
     <>
       <ThemeProvider theme={theme}>
-        <li>
-          <div className="w-1/3 mx-auto">
+        <li className="px-4">
+          <div className="w-full lg:w-1/2 2xl:w-5/12 ">
             <h4 className="capitalize text-spotifyOffWhite font-semibold text-lg">
               {label}
             </h4>
-            <p>
+            <h5 className="text-spotifyOffWhite/80 text-sm">
               {currentValue} {extra}
-            </p>
+            </h5>
             <Slider
               min={min}
               max={max}
               valueLabelDisplay="auto"
               color="secondary"
-              defaultValue={parseFloat(average.toFixed(2))}
               step={step()}
               value={currentValue}
               onChange={handleChange}
+              name={label}
             />
           </div>
         </li>

@@ -51,9 +51,9 @@ export default function RootLayout({
   
         "
           >
-            <ChangeTimePeriod />
-            <div>Recommendations</div>
-            <TrackRecommendations />
+            {/* <ChangeTimePeriod />
+            <div>Recommendations</div> */}
+            {/* <TrackRecommendations /> */}
             {/* <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
               <li>Get user tracks</li>
               <li>Get user artists</li>
