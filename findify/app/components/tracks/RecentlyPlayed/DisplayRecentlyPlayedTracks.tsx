@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import RecentlyPlayedTracksLoadingState from './RecentlyPlayedTracksLoadingState';
 
 interface DisplayRecentlyPlayedTracksProps {
   initialTracks: RecentlyPlayedTracks;
@@ -24,24 +25,29 @@ const DisplayRecentlyPlayedTracks: React.FC<
     initialTracks.items
   );
   const [nextBefore, setNextBefore] = useState(initialTracks.cursors.before);
-  const [buttonText, setButtonText] = useState('Load more');
-  const [buttonRef, inView] = useInView();
+  const [loading, setLoading] = useState<
+    'loading' | 'noMoreResults' | 'notLoading'
+  >('notLoading');
+  const [loadingRef, inView] = useInView();
 
   const loadMoreTracks = useCallback(async () => {
-    setButtonText('Loading...');
+    if (loading === 'noMoreResults') {
+      return;
+    }
+    setLoading('loading');
     const nextTracks = await fetchMoreTracks(
       10,
       parseInt(nextBefore),
       session.user.accessToken ? session.user.accessToken : ''
     );
     if (!nextTracks || !nextTracks.cursors) {
-      setButtonText('No more results to show');
+      setLoading('noMoreResults');
       return;
     }
     setTracks((previousTracks) => [...previousTracks, ...nextTracks.items]);
     setNextBefore(nextTracks.cursors.before);
-    setButtonText('Load more');
-  }, [nextBefore, session.user.accessToken]);
+    setLoading('notLoading');
+  }, [nextBefore, session.user.accessToken, loading]);
 
   useEffect(() => {
     if (inView) {
@@ -103,8 +109,8 @@ const DisplayRecentlyPlayedTracks: React.FC<
           );
         })}
       </ul>
-      <div className="mt-4 flex justify-center items-center">
-        <p ref={buttonRef}>{buttonText}</p>
+      <div ref={loadingRef}>
+        <RecentlyPlayedTracksLoadingState loading={loading} />
       </div>
     </div>
   );
