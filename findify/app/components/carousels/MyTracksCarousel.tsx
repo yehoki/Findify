@@ -40,6 +40,8 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({
     const decideSingleWidth = () => {
       if (window.innerWidth <= 768) {
         setSingleWidth(148);
+        setCarouselTranslate(0);
+        setCurrentScrolled(0);
       } else {
         setSingleWidth(198);
       }
