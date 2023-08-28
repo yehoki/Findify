@@ -1,9 +1,11 @@
 import getGenreInformation from '@/app/actions/genres/getGenreInformation';
 import getUserSession from '@/app/actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';
+import SingleGenre from '@/app/components/genres/SingleGenre';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import { parseArtists } from '@/app/config/helper';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AiOutlineUser } from 'react-icons/ai';
 
 interface GenrePageProps {
@@ -31,6 +33,45 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
     }
   });
 
+  const collectGenres = () => {
+    let genreMap = new Map<string, number>();
+    topArtists.forEach((artistItem) => {
+      artistItem.genres.forEach((genre) => {
+        const checkMap = genreMap.get(genre);
+        if (!checkMap) {
+          genreMap.set(genre, 1);
+        } else {
+          genreMap.set(genre, checkMap + 1);
+        }
+      });
+    });
+    // Ensure the current genre is not displayed
+    // Replaces encoded versions of space and '+' sign
+    genreMap.delete(
+      params.genreName.replaceAll('%20', ' ').replaceAll('%2B', ' ')
+    );
+
+    const userGenres: { genre: string; genreCount: number }[] = [];
+    genreMap.forEach((genreCount, genre) => {
+      userGenres.push({
+        genre: genre,
+        genreCount: genreCount,
+      });
+    });
+
+    const sortedGenres = userGenres.sort((objOne, objTwo) => {
+      if (objOne.genreCount < objTwo.genreCount) {
+        return 1;
+      } else if (objOne.genreCount > objTwo.genreCount) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    return sortedGenres;
+  };
+
   return (
     <>
       <header
@@ -43,6 +84,17 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
         <MobileHeader session={session} />
       </header>
       <div>
+        <h2
+          className="text-xl text-white font-semibold
+         my-4 px-4"
+        >
+          Similar genres
+        </h2>
+        <ul className="flex gap-2 overflow-x-auto py-1 mx-4 pb-4">
+          {collectGenres().map((genre) => {
+            return <SingleGenre label={genre.genre} key={genre.genre} />;
+          })}
+        </ul>
         <h2 className="text-xl text-white font-semibold my-4 px-4">
           Most followed artists
         </h2>
@@ -58,28 +110,35 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
                 <div
                   className="relative w-[120px] h-[120px]  
                   md:w-[150px] md:h-[150px] aspect-square rounded-full
-                mx-auto
+                mx-auto mb-2
                 "
                 >
-                  {artist.images && artist.images[0] && (
-                    <Image
-                      src={artist.images[0].url}
-                      fill
-                      alt={`${artist.name} image`}
-                      className="rounded-full"
-                    />
-                  )}
-                  {(!artist.images || !artist.images[0]) && (
-                    <AiOutlineUser
-                      className="w-full h-full rounded-full text-spotifyOffWhite 
+                  <Link href={`/artist/${artist.id}`}>
+                    {artist.images && artist.images[0] && (
+                      <Image
+                        src={artist.images[0].url}
+                        fill
+                        alt={`${artist.name} image`}
+                        className="rounded-full"
+                      />
+                    )}
+                    {(!artist.images || !artist.images[0]) && (
+                      <AiOutlineUser
+                        className="w-full h-full rounded-full text-spotifyOffWhite 
                 bg-transparent border-[#b3b3b3]"
-                    />
-                  )}
+                      />
+                    )}
+                  </Link>
                 </div>
-                <h3 className="text-center text-white text-lg font-semibold">
-                  {artist.name}
+                <h3
+                  className="w-fit mx-auto mb-2
+                  text-white text-lg font-semibold
+                hover:underline line-clamp-1
+                "
+                >
+                  <Link href={`/artist/${artist.id}`}>{artist.name}</Link>
                 </h3>
-                <h4 className="text-sm text-spotifyOffWhite font-semibold text-center mb-1">
+                <h4 className="text-sm text-spotifyOffWhite font-semibold text-center ">
                   {Intl.NumberFormat('en-US').format(artist.followers.total)}{' '}
                   followers
                 </h4>
@@ -93,13 +152,6 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
             </li>
           ))}
         </ul>
-        {/* {genreInformation.tracks.items.map((track) => {
-        return (
-          <div key={track.id}>
-            {track.name}: {track.artists[0].name}
-          </div>
-        );
-      })} */}
       </div>
     </>
   );
