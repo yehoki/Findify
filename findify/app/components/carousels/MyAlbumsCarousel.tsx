@@ -47,6 +47,8 @@ const MyAlbumsCarousel: React.FC<MyAlbumsCarouselProps> = ({
     const decideSingleWidth = () => {
       if (window.innerWidth <= 768) {
         setSingleWidth(148);
+        setCarouselTranslate(0);
+        setCurrentScrolled(0);
       } else {
         setSingleWidth(198);
       }
@@ -134,9 +136,9 @@ const MyAlbumsCarousel: React.FC<MyAlbumsCarouselProps> = ({
 
   return (
     <div className="px-2">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-4">
         <h3 className="text-white text-xl font-semibold">{heading}</h3>
-        <div className="flex gap-2 md:gap-4 mb-4">
+        <div className="hidden md:flex gap-4">
           <CarouselButton
             icon={PiCaretDoubleLeftLight}
             onClick={() => handleButtonClick('start')}
@@ -170,6 +172,8 @@ const MyAlbumsCarousel: React.FC<MyAlbumsCarouselProps> = ({
         }}
         className="grid transition duration-500 gap-4
     grid-rows-1 grid-flow-col
+    overflow-x-auto md:overflow-x-visible
+    pb-2 md:pb-0
     "
       >
         {myAlbums.map((album, index: number) => (
