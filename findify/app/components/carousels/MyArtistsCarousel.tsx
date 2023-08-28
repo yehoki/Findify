@@ -1,7 +1,6 @@
 'use client';
 
-import { ArtistObject, TrackObject } from '@/app/types/SpotifyTypes';
-import Image from 'next/image';
+import { ArtistObject } from '@/app/types/SpotifyTypes';
 import { useLayoutEffect, useState } from 'react';
 import {
   PiCaretDoubleLeftLight,
@@ -127,9 +126,9 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
 
   return (
     <div className="px-2">
-      <div className="flex justify-between ">
+      <div className="flex justify-between mb-4">
         <h3 className="text-white text-xl font-semibold">{heading}</h3>
-        <div className="flex gap-2 md:gap-4 mb-4">
+        <div className="hidden md:flex gap-4">
           <CarouselButton
             icon={PiCaretDoubleLeftLight}
             onClick={() => handleButtonClick('start')}
@@ -162,7 +161,9 @@ const MyArtistsCarousel: React.FC<MyArtistsCarouselProps> = ({
           translate: `translateX(${carouselTranslate}px)`,
         }}
         className="grid transition duration-500 gap-4
-    grid-rows-1 grid-flow-col
+    grid-rows-1 grid-flow-col 
+    overflow-x-auto md:overflow-x-visible
+    pb-2 md:pb-0
     "
       >
         {myArtists.map((artist, index) => (
