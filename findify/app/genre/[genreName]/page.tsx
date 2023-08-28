@@ -107,13 +107,13 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
           {topArtists.map((artist) => (
             <li key={artist.id} className="">
               <div>
-                <div
-                  className="relative w-[120px] h-[120px]  
+                <Link href={`/artist/${artist.id}`}>
+                  <div
+                    className="relative w-[120px] h-[120px]  
                   md:w-[150px] md:h-[150px] aspect-square rounded-full
                 mx-auto mb-2
                 "
-                >
-                  <Link href={`/artist/${artist.id}`}>
+                  >
                     {artist.images && artist.images[0] && (
                       <Image
                         src={artist.images[0].url}
@@ -128,8 +128,8 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
                 bg-transparent border-[#b3b3b3]"
                       />
                     )}
-                  </Link>
-                </div>
+                  </div>
+                </Link>
                 <h3
                   className="w-fit mx-auto mb-2
                   text-white text-lg font-semibold
