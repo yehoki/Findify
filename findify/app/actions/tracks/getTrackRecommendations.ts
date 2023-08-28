@@ -1,6 +1,5 @@
 import { RecommendationObject } from '@/app/types/SpotifyTypes';
 import getUserSession from '../user/getUserSession';
-import next from 'next/types';
 
 export default async function getTrackRecommendations(
   limit = 50,
