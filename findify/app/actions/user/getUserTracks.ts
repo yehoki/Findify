@@ -8,6 +8,7 @@ export default async function getUserTracks(
 ) {
   try {
     const currentUser = await getUserSession();
+    console.log('User', currentUser);
     if (!currentUser) {
       return null;
     }
@@ -23,11 +24,12 @@ export default async function getUserTracks(
         method: 'GET',
       }
     );
-
+    console.log(res.url, res.ok, res.status, res.statusText);
     if (!res.ok) {
       return null;
     }
     const userTracks: MyTopTracks = await res.json();
+    console.log(userTracks);
     return userTracks;
   } catch (err: any) {
     console.log(err);

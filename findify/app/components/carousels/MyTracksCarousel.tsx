@@ -30,6 +30,7 @@ const MyTracksCarousel: React.FC<MyTracksCarouselProps> = ({
   const [isScrolling, setIsScrolling] = useState(false);
   const router = useRouter();
 
+  console.log(myTracks);
   useLayoutEffect(() => {
     setCarouselTranslate(0);
     setCurrentScrolled(0);
