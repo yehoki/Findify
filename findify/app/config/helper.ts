@@ -19,6 +19,46 @@ export const convertSecondsToMinutes = (seconds: number) => {
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
-  const fixedSeconds = remainingSeconds === 0 ? '00' : remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
+  const fixedSeconds =
+    remainingSeconds === 0
+      ? '00'
+      : remainingSeconds < 10
+      ? `0${remainingSeconds}`
+      : remainingSeconds;
   return `${minutes}:${fixedSeconds}`;
+};
+
+export const getTimeFromNow = (epoch: number) => {
+  var seconds = Math.floor((new Date().getTime() - epoch) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + ' years ago';
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) === 1
+      ? Math.floor(interval) + ' month ago'
+      : Math.floor(interval) + ' months ago';
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) === 1
+      ? Math.floor(interval) + ' day ago'
+      : Math.floor(interval) + ' days ago';
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) === 1
+      ? Math.floor(interval) + ' hour ago'
+      : Math.floor(interval) + ' hours ago';
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) === 1
+      ? Math.floor(interval) + ' minute ago'
+      : Math.floor(interval) + ' minutes ago';
+  }
+  return 'A few seconds ago';
 };

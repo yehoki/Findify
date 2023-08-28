@@ -7,10 +7,12 @@ import getArtistById from '@/app/actions/artists/getArtistById';
 
 interface ArtistTopTracksProps {
   artistId: string;
+  heading?: boolean;
 }
 
 const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
   artistId,
+  heading,
 }) => {
   const singleArtist = await getArtistById(artistId);
   const artistTopTracks = await getArtistsTopTracks(artistId);
@@ -41,9 +43,11 @@ const ArtistTopTracks: React.FC<ArtistTopTracksProps> = async ({
 
   return (
     <>
-      <h3 className="text-white font-semibold text-xl px-4">
-        Top Tracks by {singleArtist.name}
-      </h3>
+      {!heading && (
+        <h3 className="text-white font-semibold text-xl px-4">
+          Top Tracks by {singleArtist.name}
+        </h3>
+      )}
       <ul className="pt-4">
         {topTracksByPopularity.map((track, index) => (
           <li

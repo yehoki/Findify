@@ -13,6 +13,8 @@ import UserGenres from './components/genres/UserGenres';
 import EmptyGenreState from './components/genres/EmptyGenreState';
 import getRecentlyPlayedTracks from './actions/tracks/getRecentlyPlayedTracks';
 import Image from 'next/image';
+import { getTimeFromNow, parseArtists } from './config/helper';
+import Link from 'next/link';
 export default async function Home() {
   const session = await getUserSession();
 
@@ -53,10 +55,6 @@ export default async function Home() {
           <ul>
             {recentlyPlayedTracks.items.map((track) => {
               const epochTime = new Date(track.played_at);
-              const now = new Date();
-              const minutesApart = new Date(
-                now.getTime() - epochTime.getTime()
-              );
               return (
                 <li
                   key={track.track.id + Math.floor(Math.random() * 10000)}
@@ -66,15 +64,41 @@ export default async function Home() {
                 transition
                 "
                 >
-                  <div className="relative w-[50px] h-[50px]">
-                    <Image
-                      src={track.track.album.images[0].url}
-                      alt={`${track.track.name} album cover`}
-                      fill
-                    />
-                  </div>
-                  <div></div>
-                  <div></div>
+                  <Link href={`/track/${track.track.id}`}>
+                    <div className="flex justify-between">
+                      <div className="flex gap-4">
+                        <div className="relative min-w-[50px] h-[50px] aspect-[1/1]">
+                          <Image
+                            src={track.track.album.images[0].url}
+                            alt={`${track.track.name} album cover`}
+                            fill
+                          />
+                        </div>
+                        <div>
+                          <h4
+                            className="font-semibold 
+                        text-lg text-white line-clamp-1"
+                          >
+                            {track.track.name}
+                          </h4>
+                          <h5 className="font-semibold text-sm text-spotifyOffWhite line-clamp-1">
+                            {parseArtists(
+                              track.track.artists.map((artist) => artist.name)
+                            )}{' '}
+                            · {track.track.album.name}
+                          </h5>
+                        </div>
+                      </div>
+                      <div>
+                        <p
+                          className="text-sm text-spotifyOffWhite 
+                      font-semibold line-clamp-1 max-w-[72px] sm:max-w-[125px]"
+                        >
+                          {getTimeFromNow(epochTime.getTime())}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 </li>
               );
             })}

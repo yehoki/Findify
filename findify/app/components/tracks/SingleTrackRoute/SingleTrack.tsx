@@ -89,7 +89,7 @@ const SingleTrack: React.FC<SingleTrackProps> = async ({
           {singleTrack.artists[0].name}
         </div>
         <Suspense fallback={<ArtistTopTracksEmptyState />}>
-          <ArtistTopTracks artistId={firstArtist.id} />
+          <ArtistTopTracks artistId={firstArtist.id} heading />
         </Suspense>
         <div className="mt-10 overflow-x-hidden">
           <SimilarArtists artistId={firstArtist.id} />
