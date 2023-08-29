@@ -3,6 +3,7 @@ import getTrackRecommendations from '@/app/actions/tracks/getTrackRecommendation
 import { parseArtists } from '@/app/config/helper';
 import Image from 'next/image';
 import Link from 'next/link';
+import { PiCaretRightLight } from 'react-icons/pi';
 
 interface TrackRecommendationsProps {}
 
@@ -29,13 +30,22 @@ const TrackRecommendations: React.FC<
       <section
         className="group px-2 py-1 mt-4 mx-2 rounded-md
       hover:bg-[#1a1a1a] transition duration-300
+      group
       "
       >
-        <Link href="/recommendations">
-          <p className="text-lg text-white font-semibold">
-            Song Recommendations
-          </p>
-          <p className="text-spotifyOffWhite text-sm">By you — for you</p>
+        <Link
+          href="/recommendations"
+          className="flex items-center justify-between"
+        >
+          <div>
+            <p className="text-lg text-white font-semibold whitespace-nowrap">
+              Song Recommendations
+            </p>
+            <p className="text-spotifyOffWhite text-sm">By you — for you</p>
+          </div>
+          <div className="text-white flex">
+            <PiCaretRightLight size={24} className="" />
+          </div>
         </Link>
       </section>
       <h2 className="text-white text-lg font-semibold mt-4 px-4">
