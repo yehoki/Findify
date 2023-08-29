@@ -36,6 +36,7 @@ export const options: NextAuthOptions = {
         expires: session.expires,
         user: {
           ...session.user,
+          userId: token.userId,
           tokenId: token.id,
           accessToken: token.accessToken,
           accessTokenExpiry: token.accessTokenExpiry,
@@ -47,14 +48,16 @@ export const options: NextAuthOptions = {
     async jwt({ token, user, account }) {
       const clientId = process.env.SPOTIFY_CLIENTID as string;
       const clientSecret = process.env.SPOTIFY_SECRET as string;
-
       if (account && user) {
         token.tokenId = user.id;
         token.accessToken = account.access_token;
         token.expiresAt = account.expires_at;
         token.refreshToken = account.refresh_token;
         return token;
-      } else if (token.expiresAt && Date.now() < (token.expiresAt as number) * 1000) {
+      } else if (
+        token.expiresAt &&
+        Date.now() < (token.expiresAt as number) * 1000
+      ) {
         return token;
       } else {
         try {
@@ -75,6 +78,7 @@ export const options: NextAuthOptions = {
           if (!res.ok) throw tokens;
           return {
             ...token,
+            userId: user.id,
             accessToken: tokens.access_token,
             expiresAt: tokens.expires_at,
             refreshToken: tokens.refresh_token || token.refreshToken,

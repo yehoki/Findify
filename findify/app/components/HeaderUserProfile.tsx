@@ -52,7 +52,13 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
                     className="hover:bg-spotifyLighterGray p-3 
               w-full text-left text-sm"
                   >
-                    <span className="">Account</span>
+                    <a
+                      href="https://www.spotify.com/uk/account/overview/"
+                      target="_blank"
+                      className="w-full"
+                    >
+                      Account
+                    </a>
                   </button>
                 </li>
                 <li className="">
@@ -60,7 +66,13 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({ session }) => {
                     className="hover:bg-spotifyLighterGray p-3 
               w-full text-left text-sm"
                   >
-                    <span className="">Profile</span>
+                    <a
+                      href={`https://open.spotify.com/user/${session.user.userId}`}
+                      target="_blank"
+                      className="w-full"
+                    >
+                      Profile
+                    </a>
                   </button>
                 </li>
                 <li className="">
