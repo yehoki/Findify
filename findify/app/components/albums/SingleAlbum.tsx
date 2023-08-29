@@ -1,7 +1,7 @@
 'use client';
 
 import { parseArtists } from '@/app/config/helper';
-import { SimplifiedAlbumObject, TrackObject } from '@/app/types/SpotifyTypes';
+import { SimplifiedAlbumObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 
 interface SingleAlbumProps {

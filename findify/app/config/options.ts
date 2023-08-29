@@ -3,7 +3,7 @@ import SpotifyProvider from 'next-auth/providers/spotify';
 import { URLSearchParams } from 'url';
 
 const spotifyScope =
-  'user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
+  'playlist-modify-public playlist-modify-private user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
 
 export const options: NextAuthOptions = {
   secret: process.env.NEXT_AUTH_SECRET as string,
@@ -36,8 +36,7 @@ export const options: NextAuthOptions = {
         expires: session.expires,
         user: {
           ...session.user,
-          userId: token.userId,
-          tokenId: token.id,
+          userId: token.tokenId,
           accessToken: token.accessToken,
           accessTokenExpiry: token.accessTokenExpiry,
         },
@@ -78,7 +77,7 @@ export const options: NextAuthOptions = {
           if (!res.ok) throw tokens;
           return {
             ...token,
-            userId: user.id,
+            userId: token.userId,
             accessToken: tokens.access_token,
             expiresAt: tokens.expires_at,
             refreshToken: tokens.refresh_token || token.refreshToken,
@@ -92,5 +91,8 @@ export const options: NextAuthOptions = {
     signIn({ account, profile, user }) {
       return true;
     },
+  },
+  events: {
+    async signOut({ token, session }) {},
   },
 };

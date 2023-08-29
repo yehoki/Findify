@@ -15,11 +15,13 @@ type AnalysisValues = {
 
 type InitialState = {
   isEmpty: boolean;
+  currentTrack: string;
   analysisValues: AnalysisValues;
 };
 
 const initialState = {
   isEmpty: true,
+  currentTrack: '',
   analysisValues: {
     acousticness: 0,
     danceability: 0,
@@ -41,10 +43,17 @@ const sliderRecommendationSlice = createSlice({
     clearValues: (state) => {
       return initialState;
     },
-    setValues: (state, action: PayloadAction<AnalysisValues>) => {
+    setValues: (
+      state,
+      action: PayloadAction<{
+        analysis: AnalysisValues;
+        currentTrackName: string;
+      }>
+    ) => {
       return {
         isEmpty: false,
-        analysisValues: action.payload,
+        analysisValues: action.payload.analysis,
+        currentTrack: action.payload.currentTrackName,
       };
     },
   },

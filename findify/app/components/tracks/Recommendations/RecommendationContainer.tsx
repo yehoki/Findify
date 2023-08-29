@@ -5,6 +5,7 @@ import { Session } from 'next-auth';
 import RecommendationForm from './RecommendationForm';
 import { useState } from 'react';
 import RecommendationDisplay from './RecommendationDisplay';
+import SliderRecommendationProvider from '@/app/providers/SliderRecommendationProvider';
 
 interface RecommendationContainerProps {
   analysisData: {
@@ -40,10 +41,13 @@ const RecommendationContainer: React.FC<RecommendationContainerProps> = ({
         setRecommendationState={setRecommendationState}
         setRecommendedTracks={setRecommendedTracks}
       />
-      <RecommendationDisplay
-        tracks={recommendedTracks}
-        recommendationState={recommendationState}
-      />
+      <SliderRecommendationProvider>
+        <RecommendationDisplay
+          session={session}
+          tracks={recommendedTracks}
+          recommendationState={recommendationState}
+        />
+      </SliderRecommendationProvider>
     </>
   );
 };

@@ -5,20 +5,61 @@ import { TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import Link from 'next/link';
 import RecommendationLoadingState from './RecommendationLoadingState';
+import { Session } from 'next-auth';
+import createNewPlaylist from '@/app/actions/playlists/createNewPlaylist';
+import { useSliderRecommendationSelector } from '@/app/store/store';
+import addSongsToPlaylist from '@/app/actions/playlists/addSongsToPlaylist';
+import { useCallback, useState } from 'react';
 
 interface RecommendationDisplayProps {
   tracks: TrackObject[];
   recommendationState: 'none' | 'fetching' | 'display';
+  session: Session;
 }
 
 const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
   tracks,
   recommendationState,
+  session,
 }) => {
+  const currentTrack = useSliderRecommendationSelector(
+    (state) => state.sliderRecommendationReducer.currentTrack
+  );
+  const [newPlaylistId, setNewPlaylistId] = useState('');
+  const [isPlaylistLoading, setIsPlaylistLoading] = useState(false);
+
+  const handleCreatePlaylist = useCallback(async () => {
+    setIsPlaylistLoading(true);
+    const convertTracksToIds = tracks.map(
+      (track) => `spotify:track:${track.id}`
+    );
+    const newPlaylist = await createNewPlaylist(
+      session,
+      `Spotify songs similar to ${currentTrack}`,
+      `Spotify recommended tracks similar to ${currentTrack}. For you — By you.`
+    );
+    if (!newPlaylist) {
+      setIsPlaylistLoading(false);
+      return;
+    }
+
+    const addTracksToPlaylist = await addSongsToPlaylist(
+      session,
+      newPlaylist,
+      convertTracksToIds
+    );
+    if (!addTracksToPlaylist) {
+      setIsPlaylistLoading(false);
+      return;
+    }
+
+    setNewPlaylistId(newPlaylist);
+    setIsPlaylistLoading(false);
+  }, [currentTrack, session, tracks]);
+
   if (recommendationState === 'none') {
     return <></>;
   }
-
   return (
     <>
       {recommendationState === 'fetching' ? (
@@ -74,6 +115,27 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
               </li>
             ))}
           </ul>
+          <section className="mt-4">
+            <h3 className="px-4 text-xl text-white font-semibold">
+              Create a playlist from recommended songs
+            </h3>
+            <h4 className="px-4 text-spotifyOffWhite mb-2">
+              {tracks[0].name}, {tracks[1].name} and {tracks.length - 2} more
+            </h4>
+            <button
+              className="mx-4 px-2 py-1 text-spotifyGreen rounded-md border-spotifyGreen border"
+              onClick={handleCreatePlaylist}
+            >
+              Create Playlist
+            </button>
+            {newPlaylistId !== '' && (
+              <>
+                <a href={`https://open.spotify.com/playlist/${newPlaylistId}`}>
+                  Checkout your new playlist on Spotify
+                </a>
+              </>
+            )}
+          </section>
         </>
       )}
     </>

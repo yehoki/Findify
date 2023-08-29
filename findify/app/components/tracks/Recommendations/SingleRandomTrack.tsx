@@ -33,16 +33,19 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
       setSelected(trackInfo.id);
       dispatch(
         setValues({
-          acousticness: trackAnalysis.acousticness,
-          danceability: trackAnalysis.danceability,
-          energy: trackAnalysis.energy,
-          instrumentalness: trackAnalysis.instrumentalness,
-          liveness: trackAnalysis.liveness,
-          loudness: trackAnalysis.loudness,
-          popularity: trackInfo.popularity,
-          speechiness: trackAnalysis.speechiness,
-          tempo: trackAnalysis.tempo,
-          valence: trackAnalysis.valence,
+          analysis: {
+            acousticness: trackAnalysis.acousticness,
+            danceability: trackAnalysis.danceability,
+            energy: trackAnalysis.energy,
+            instrumentalness: trackAnalysis.instrumentalness,
+            liveness: trackAnalysis.liveness,
+            loudness: trackAnalysis.loudness,
+            popularity: trackInfo.popularity,
+            speechiness: trackAnalysis.speechiness,
+            tempo: trackAnalysis.tempo,
+            valence: trackAnalysis.valence,
+          },
+          currentTrackName: trackInfo.name,
         })
       );
     }
