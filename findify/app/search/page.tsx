@@ -1,14 +1,10 @@
 export const dynamic = 'force-dynamic';
-
 import { Suspense } from 'react';
 import getUserSession from '../actions/user/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
-import Menu from '../components/Menu/Menu';
 import MobileHeader from '../components/header/MobileHeader';
-import DisplayResults from '../components/search/DisplayResults';
 import FetchResults from '../components/search/FetchResults';
 import Search from '../components/search/Search';
-import MenuProvider from '../providers/MenuProvider';
 import SearchProvider from '../providers/SearchProvider';
 import LoadingSearchResults from '../components/search/LoadingSearchResults';
 
