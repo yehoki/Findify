@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import getGenreInformation from '@/app/actions/genres/getGenreInformation';
 import getUserSession from '@/app/actions/user/getUserSession';
 import HeaderUserProfile from '@/app/components/HeaderUserProfile';

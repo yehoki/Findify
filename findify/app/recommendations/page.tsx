@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import getUserSession from '../actions/user/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import MobileHeader from '../components/header/MobileHeader';
