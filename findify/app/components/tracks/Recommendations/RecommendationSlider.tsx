@@ -49,7 +49,7 @@ const RecommendationSlider: React.FC<RecommendationSliderProps> = ({
     <>
       <ThemeProvider theme={theme}>
         <li className="px-4">
-          <div className="w-full lg:w-1/2 2xl:w-5/12 ">
+          <div className="w-full">
             <h4 className="capitalize text-spotifyOffWhite font-semibold text-lg">
               {label}
             </h4>

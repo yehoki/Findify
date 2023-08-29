@@ -2,6 +2,8 @@
 
 import { FormEvent } from 'react';
 import RecommendationSlider from './RecommendationSlider';
+import { TrackObject } from '@/app/types/SpotifyTypes';
+import { Session } from 'next-auth';
 
 interface RecommendationFormProps {
   analysisData: {
@@ -11,10 +13,13 @@ interface RecommendationFormProps {
     max: number;
     extraInfo?: string;
   }[];
+  songInformation: TrackObject[];
+  session: Session;
 }
 
 const RecommendationForm: React.FC<RecommendationFormProps> = ({
   analysisData,
+  session,
 }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +38,7 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="w-full lg:w-1/2 2xl:w-5/12" onSubmit={handleSubmit}>
       <ul>
         {analysisData.map((analysisPoint) => (
           <RecommendationSlider
