@@ -5,6 +5,7 @@ import { AudioFeaturesObject, TrackObject } from '@/app/types/SpotifyTypes';
 import { Session } from 'next-auth';
 import RecommendationSliders from './RecommendationSliders';
 import RandomTracks from './RandomTracks';
+import fetchSelectedRecommendations from '@/app/actions/tracks/fetchSelectedRecommendations';
 
 interface RecommendationFormProps {
   analysisData: {
@@ -30,24 +31,46 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
 }) => {
   const [selectedTrack, setSelectedTrack] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (selectedTrack === '') {
+      return;
+    }
     const formData = new FormData(e.currentTarget);
 
-    const acousticness = formData.get('acousticness');
-    const danceability = formData.get('danceability');
-    const energy = formData.get('energy');
-    const instrumentalness = formData.get('instrumentalness');
-    const liveness = formData.get('liveness');
-    const loudness = formData.get('loudness');
-    const popularity = formData.get('popularity');
-    const speechiness = formData.get('speechiness');
-    const tempo = formData.get('tempo');
-    const valence = formData.get('valence');
+    const acousticness = formData.get('acousticness') as string;
+    const danceability = formData.get('danceability') as string;
+    const energy = formData.get('energy') as string;
+    const instrumentalness = formData.get('instrumentalness') as string;
+    const liveness = formData.get('liveness') as string;
+    const loudness = formData.get('loudness') as string;
+    const popularity = formData.get('popularity') as string;
+    const speechiness = formData.get('speechiness') as string;
+    const tempo = formData.get('tempo') as string;
+    const valence = formData.get('valence') as string;
+
+    const recommendations = await fetchSelectedRecommendations(
+      50,
+      session,
+      selectedTrack,
+      parseFloat(acousticness),
+      parseFloat(danceability),
+      parseFloat(energy),
+      parseFloat(instrumentalness),
+      parseFloat(liveness),
+      parseFloat(loudness),
+      parseFloat(popularity),
+      parseFloat(speechiness),
+      parseFloat(tempo),
+      parseFloat(valence)
+    );
   };
 
   return (
-    <form className="flex flex-col md:flex-row gap-4 mt-8">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col md:flex-row gap-4 mt-8"
+    >
       <div
         className="w-full 
             md:w-1/3 lg:w-1/2 2xl:w-5/12
@@ -68,6 +91,7 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
           tracks={tracksWithAnalysis}
         />
       </div>
+      <button type="submit">Submit</button>
     </form>
   );
 };
