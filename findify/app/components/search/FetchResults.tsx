@@ -1,5 +1,4 @@
 import { Session } from 'next-auth';
-import { FullSearchResults } from './Search';
 import getSearchFromQuery from '@/app/actions/search/getSearchFromQuery';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import MyArtistsCarousel from '../carousels/MyArtistsCarousel';
