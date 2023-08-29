@@ -2,7 +2,7 @@
 
 import { Slider } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface RecommendationSliderProps {
   label: string;
@@ -38,6 +38,14 @@ const RecommendationSlider: React.FC<RecommendationSliderProps> = ({
   const handleChange = (event: Event, newValue: number | number[]) => {
     setCurrentValue(newValue as number);
   };
+
+  useEffect(() => {
+    setCurrentValue(
+      label === 'tempo' || label === 'loudness' || label === 'popularity'
+        ? parseFloat(average.toFixed(0))
+        : parseFloat(average.toFixed(2))
+    );
+  }, [average]);
 
   const step = () => {
     if (min === 0 && max === 1) {

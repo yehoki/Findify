@@ -6,6 +6,7 @@ import { Session } from 'next-auth';
 import RecommendationSliders from './RecommendationSliders';
 import RandomTracks from './RandomTracks';
 import fetchSelectedRecommendations from '@/app/actions/tracks/fetchSelectedRecommendations';
+import SliderRecommendationProvider from '@/app/providers/SliderRecommendationProvider';
 
 interface RecommendationFormProps {
   analysisData: {
@@ -71,27 +72,29 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
       onSubmit={handleSubmit}
       className="flex flex-col md:flex-row gap-4 mt-8"
     >
-      <div
-        className="w-full 
+      <SliderRecommendationProvider>
+        <div
+          className="w-full 
             md:w-1/3 lg:w-1/2 2xl:w-5/12
             order-2 md:order-1"
-      >
-        <RecommendationSliders analysisData={analysisData} />
-      </div>
-      <div className="block flex-1 order-1 md:order-2 px-4">
-        <h4 className="text-xl text-white font-semibold mb-1">
-          Some songs you are familiar with
-        </h4>
-        <h5 className="text-sm text-spotifyOffWhite font-semibold mb-4">
-          Choose a track for which you want some similar recommendations
-        </h5>
-        <RandomTracks
-          selected={selectedTrack}
-          setSelected={setSelectedTrack}
-          tracks={tracksWithAnalysis}
-        />
-      </div>
-      <button type="submit">Submit</button>
+        >
+          <RecommendationSliders analysisData={analysisData} />
+        </div>
+        <div className="block flex-1 order-1 md:order-2 px-4">
+          <h4 className="text-xl text-white font-semibold mb-1">
+            Some songs you are familiar with
+          </h4>
+          <h5 className="text-sm text-spotifyOffWhite font-semibold mb-4">
+            Choose a track for which you want some similar recommendations
+          </h5>
+          <RandomTracks
+            selected={selectedTrack}
+            setSelected={setSelectedTrack}
+            tracks={tracksWithAnalysis}
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </SliderRecommendationProvider>
     </form>
   );
 };

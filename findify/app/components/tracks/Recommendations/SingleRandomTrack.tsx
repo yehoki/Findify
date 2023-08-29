@@ -1,10 +1,16 @@
 'use client';
 
 import { parseArtists } from '@/app/config/helper';
+import {
+  clearValues,
+  setValues,
+} from '@/app/reducers/sliderRecommendationReducer';
 import { AudioFeaturesObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface SingleRandomTrackProps {
   trackAnalysis: AudioFeaturesObject;
@@ -19,11 +25,27 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
   selected,
   setSelected,
 }) => {
+  const dispatch = useDispatch();
   const handleClickTrack = () => {
     if (selected === trackInfo.id) {
       setSelected('');
+      dispatch(clearValues());
     } else {
       setSelected(trackInfo.id);
+      dispatch(
+        setValues({
+          acousticness: trackAnalysis.acousticness,
+          danceability: trackAnalysis.danceability,
+          energy: trackAnalysis.energy,
+          instrumentalness: trackAnalysis.instrumentalness,
+          liveness: trackAnalysis.liveness,
+          loudness: trackAnalysis.loudness,
+          popularity: trackInfo.popularity,
+          speechiness: trackAnalysis.speechiness,
+          tempo: trackAnalysis.tempo,
+          valence: trackAnalysis.valence,
+        })
+      );
     }
   };
   return (
