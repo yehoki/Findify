@@ -4,6 +4,7 @@ import { onOpen } from '@/app/reducers/mobileMenuReducer';
 import { useMobileMenuSelector } from '@/app/store/store';
 import { Session } from 'next-auth';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useDispatch } from 'react-redux';
 interface MobileHeaderProps {
@@ -39,7 +40,9 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ session }) => {
       )}
       {session && (
         <>
-          <h1 className="md:hidden text-white ml-2 text-lg">Findify</h1>
+          <h1 className="md:hidden text-white ml-2 text-lg">
+            <Link href={'/'}>Findify</Link>
+          </h1>
           <button
             className="md:hidden text-white mr-2"
             onClick={handleOpenModal}
