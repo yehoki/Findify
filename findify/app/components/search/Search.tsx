@@ -1,8 +1,5 @@
 'use client';
-import {
-  setSearchResults,
-  setSearching,
-} from '@/app/reducers/searchResultReducer';
+import { setSearching } from '@/app/reducers/searchResultReducer';
 import { AppDispatch } from '@/app/store/store';
 import {
   ArtistObject,
@@ -12,7 +9,7 @@ import {
 } from '@/app/types/SpotifyTypes';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 interface SearchProps {

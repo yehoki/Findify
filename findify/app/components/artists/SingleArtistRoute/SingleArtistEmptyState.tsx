@@ -1,6 +1,5 @@
 'use client';
 
-import EmptyGenreState from '../../genres/EmptyGenreState';
 import SingleEmptyGenre from '../../genres/SingleEmptyGenre';
 
 interface SingleArtistEmptyStateProps {}
