@@ -89,6 +89,13 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
             lg:w-1/2 2xl:w-5/12
             order-2 lg:order-1"
           >
+            <h4 className="text-xl text-white font-semibold mb-1 px-4">
+              Adjust your recommendations
+            </h4>
+            <h5 className="text-sm text-spotifyOffWhite font-semibold mb-4 px-4">
+              Choose information for your ideal songs and we will try to find
+              you a match
+            </h5>
             <RecommendationSliders analysisData={analysisData} />
           </div>
           <div className="block flex-1 order-1 lg:order-2 px-4">
