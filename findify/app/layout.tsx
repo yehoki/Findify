@@ -48,12 +48,12 @@ export default function RootLayout({
         row-start-3 row-end-[17]
   col-span-4 lg:col-span-3 2xl:col-span-2 md:rounded-lg
   hidden md:block
-  
+  overflow-y-hidden
         "
           >
             {/* <ChangeTimePeriod />
             <div>Recommendations</div> */}
-            {/* <TrackRecommendations /> */}
+            <TrackRecommendations />
             {/* <ul className="mx-auto w-3/4 text-center pt-12 flex flex-col gap-2">
               <li>Get user tracks</li>
               <li>Get user artists</li>
