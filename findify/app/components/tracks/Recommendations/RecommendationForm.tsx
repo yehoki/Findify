@@ -83,15 +83,15 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
   return (
     <form onSubmit={handleSubmit}>
       <SliderRecommendationProvider>
-        <div className="flex flex-col md:flex-row gap-4 mt-8">
+        <div className="flex flex-col lg:flex-row gap-4 mt-8">
           <div
             className="w-full 
-            md:w-1/3 lg:w-1/2 2xl:w-5/12
-            order-2 md:order-1"
+            lg:w-1/2 2xl:w-5/12
+            order-2 lg:order-1"
           >
             <RecommendationSliders analysisData={analysisData} />
           </div>
-          <div className="block flex-1 order-1 md:order-2 px-4">
+          <div className="block flex-1 order-1 lg:order-2 px-4">
             <h4 className="text-xl text-white font-semibold mb-1">
               Here are some songs you are familiar with
             </h4>
