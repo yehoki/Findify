@@ -9,7 +9,7 @@ import { Session } from 'next-auth';
 import createNewPlaylist from '@/app/actions/playlists/createNewPlaylist';
 import { useSliderRecommendationSelector } from '@/app/store/store';
 import addSongsToPlaylist from '@/app/actions/playlists/addSongsToPlaylist';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface RecommendationDisplayProps {
   tracks: TrackObject[];
@@ -27,6 +27,10 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
   );
   const [newPlaylistId, setNewPlaylistId] = useState('');
   const [isPlaylistLoading, setIsPlaylistLoading] = useState(false);
+
+  useEffect(() => {
+    setNewPlaylistId('');
+  }, [tracks]);
 
   const handleCreatePlaylist = useCallback(async () => {
     setIsPlaylistLoading(true);
@@ -115,25 +119,36 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
               </li>
             ))}
           </ul>
-          <section className="mt-4">
+          <section className="mt-4 mb-8">
             <h3 className="px-4 text-xl text-white font-semibold">
               Create a playlist from recommended songs
             </h3>
             <h4 className="px-4 text-spotifyOffWhite mb-2">
               {tracks[0].name}, {tracks[1].name} and {tracks.length - 2} more
             </h4>
-            <button
-              className="mx-4 px-2 py-1 text-spotifyGreen rounded-md border-spotifyGreen border"
-              onClick={handleCreatePlaylist}
-            >
-              Create Playlist
-            </button>
+            {!isPlaylistLoading && newPlaylistId === '' && (
+              <button
+                className="mx-4 px-2 py-1 text-spotifyGreen rounded-md border-spotifyGreen border font-semibold
+                hover:scale-105
+                "
+                onClick={handleCreatePlaylist}
+              >
+                Create Playlist
+              </button>
+            )}
+            {isPlaylistLoading && (
+              <p className="text-white text-lg font-semibold px-4 ">
+                Hold tight we are creating your playlist...
+              </p>
+            )}
             {newPlaylistId !== '' && (
-              <>
-                <a href={`https://open.spotify.com/playlist/${newPlaylistId}`}>
-                  Checkout your new playlist on Spotify
-                </a>
-              </>
+              <a
+                href={`https://open.spotify.com/playlist/${newPlaylistId}`}
+                className="px-4 text-spotifyGreen text-lg font-semibold hover:underline"
+                target="_blank"
+              >
+                Checkout your new playlist on Spotify!
+              </a>
             )}
           </section>
         </>
