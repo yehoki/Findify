@@ -121,7 +121,9 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
           </ul>
           <section className="mt-4 mb-8">
             <h3 className="px-4 text-xl text-white font-semibold">
-              Create a playlist from recommended songs
+              {newPlaylistId === ''
+                ? 'Create a playlist from recommended songs'
+                : 'Your new playlist is ready'}
             </h3>
             <h4 className="px-4 text-spotifyOffWhite mb-2">
               {tracks[0].name}, {tracks[1].name} and {tracks.length - 2} more

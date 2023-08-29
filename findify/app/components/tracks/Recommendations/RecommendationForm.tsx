@@ -120,7 +120,7 @@ const RecommendationForm: React.FC<RecommendationFormProps> = ({
         "
             type="submit"
           >
-            Submit
+            Get your recommendations
           </button>
         </div>
       </SliderRecommendationProvider>
