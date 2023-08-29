@@ -7,6 +7,7 @@ import FetchResults from '../components/search/FetchResults';
 import Search from '../components/search/Search';
 import SearchProvider from '../providers/SearchProvider';
 import LoadingSearchResults from '../components/search/LoadingSearchResults';
+import MobileMenuProvider from '../providers/MobileMenuProvider';
 
 interface SearchPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -27,7 +28,9 @@ const SearchPage: React.FC<SearchPageProps> = async ({ searchParams }) => {
           <Search session={session} />
         </SearchProvider>
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div>
         <Suspense fallback={<LoadingSearchResults />}>

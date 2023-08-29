@@ -12,6 +12,7 @@ import UserGenres from './components/genres/UserGenres';
 import EmptyGenreState from './components/genres/EmptyGenreState';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
 import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
+import MobileMenuProvider from './providers/MobileMenuProvider';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -29,7 +30,9 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
           "
       >
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div className="mt-10 md:mt-0">
         <div className="py-4 overflow-x-hidden">

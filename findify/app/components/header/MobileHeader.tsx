@@ -1,13 +1,25 @@
 'use client';
 
+import { onOpen } from '@/app/reducers/mobileMenuReducer';
+import { useMobileMenuSelector } from '@/app/store/store';
 import { Session } from 'next-auth';
 import { signIn } from 'next-auth/react';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { useDispatch } from 'react-redux';
 interface MobileHeaderProps {
   session: Session | null;
 }
 
 const MobileHeader: React.FC<MobileHeaderProps> = ({ session }) => {
+  const dispatch = useDispatch();
+  const isOpen = useMobileMenuSelector(
+    (state) => state.mobileMenuReducer.isOpen
+  );
+  const handleOpenModal = () => {
+    if (!isOpen) {
+      return dispatch(onOpen());
+    }
+  };
   return (
     <>
       {!session && (
@@ -28,7 +40,10 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ session }) => {
       {session && (
         <>
           <h1 className="md:hidden text-white ml-2 text-lg">Findify</h1>
-          <button className="md:hidden text-white mr-2">
+          <button
+            className="md:hidden text-white mr-2"
+            onClick={handleOpenModal}
+          >
             <RxHamburgerMenu size={32} />
           </button>
         </>

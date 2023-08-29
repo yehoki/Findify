@@ -3,6 +3,7 @@ import getUserSession from '../actions/user/getUserSession';
 import HeaderUserProfile from '../components/HeaderUserProfile';
 import MobileHeader from '../components/header/MobileHeader';
 import UserRecommendations from '../components/tracks/Recommendations/UserRecommendations';
+import MobileMenuProvider from '../providers/MobileMenuProvider';
 
 const RecommendationsPage = async ({}) => {
   const session = await getUserSession();
@@ -18,7 +19,9 @@ const RecommendationsPage = async ({}) => {
           relative"
       >
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div>
         <UserRecommendations session={session} />

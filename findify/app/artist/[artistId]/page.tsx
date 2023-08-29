@@ -10,6 +10,7 @@ import SingleArtist from '@/app/components/artists/SingleArtistRoute/SingleArtis
 import SingleArtistEmptyState from '@/app/components/artists/SingleArtistRoute/SingleArtistEmptyState';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import SimilarArtists from '@/app/components/tracks/SingleTrackRoute/SimilarArtists';
+import MobileMenuProvider from '@/app/providers/MobileMenuProvider';
 import { Suspense } from 'react';
 
 interface ArtistPageProps {
@@ -36,7 +37,9 @@ const ArtistPage: React.FC<ArtistPageProps> = async ({ params }) => {
           "
       >
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div
         className="mt-16

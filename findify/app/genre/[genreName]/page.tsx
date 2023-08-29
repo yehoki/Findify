@@ -5,6 +5,7 @@ import HeaderUserProfile from '@/app/components/HeaderUserProfile';
 import SingleGenre from '@/app/components/genres/SingleGenre';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import { parseArtists } from '@/app/config/helper';
+import MobileMenuProvider from '@/app/providers/MobileMenuProvider';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -82,7 +83,9 @@ const GenrePage: React.FC<GenrePageProps> = async ({ params }) => {
           "
       >
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div>
         <h2

@@ -4,6 +4,8 @@ import { Lato } from 'next/font/google';
 import Menu from './components/Menu/Menu';
 import ChangeTimePeriod from './components/SideMenu/ChangeTimePeriod';
 import TrackRecommendations from './components/tracks/Recommendations/TrackRecommendations';
+import MobileMenuModal from './components/modals/MobileMenuModal';
+import MobileMenuProvider from './providers/MobileMenuProvider';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -24,6 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.className} bg-black`}>
+        <MobileMenuProvider>
+          <MobileMenuModal />
+        </MobileMenuProvider>
         <main
           className="text-spotifyGreen
         w-full

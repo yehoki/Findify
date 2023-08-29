@@ -6,6 +6,7 @@ import HeaderUserProfile from '@/app/components/HeaderUserProfile';
 import MobileHeader from '@/app/components/header/MobileHeader';
 import getArtistsFromList from '@/app/actions/artists/getArtistsFromList';
 import SingleTrack from '@/app/components/tracks/SingleTrackRoute/SingleTrack';
+import MobileMenuProvider from '@/app/providers/MobileMenuProvider';
 
 interface TrackPageProps {
   params: { trackId: string };
@@ -37,7 +38,9 @@ const TrackPage: React.FC<TrackPageProps> = async ({ params }) => {
           "
       >
         <HeaderUserProfile session={session} />
-        <MobileHeader session={session} />
+        <MobileMenuProvider>
+          <MobileHeader session={session} />
+        </MobileMenuProvider>
       </header>
       <div className="mt-16">
         <SingleTrack session={session} trackId={params.trackId} />
