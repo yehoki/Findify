@@ -6,6 +6,7 @@ import SingleRandomTrack from './SingleRandomTrack';
 import RecommendationSliders from './RecommendationSliders';
 import RandomTracks from './RandomTracks';
 import RecommendationForm from './RecommendationForm';
+import RecommendationContainer from './RecommendationContainer';
 
 interface UserRecommendationsProps {
   session: Session;
@@ -144,10 +145,10 @@ const UserRecommendations: React.FC<UserRecommendationsProps> = async ({
 
   return (
     <>
-      <RecommendationForm
+      <RecommendationContainer
+        tracksWithAnalysis={combineTracksWithAnalysis()}
         analysisData={analysisPoints}
         session={session}
-        tracksWithAnalysis={combineTracksWithAnalysis()}
       />
     </>
   );

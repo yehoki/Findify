@@ -75,7 +75,7 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
           </div>
         </Link>
         <div className="font-semibold">
-          <h5 className="text-white">
+          <h5 className="text-white line-clamp-2">
             <Link
               href={`/track/${trackInfo.id}`}
               className="outline-none hover:underline"
@@ -86,7 +86,7 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
           <p className="text-spotifyOffWhite text-sm line-clamp-1 mb-2">
             by {parseArtists(trackInfo.artists.map((artist) => artist.name))}
           </p>
-          <div
+          {/* <div
             className="w-full grid grid-cols-2 grid-rows-2 
                       gap-y-2 gap-x-4 2xl:gap-x-8 2xl:gap-y-2
                       text-spotifyOffWhite text-sm font-normal
@@ -102,7 +102,7 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
             <p className="line-clamp-1">
               Tempo: {trackAnalysis.tempo.toFixed(0)} BPM
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </li>
