@@ -9,9 +9,10 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { useDispatch } from 'react-redux';
 interface MobileHeaderProps {
   session: Session | null;
+  children?: React.ReactNode;
 }
 
-const MobileHeader: React.FC<MobileHeaderProps> = ({ session }) => {
+const MobileHeader: React.FC<MobileHeaderProps> = ({ session, children }) => {
   const dispatch = useDispatch();
   const isOpen = useMobileMenuSelector(
     (state) => state.mobileMenuReducer.isOpen
@@ -43,6 +44,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ session }) => {
           <h1 className="md:hidden text-white ml-2 text-lg">
             <Link href={'/'}>Findify</Link>
           </h1>
+          {children}
           <button
             className="md:hidden text-white mr-2"
             onClick={handleOpenModal}

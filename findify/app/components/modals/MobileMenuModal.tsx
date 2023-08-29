@@ -63,6 +63,11 @@ const MobileMenuModal: React.FC<MobileMenuModalProps> = ({ session }) => {
             </Link>
           </li>
           <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+            <Link onClick={handleCloseModal} href={'/search'}>
+              Search
+            </Link>
+          </li>
+          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
             <a
               href="https://www.spotify.com/uk/account/overview/"
               target="_blank"

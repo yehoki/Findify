@@ -24,12 +24,13 @@ const SearchPage: React.FC<SearchPageProps> = async ({ searchParams }) => {
     flex justify-between items-center md:block
     relative"
       >
-        <SearchProvider>
-          <Search session={session} />
-        </SearchProvider>
         <HeaderUserProfile session={session} />
         <MobileMenuProvider>
-          <MobileHeader session={session} />
+          <MobileHeader session={session}>
+            <SearchProvider>
+              <Search session={session} />
+            </SearchProvider>
+          </MobileHeader>
         </MobileMenuProvider>
       </header>
       <div>
