@@ -2,10 +2,6 @@ import getMultipleTrackAnalysis from '@/app/actions/tracks/getMultipleTrackAnaly
 import getUserTracks from '@/app/actions/user/getUserTracks';
 import { AudioFeaturesObject, TrackObject } from '@/app/types/SpotifyTypes';
 import { Session } from 'next-auth';
-import SingleRandomTrack from './SingleRandomTrack';
-import RecommendationSliders from './RecommendationSliders';
-import RandomTracks from './RandomTracks';
-import RecommendationForm from './RecommendationForm';
 import RecommendationContainer from './RecommendationContainer';
 
 interface UserRecommendationsProps {

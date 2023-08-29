@@ -8,7 +8,6 @@ import {
 import { AudioFeaturesObject, TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -86,23 +85,6 @@ const SingleRandomTrack: React.FC<SingleRandomTrackProps> = ({
           <p className="text-spotifyOffWhite text-sm line-clamp-1 mb-2">
             by {parseArtists(trackInfo.artists.map((artist) => artist.name))}
           </p>
-          {/* <div
-            className="w-full grid grid-cols-2 grid-rows-2 
-                      gap-y-2 gap-x-4 2xl:gap-x-8 2xl:gap-y-2
-                      text-spotifyOffWhite text-sm font-normal
-                      "
-          >
-            <p className="line-clamp-1">
-              Energy: {trackAnalysis.energy.toFixed(2)}
-            </p>
-            <p className="line-clamp-1">
-              Danceability: {trackAnalysis.danceability.toFixed(2)}
-            </p>
-            <p className="line-clamp-1">Popularity: {trackInfo.popularity}</p>
-            <p className="line-clamp-1">
-              Tempo: {trackAnalysis.tempo.toFixed(0)} BPM
-            </p>
-          </div> */}
         </div>
       </div>
     </li>

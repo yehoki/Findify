@@ -4,7 +4,6 @@ import { parseArtists } from '@/app/config/helper';
 import { TrackObject } from '@/app/types/SpotifyTypes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Dispatch, SetStateAction } from 'react';
 import RecommendationLoadingState from './RecommendationLoadingState';
 
 interface RecommendationDisplayProps {
@@ -16,33 +15,6 @@ const RecommendationDisplay: React.FC<RecommendationDisplayProps> = ({
   tracks,
   recommendationState,
 }) => {
-  // const parseArtistsWithLinks = (artists: { name: string; id: string }[]) => {
-  //   if (artists.length === 0) {
-  //     return;
-  //   }
-  //   const firstArtist = (
-  //     <Link className="hover:underline" href={`/artist/${artists[0].id}`}>
-  //       {artists[0].name}
-  //     </Link>
-  //   );
-  //   if (artists.length === 1) {
-  //     return firstArtist;
-  //   }
-
-  //   return artists.map((artist, index: number) => (
-  //     <>
-  //       {index !== 0 ? ', ' : ''}
-  //       <Link
-  //         key={artist.id}
-  //         href={`/artist/${artist.id}`}
-  //         className="hover:underline"
-  //       >
-  //         {artist.name}
-  //       </Link>
-  //     </>
-  //   ));
-  // };
-
   if (recommendationState === 'none') {
     return <></>;
   }
