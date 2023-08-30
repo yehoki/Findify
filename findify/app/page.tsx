@@ -66,17 +66,32 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
         />
         <div className="py-4 overflow-x-hidden">
           <Suspense fallback={<EmptyTracksState />}>
-            <UserTracks session={session} />
+            <UserTracks
+              session={session}
+              timePeriod={
+                formattedTimePeriod !== '' ? formattedTimePeriod : 'medium_term'
+              }
+            />
           </Suspense>
         </div>
         <div className="py-4 overflow-x-hidden ">
           <Suspense fallback={<EmptyArtistsState />}>
-            <UserArtists session={session} />
+            <UserArtists
+              session={session}
+              timePeriod={
+                formattedTimePeriod !== '' ? formattedTimePeriod : 'medium_term'
+              }
+            />
           </Suspense>
         </div>
         <div className="py-4">
           <Suspense fallback={<EmptyGenreState />}>
-            <UserGenres session={session} />
+            <UserGenres
+              session={session}
+              timePeriod={
+                formattedTimePeriod !== '' ? formattedTimePeriod : 'medium_term'
+              }
+            />
           </Suspense>
         </div>
         <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>

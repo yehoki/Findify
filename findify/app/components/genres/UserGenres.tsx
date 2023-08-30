@@ -2,17 +2,22 @@ import getUserGenres from '@/app/actions/user/getUserGenres';
 import { Session } from 'next-auth';
 import SingleGenre from './SingleGenre';
 import EmptyGenreState from './EmptyGenreState';
+import { TimePeriod } from '../TimePeriodSwitch';
 
 interface UserGenresProps {
   session: Session | null;
+  timePeriod: TimePeriod;
 }
 
-const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
+const UserGenres: React.FC<UserGenresProps> = async ({
+  session,
+  timePeriod,
+}) => {
   if (!session) {
     return <EmptyGenreState home={true} />;
   }
 
-  const userGenres = await getUserGenres();
+  const userGenres = await getUserGenres(timePeriod);
 
   if (!userGenres) {
     return <></>;

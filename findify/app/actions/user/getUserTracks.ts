@@ -8,7 +8,6 @@ export default async function getUserTracks(
 ) {
   try {
     const currentUser = await getUserSession();
-    console.log(currentUser);
     if (!currentUser) {
       return null;
     }

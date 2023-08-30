@@ -18,13 +18,12 @@ const TimePeriodSwitch: React.FC<TimePeriodSwitchProps> = ({
 
   const handleChangePeriod = (period: TimePeriod) => {
     setCurrentPeriod(period);
-    router.push(`/?tp=${period}`);
-    return router.refresh();
+    return router.push(`/?tp=${period}`);
   };
 
   return (
     <div className="flex items-center justify-center md:justify-end mb-4">
-      <ul className="flex bg-spotifyGray rounded-md  items-center justify-center text-lg">
+      <ul className="flex bg-spotifyGray rounded-md  items-center justify-center">
         <li
           onClick={() => handleChangePeriod('short_term')}
           className={`px-4 py-2 rounded-md cursor-pointer text-white font-semibold

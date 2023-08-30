@@ -2,16 +2,21 @@ import getUserTracks from '@/app/actions/user/getUserTracks';
 import { Session } from 'next-auth';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import EmptyTracksState from './EmptyTracksState';
+import { TimePeriod } from '../TimePeriodSwitch';
 
 interface UserTracksProps {
   session: Session | null;
+  timePeriod: TimePeriod;
 }
 
-const UserTracks: React.FC<UserTracksProps> = async ({ session }) => {
+const UserTracks: React.FC<UserTracksProps> = async ({
+  session,
+  timePeriod,
+}) => {
   if (!session) {
     return <EmptyTracksState home={true} />;
   }
-  const userTracks = await getUserTracks(50, 'medium_term');
+  const userTracks = await getUserTracks(50, timePeriod);
   if (!userTracks) {
     return (
       <>

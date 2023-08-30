@@ -1,9 +1,12 @@
+import { TimePeriod } from '@/app/components/TimePeriodSwitch';
 import getUserArtists from './getUserArtists';
 import getUserTracks from './getUserTracks';
 
-export default async function getUserGenres() {
+export default async function getUserGenres(
+  timePeriod: TimePeriod
+) {
   try {
-    const currentUserArtists = await getUserArtists(50, 'long_term', 2);
+    const currentUserArtists = await getUserArtists(50, timePeriod, 2);
 
     if (!currentUserArtists) {
       return null;
