@@ -2,7 +2,6 @@ import getUserTracks from '@/app/actions/user/getUserTracks';
 import { Session } from 'next-auth';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import EmptyTracksState from './EmptyTracksState';
-import { Suspense } from 'react';
 
 interface UserTracksProps {
   session: Session | null;
@@ -13,7 +12,7 @@ const UserTracks: React.FC<UserTracksProps> = async ({ session }) => {
     return <EmptyTracksState home={true} />;
   }
   const userTracks = await getUserTracks(50, 'medium_term');
-  if (!userTracks || userTracks === 'UserManagement') {
+  if (!userTracks) {
     return (
       <>
         <h2 className="px-4 text-white font-semibold text-xl">
@@ -41,7 +40,7 @@ const UserTracks: React.FC<UserTracksProps> = async ({ session }) => {
       </>
     );
   }
-  return <MyTracksCarousel myTracks={userTracks ? userTracks.items : []} />;
+  return <MyTracksCarousel myTracks={userTracks.items} />;
 };
 
 export default UserTracks;

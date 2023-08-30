@@ -13,12 +13,13 @@ interface RecentlyPlayedTracksProps {
 const RecentlyPlayedTracks: React.FC<RecentlyPlayedTracksProps> = async ({
   session,
 }) => {
-  const recentlyPlayedTracks = await getRecentlyPlayedTracks(20);
-  if (recentlyPlayedTracks === 'UserManagement') {
-    return <></>;
-  }
-  if (!recentlyPlayedTracks || !session) {
+  if (!session) {
     return <RecentlyPlayedTracksLoadingState home={true} />;
+  }
+  const recentlyPlayedTracks = await getRecentlyPlayedTracks(20);
+
+  if (!recentlyPlayedTracks) {
+    return <></>;
   }
   return (
     <DisplayRecentlyPlayedTracks

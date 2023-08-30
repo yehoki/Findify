@@ -23,9 +23,6 @@ export default async function getRecentlyPlayedTracks(
         method: 'GET',
       }
     );
-    if (res.status === 403 || res.status === 504) {
-      return 'UserManagement';
-    }
     if (!res.ok) {
       return null;
     }

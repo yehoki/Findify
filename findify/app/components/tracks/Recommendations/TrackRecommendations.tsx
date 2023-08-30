@@ -18,7 +18,7 @@ const TrackRecommendations: React.FC<TrackRecommendationsProps> = async ({
     return <EmptySideRecommendations status="loggedOut" />;
   }
   const recentlyPlayedTracks = await getRecentlyPlayedTracks();
-  if (!recentlyPlayedTracks || recentlyPlayedTracks === 'UserManagement') {
+  if (!recentlyPlayedTracks) {
     return <EmptySideRecommendations status="failed" />;
   }
   const recommendations = await getTrackRecommendations(

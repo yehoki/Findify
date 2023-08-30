@@ -12,7 +12,7 @@ const UserRecommendations: React.FC<UserRecommendationsProps> = async ({
   session,
 }) => {
   const userTracks = await getUserTracks(50, 'short_term');
-  if (!userTracks || userTracks === 'UserManagement') {
+  if (!userTracks) {
     return <></>;
   }
 
@@ -20,7 +20,7 @@ const UserRecommendations: React.FC<UserRecommendationsProps> = async ({
     userTracks.items.map((track) => track.id)
   );
   if (!topTrackAnalysis) {
-    return <div></div>;
+    return <></>;
   }
 
   const averageAcousticness =

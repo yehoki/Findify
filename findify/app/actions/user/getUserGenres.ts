@@ -4,9 +4,7 @@ import getUserTracks from './getUserTracks';
 export default async function getUserGenres() {
   try {
     const currentUserArtists = await getUserArtists(50, 'long_term', 2);
-    if (currentUserArtists === 'UserManagement') {
-      return 'UserManagement';
-    }
+
     if (!currentUserArtists) {
       return null;
     }

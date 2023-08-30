@@ -14,13 +14,9 @@ const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
 
   const userGenres = await getUserGenres();
 
-  if (!userGenres || userGenres === 'UserManagement') {
+  if (!userGenres) {
     return <></>;
   }
-
-  // if (!userGenres) {
-  //   return <EmptyGenreState />;
-  // }
   const sortedGenres = () => {
     const genreArray: { genre: string; genreCount: number }[] = [];
     userGenres.forEach((genreCount, genre) => {
