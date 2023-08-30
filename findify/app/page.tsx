@@ -13,6 +13,7 @@ import EmptyGenreState from './components/genres/EmptyGenreState';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
 import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
 import MobileMenuProvider from './providers/MobileMenuProvider';
+import TimePeriodSwitch from './components/TimePeriodSwitch';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -20,6 +21,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
+
   return (
     <>
       <header
@@ -44,6 +46,7 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             </h3>
           </>
         )}
+        <TimePeriodSwitch />
         <div className="py-4 overflow-x-hidden">
           <Suspense fallback={<EmptyTracksState />}>
             <UserTracks session={session} />
