@@ -10,7 +10,7 @@ export default async function getRecentlyPlayedTracks(limit = 50) {
     const spotifyBaseURL =
       'https://api.spotify.com/v1/me/player/recently-played';
     const controller = new AbortController();
-    const abortFetch = setTimeout(() => controller.abort(), 3000);
+    const abortFetch = setTimeout(() => controller.abort(), 1500);
     const res = await fetch(`${spotifyBaseURL}?limit=${limit}`, {
       headers: {
         Authorization: `Bearer ${

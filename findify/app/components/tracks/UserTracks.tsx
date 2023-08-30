@@ -2,7 +2,7 @@ import getUserTracks from '@/app/actions/user/getUserTracks';
 import { Session } from 'next-auth';
 import MyTracksCarousel from '../carousels/MyTracksCarousel';
 import EmptyTracksState from './EmptyTracksState';
-import { TimePeriod } from '../TimePeriodSwitch';
+import TimePeriodSwitch, { TimePeriod } from '../TimePeriodSwitch';
 
 interface UserTracksProps {
   session: Session | null;
@@ -45,7 +45,12 @@ const UserTracks: React.FC<UserTracksProps> = async ({
       </>
     );
   }
-  return <MyTracksCarousel myTracks={userTracks.items} />;
+  return (
+    <>
+      <TimePeriodSwitch timePeriodParam={timePeriod} />
+      <MyTracksCarousel myTracks={userTracks.items} />
+    </>
+  );
 };
 
 export default UserTracks;
