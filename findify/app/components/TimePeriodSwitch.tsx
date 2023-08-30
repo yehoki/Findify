@@ -22,7 +22,7 @@ const TimePeriodSwitch: React.FC<TimePeriodSwitchProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-center md:justify-end mb-4">
+    <div className="flex items-center justify-center md:justify-end mb-8">
       <ul className="flex bg-spotifyGray rounded-md  items-center justify-center">
         <li
           onClick={() => handleChangePeriod('short_term')}

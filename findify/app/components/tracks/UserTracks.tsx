@@ -47,7 +47,9 @@ const UserTracks: React.FC<UserTracksProps> = async ({
   }
   return (
     <>
-      <TimePeriodSwitch timePeriodParam={timePeriod} />
+      {session && userTracks && (
+        <TimePeriodSwitch timePeriodParam={timePeriod} />
+      )}
       <MyTracksCarousel myTracks={userTracks.items} />
     </>
   );
