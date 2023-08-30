@@ -19,10 +19,6 @@ interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export function reportWebVitals(metric: any) {
-  console.log(metric);
-}
-
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
   const currentUserProfile = await getUserInfo();
