@@ -9,7 +9,7 @@ interface UserArtistsProps {
 
 const UserArtists: React.FC<UserArtistsProps> = async ({ session }) => {
   if (!session) {
-    return <EmptyArtistsState />;
+    return <EmptyArtistsState home={true} />;
   }
   const userArtists = await getUserArtists(50, 'medium_term');
 

@@ -1,18 +1,20 @@
 'use client';
 
-interface RecentlyPlayedTracksLoadingStateProps {}
+interface RecentlyPlayedTracksLoadingStateProps {
+  home?: boolean;
+}
 
 const RecentlyPlayedTracksLoadingState: React.FC<
   RecentlyPlayedTracksLoadingStateProps
-> = ({}) => {
+> = ({ home }) => {
   return (
     <div
-      className="py-2 px-4 mb-2 w-full rounded-md 
+      className={`py-2 px-4 mb-2 w-full rounded-md 
     bg-[#191919] hover:bg-spotifyGray
     transition   
     flex gap-4
-    animate-pulse
-    "
+    ${home ? '' : 'animate-pulse'}
+    `}
     >
       <div className="min-w-[50px] h-[50px] aspect-square bg-spotifyLighterGray"></div>
       <div className="w-full">

@@ -1,16 +1,18 @@
 'use client';
 
-interface SingleEmptyGenreProps {}
+interface SingleEmptyGenreProps {
+  home?: boolean;
+}
 
-const SingleEmptyGenre: React.FC<SingleEmptyGenreProps> = ({}) => {
+const SingleEmptyGenre: React.FC<SingleEmptyGenreProps> = ({ home }) => {
   return (
     <li
-      className="min-w-fit px-4 py-2
+      className={`min-w-fit px-4 py-2
     bg-[#181818] text-white
     rounded-full
     hover:bg-[#252525] transition duration-300 cursor-pointer
-    animate-pulse
-    "
+    ${home ? '' : 'animate-pulse'}
+    `}
     >
       <div
         style={{ width: `${Math.floor(Math.random() * 50) + 70}px` }}

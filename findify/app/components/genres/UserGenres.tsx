@@ -9,7 +9,7 @@ interface UserGenresProps {
 
 const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
   if (!session) {
-    return <EmptyGenreState />;
+    return <EmptyGenreState home={true} />;
   }
 
   const userGenres = await getUserGenres();

@@ -2,9 +2,11 @@
 
 import SingleEmptyUserArtist from './SingleEmptyUserArtist';
 
-interface EmptyArtistsStateProps {}
+interface EmptyArtistsStateProps {
+  home?: boolean;
+}
 
-const EmptyArtistsState: React.FC<EmptyArtistsStateProps> = ({}) => {
+const EmptyArtistsState: React.FC<EmptyArtistsStateProps> = ({ home }) => {
   const artists = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <div>
@@ -14,7 +16,7 @@ const EmptyArtistsState: React.FC<EmptyArtistsStateProps> = ({}) => {
     grid-rows-1 grid-flow-col"
       >
         {artists.map((artist) => (
-          <SingleEmptyUserArtist key={artist} />
+          <SingleEmptyUserArtist key={artist} home={home} />
         ))}
       </div>
     </div>

@@ -1,15 +1,19 @@
 'use client';
 
-interface SingleEmptyUserTrackProps {}
+interface SingleEmptyUserTrackProps {
+  home?: boolean;
+}
 
-const SingleEmptyUserTrack: React.FC<SingleEmptyUserTrackProps> = ({}) => {
+const SingleEmptyUserTrack: React.FC<SingleEmptyUserTrackProps> = ({
+  home,
+}) => {
   return (
     <div
-      className="rounded-md p-4 bg-[#181818] 
+      className={`rounded-md p-4 bg-[#181818] 
   hover:bg-[#252525] transition duration-300 cursor-pointer
   group
-  animate-pulse
-  "
+    ${home ? '' : 'animate-pulse'}
+  `}
     >
       <div className="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] mb-4 rounded-md shadow-lg z-0 bg-[#4a4a4c]"></div>
       <div>

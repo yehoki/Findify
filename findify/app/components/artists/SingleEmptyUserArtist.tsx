@@ -1,14 +1,18 @@
 'use client';
 
-interface SingleEmptyUserArtistProps {}
+interface SingleEmptyUserArtistProps {
+  home?: boolean;
+}
 
-const SingleEmptyUserArtist: React.FC<SingleEmptyUserArtistProps> = ({}) => {
+const SingleEmptyUserArtist: React.FC<SingleEmptyUserArtistProps> = ({
+  home,
+}) => {
   return (
     <div
-      className="rounded-md p-4 bg-[#181818] 
+      className={`rounded-md p-4 bg-[#181818] 
   hover:bg-[#252525] transition duration-300 cursor-pointer
-  animate-pulse
-  "
+  ${home ? '' : 'animate-pulse'}
+  `}
     >
       <div
         className="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] mb-4 bg-[#4a4a4c]
