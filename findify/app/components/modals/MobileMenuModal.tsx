@@ -3,7 +3,7 @@
 import { onClose } from '@/app/reducers/mobileMenuReducer';
 import { useMobileMenuSelector } from '@/app/store/store';
 import { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
@@ -57,45 +57,62 @@ const MobileMenuModal: React.FC<MobileMenuModalProps> = ({ session }) => {
       </button>
       <div className="mt-16">
         <ul className="px-8">
-          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
-            <Link onClick={handleCloseModal} href={'/recommendations'}>
-              Your Recommendations
-            </Link>
-          </li>
-          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
-            <Link onClick={handleCloseModal} href={'/search'}>
-              Search
-            </Link>
-          </li>
-          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
-            <a
-              href="https://www.spotify.com/uk/account/overview/"
-              target="_blank"
-            >
-              Account
-            </a>
-          </li>
-          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
-            <a
-              href={`${
-                session && session.user && session.user.userId
-                  ? `https://open.spotify.com/user/${session.user.userId}`
-                  : 'https://open.spotify.com'
-              }`}
-              target="_blank"
-            >
-              Profile
-            </a>
-          </li>
-          <li className="hover:scale-110 mb-4 text-xl transition w-fit">
-            <button
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Log Out
-            </button>
-          </li>
+          {session && (
+            <>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <Link onClick={handleCloseModal} href={'/recommendations'}>
+                  Your Recommendations
+                </Link>
+              </li>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <Link onClick={handleCloseModal} href={'/search'}>
+                  Search
+                </Link>
+              </li>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <a
+                  href="https://www.spotify.com/uk/account/overview/"
+                  target="_blank"
+                >
+                  Account
+                </a>
+              </li>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <a
+                  href={`${
+                    session && session.user && session.user.userId
+                      ? `https://open.spotify.com/user/${session.user.userId}`
+                      : 'https://open.spotify.com'
+                  }`}
+                  target="_blank"
+                >
+                  Profile
+                </a>
+              </li>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <button
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
+          )}
+          {!session && (
+            <>
+              <li className="hover:scale-110 mb-4 text-xl transition w-fit">
+                <button
+                  onClick={() => {
+                    signIn('spotify');
+                  }}
+                >
+                  Log In
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

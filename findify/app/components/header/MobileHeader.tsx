@@ -24,7 +24,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ session, children }) => {
   };
   return (
     <>
-      {!session && (
+      {/* {!session && (
         <>
           <h1 className="md:hidden text-white ml-2 text-lg">Findify</h1>
           <button
@@ -38,21 +38,14 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ session, children }) => {
             Log in
           </button>
         </>
-      )}
-      {session && (
-        <>
-          <h1 className="md:hidden text-white ml-2 text-lg">
-            <Link href={'/'}>Findify</Link>
-          </h1>
-          {children}
-          <button
-            className="md:hidden text-white mr-2"
-            onClick={handleOpenModal}
-          >
-            <RxHamburgerMenu size={32} />
-          </button>
-        </>
-      )}
+      )} */}
+      <h1 className="md:hidden text-white ml-2 text-lg">
+        <Link href={'/'}>Findify</Link>
+      </h1>
+      {children}
+      <button className="md:hidden text-white mr-2" onClick={handleOpenModal}>
+        <RxHamburgerMenu size={32} />
+      </button>
     </>
   );
 };
