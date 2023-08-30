@@ -13,14 +13,19 @@ import EmptyGenreState from './components/genres/EmptyGenreState';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
 import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
 import MobileMenuProvider from './providers/MobileMenuProvider';
+import getUserInfo from './actions/user/getUserInfo';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+export function reportWebVitals(metric: any) {
+  console.log(metric);
+}
+
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
-
+  const currentUserProfile = await getUserInfo();
   return (
     <>
       <header
@@ -50,19 +55,23 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             <UserTracks session={session} />
           </Suspense>
         </div>
-        <div className="py-4 overflow-x-hidden ">
-          <Suspense fallback={<EmptyArtistsState />}>
-            <UserArtists session={session} />
-          </Suspense>
-        </div>
-        <div className="py-4">
-          <Suspense fallback={<EmptyGenreState />}>
-            <UserGenres session={session} />
-          </Suspense>
-        </div>
-        <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
-          <RecentlyPlayedTracks session={session} />
-        </Suspense>
+        {currentUserProfile === 'operational' && (
+          <>
+            <div className="py-4 overflow-x-hidden ">
+              <Suspense fallback={<EmptyArtistsState />}>
+                <UserArtists session={session} />
+              </Suspense>
+            </div>
+            <div className="py-4">
+              <Suspense fallback={<EmptyGenreState />}>
+                <UserGenres session={session} />
+              </Suspense>
+            </div>
+            <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
+              <RecentlyPlayedTracks session={session} />
+            </Suspense>
+          </>
+        )}
       </div>
     </>
   );

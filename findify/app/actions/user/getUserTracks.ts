@@ -8,6 +8,7 @@ export default async function getUserTracks(
 ) {
   try {
     const currentUser = await getUserSession();
+    console.log(currentUser);
     if (!currentUser) {
       return null;
     }
@@ -23,6 +24,7 @@ export default async function getUserTracks(
         method: 'GET',
       }
     );
+    console.log(res.status, res.statusText, res.url);
     if (res.status === 403) {
       return 'UserManagement';
     }

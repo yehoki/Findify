@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { NextAuthOptions, TokenSet } from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 import { URLSearchParams } from 'url';
