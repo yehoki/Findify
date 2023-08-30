@@ -35,6 +35,16 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
         </MobileMenuProvider>
       </header>
       <div className="mt-10 md:mt-0">
+        {!session && (
+          <>
+            <h2 className="px-4 text-xl text-white font-semibold">
+              Log in with your Spotify account
+            </h2>
+            <h3 className="px-4 text-sm text-spotifyOffWhite font-semibold">
+              See your top tracks & artists, and get new song recommendations
+            </h3>
+          </>
+        )}
         <div className="py-4 overflow-x-hidden">
           <Suspense fallback={<EmptyTracksState />}>
             <UserTracks session={session} />

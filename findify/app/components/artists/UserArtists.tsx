@@ -12,7 +12,9 @@ const UserArtists: React.FC<UserArtistsProps> = async ({ session }) => {
     return <EmptyArtistsState home={true} />;
   }
   const userArtists = await getUserArtists(50, 'medium_term');
-
+  if (!userArtists || userArtists === 'UserManagement') {
+    return <></>;
+  }
   return <MyArtistsCarousel myArtists={userArtists ? userArtists.items : []} />;
 };
 

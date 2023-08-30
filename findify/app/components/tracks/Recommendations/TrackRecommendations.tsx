@@ -1,18 +1,25 @@
 import getRecentlyPlayedTracks from '@/app/actions/tracks/getRecentlyPlayedTracks';
 import getTrackRecommendations from '@/app/actions/tracks/getTrackRecommendations';
 import { parseArtists } from '@/app/config/helper';
+import { Session } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PiCaretRightLight } from 'react-icons/pi';
+import EmptySideRecommendations from './EmptySideRecommendations';
 
-interface TrackRecommendationsProps {}
+interface TrackRecommendationsProps {
+  session: Session | null;
+}
 
-const TrackRecommendations: React.FC<
-  TrackRecommendationsProps
-> = async ({}) => {
+const TrackRecommendations: React.FC<TrackRecommendationsProps> = async ({
+  session,
+}) => {
+  if (!session) {
+    return <EmptySideRecommendations status="loggedOut" />;
+  }
   const recentlyPlayedTracks = await getRecentlyPlayedTracks();
-  if (!recentlyPlayedTracks) {
-    return <div>:/</div>;
+  if (!recentlyPlayedTracks || recentlyPlayedTracks === 'UserManagement') {
+    return <EmptySideRecommendations status="failed" />;
   }
   const recommendations = await getTrackRecommendations(
     50,
@@ -23,7 +30,7 @@ const TrackRecommendations: React.FC<
   );
 
   if (!recommendations) {
-    return <div> :/</div>;
+    return <EmptySideRecommendations status="failed" />;
   }
   return (
     <>

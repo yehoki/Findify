@@ -23,6 +23,9 @@ export default async function getUserTracks(
         method: 'GET',
       }
     );
+    if (res.status === 403) {
+      return 'UserManagement';
+    }
     if (!res.ok) {
       return null;
     }

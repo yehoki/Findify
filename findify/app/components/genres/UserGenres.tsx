@@ -14,6 +14,10 @@ const UserGenres: React.FC<UserGenresProps> = async ({ session }) => {
 
   const userGenres = await getUserGenres();
 
+  if (userGenres === 'UserManagement') {
+    return <></>;
+  }
+
   if (!userGenres) {
     return <EmptyGenreState />;
   }
