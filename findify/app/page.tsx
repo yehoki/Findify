@@ -14,6 +14,7 @@ import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPla
 import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
 import MobileMenuProvider from './providers/MobileMenuProvider';
 import TimePeriodSwitch from './components/TimePeriodSwitch';
+import { URLSearchParams } from 'url';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -22,7 +23,6 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
   const timePeriod = searchParams.tp;
-
   const formattedTimePeriod =
     timePeriod &&
     (timePeriod === 'short_term' ||
@@ -65,7 +65,11 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
           }
         />
         <div className="py-4 overflow-x-hidden">
-          <Suspense fallback={<EmptyTracksState />}>
+          <Suspense
+            fallback={<EmptyTracksState />}
+            key={`${timePeriod}-tracks`}
+          >
+            {/*@ts-ignore*/}
             <UserTracks
               session={session}
               timePeriod={
@@ -75,7 +79,10 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
           </Suspense>
         </div>
         <div className="py-4 overflow-x-hidden ">
-          <Suspense fallback={<EmptyArtistsState />}>
+          <Suspense
+            fallback={<EmptyArtistsState />}
+            key={`${timePeriod}-artists`}
+          >
             <UserArtists
               session={session}
               timePeriod={
@@ -85,7 +92,7 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
           </Suspense>
         </div>
         <div className="py-4">
-          <Suspense fallback={<EmptyGenreState />}>
+          <Suspense fallback={<EmptyGenreState />} key={`${timePeriod}-genres`}>
             <UserGenres
               session={session}
               timePeriod={
@@ -94,7 +101,10 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             />
           </Suspense>
         </div>
-        <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
+        <Suspense
+          fallback={<RecentlyPlayedTracksLoadingState />}
+          key={`${timePeriod}-recent`}
+        >
           <RecentlyPlayedTracks session={session} />
         </Suspense>
       </div>
