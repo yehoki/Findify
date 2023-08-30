@@ -1,10 +1,7 @@
 import { RecentlyPlayedTracks } from '@/app/types/SpotifyTypes';
 import getUserSession from '../user/getUserSession';
 
-export default async function getRecentlyPlayedTracks(
-  limit = 50,
-  before = new Date().getTime()
-) {
+export default async function getRecentlyPlayedTracks(limit = 50) {
   try {
     const currentUser = await getUserSession();
     if (!currentUser) {
@@ -12,17 +9,19 @@ export default async function getRecentlyPlayedTracks(
     }
     const spotifyBaseURL =
       'https://api.spotify.com/v1/me/player/recently-played';
-    const res = await fetch(
-      `${spotifyBaseURL}?limit=${limit}&before=${before}`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            currentUser.user.accessToken ? currentUser.user.accessToken : ''
-          }`,
-        },
-        method: 'GET',
-      }
-    );
+    const controller = new AbortController();
+    const abortFetch = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(`${spotifyBaseURL}?limit=${limit}`, {
+      headers: {
+        Authorization: `Bearer ${
+          currentUser.user.accessToken ? currentUser.user.accessToken : ''
+        }`,
+      },
+      signal: controller.signal,
+      method: 'GET',
+    });
+    clearTimeout(abortFetch);
+
     if (!res.ok) {
       return null;
     }

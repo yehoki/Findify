@@ -21,7 +21,6 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
-  const currentUserProfile = await getUserInfo();
   return (
     <>
       <header
@@ -51,23 +50,19 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             <UserTracks session={session} />
           </Suspense>
         </div>
-        {currentUserProfile === 'operational' && (
-          <>
-            <div className="py-4 overflow-x-hidden ">
-              <Suspense fallback={<EmptyArtistsState />}>
-                <UserArtists session={session} />
-              </Suspense>
-            </div>
-            <div className="py-4">
-              <Suspense fallback={<EmptyGenreState />}>
-                <UserGenres session={session} />
-              </Suspense>
-            </div>
-            <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
-              <RecentlyPlayedTracks session={session} />
-            </Suspense>
-          </>
-        )}
+        <div className="py-4 overflow-x-hidden ">
+          <Suspense fallback={<EmptyArtistsState />}>
+            <UserArtists session={session} />
+          </Suspense>
+        </div>
+        <div className="py-4">
+          <Suspense fallback={<EmptyGenreState />}>
+            <UserGenres session={session} />
+          </Suspense>
+        </div>
+        <Suspense fallback={<RecentlyPlayedTracksLoadingState />}>
+          <RecentlyPlayedTracks session={session} />
+        </Suspense>
       </div>
     </>
   );

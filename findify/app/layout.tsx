@@ -23,13 +23,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getUserSession();
+  // const session = await getUserSession();
   return (
     <html lang="en">
       <body className={`${lato.className} bg-black`}>
-        <MobileMenuProvider>
+        {/* <MobileMenuProvider>
           <MobileMenuModal session={session} />
-        </MobileMenuProvider>
+        </MobileMenuProvider> */}
         <main
           className="text-spotifyGreen
         w-full
@@ -57,7 +57,7 @@ export default async function RootLayout({
   overflow-y-hidden
         "
           >
-            <TrackRecommendations session={session} />
+            {/* <TrackRecommendations session={session} /> */}
           </section>
           <section
             className="bg-spotifyBlackBase
