@@ -21,7 +21,15 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = async ({ searchParams }) => {
   const session = await getUserSession();
+  const timePeriod = searchParams.tp;
 
+  const formattedTimePeriod =
+    timePeriod &&
+    (timePeriod === 'short_term' ||
+      timePeriod === 'medium_term' ||
+      timePeriod === 'long_term')
+      ? timePeriod
+      : '';
   return (
     <>
       <header
@@ -46,7 +54,16 @@ const Home: React.FC<HomeProps> = async ({ searchParams }) => {
             </h3>
           </>
         )}
-        <TimePeriodSwitch />
+        <TimePeriodSwitch
+          timePeriodParam={
+            timePeriod &&
+            (timePeriod === 'short_term' ||
+              timePeriod === 'medium_term' ||
+              timePeriod === 'long_term')
+              ? timePeriod
+              : ''
+          }
+        />
         <div className="py-4 overflow-x-hidden">
           <Suspense fallback={<EmptyTracksState />}>
             <UserTracks session={session} />

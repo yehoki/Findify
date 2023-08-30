@@ -1,35 +1,69 @@
 'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import qs from 'query-string';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-interface TimePeriodSwitchProps {}
+interface TimePeriodSwitchProps {
+  timePeriodParam: TimePeriod | '';
+}
 
 export type TimePeriod = 'short_term' | 'medium_term' | 'long_term';
 
-const TimePeriodSwitch: React.FC<TimePeriodSwitchProps> = ({}) => {
-  const searchParams = useSearchParams();
-  const [currentPeriod, setCurrentPeriod] = useState<TimePeriod>('medium_term');
+const TimePeriodSwitch: React.FC<TimePeriodSwitchProps> = ({
+  timePeriodParam,
+}) => {
+  const [currentPeriod, setCurrentPeriod] = useState<TimePeriod>(
+    timePeriodParam !== '' ? timePeriodParam : 'medium_term'
+  );
   const router = useRouter();
-  useEffect(() => {
-    const timePeriod = searchParams.get('tp');
-    if (
-      timePeriod &&
-      (timePeriod === 'short_term' ||
-        timePeriod === 'medium_term' ||
-        timePeriod === 'long_term')
-    ) {
-      setCurrentPeriod(timePeriod);
-    } else {
-      setCurrentPeriod('medium_term');
-    }
-  }, [router]);
+
+  const handleChangePeriod = (period: TimePeriod) => {
+    setCurrentPeriod(period);
+    router.push(`/?tp=${period}`);
+    return router.refresh();
+  };
+
   return (
-    <div className="flex items-center justify-center">
-      <ul className="flex">
-        <li>4 weeks</li>
-        <li>6 months</li>
-        <li>lifetime</li>
+    <div className="flex items-center justify-center md:justify-end mb-4">
+      <ul className="flex bg-spotifyGray rounded-md  items-center justify-center text-lg">
+        <li
+          onClick={() => handleChangePeriod('short_term')}
+          className={`px-4 py-2 rounded-md cursor-pointer text-white font-semibold
+        ${
+          currentPeriod === 'short_term'
+            ? 'bg-spotifyGreen'
+            : 'hover:bg-spotifyGreen/75'
+        }
+       transition
+        `}
+        >
+          4 weeks
+        </li>
+        <li
+          onClick={() => handleChangePeriod('medium_term')}
+          className={`px-4 py-2 rounded-md cursor-pointer text-white font-semibold
+        ${
+          currentPeriod === 'medium_term'
+            ? 'bg-spotifyGreen'
+            : 'hover:bg-spotifyGreen/75'
+        }
+          transition
+        `}
+        >
+          6 months
+        </li>
+        <li
+          onClick={() => handleChangePeriod('long_term')}
+          className={`px-4 py-2 rounded-md cursor-pointer text-white font-semibold
+        ${
+          currentPeriod === 'long_term'
+            ? 'bg-spotifyGreen'
+            : 'hover:bg-spotifyGreen/75'
+        }
+         transition
+        `}
+        >
+          lifetime
+        </li>
       </ul>
     </div>
   );
