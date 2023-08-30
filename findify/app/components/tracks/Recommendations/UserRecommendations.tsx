@@ -12,8 +12,8 @@ const UserRecommendations: React.FC<UserRecommendationsProps> = async ({
   session,
 }) => {
   const userTracks = await getUserTracks(50, 'short_term');
-  if (!userTracks) {
-    return <div></div>;
+  if (!userTracks || userTracks === 'UserManagement') {
+    return <></>;
   }
 
   const topTrackAnalysis = await getMultipleTrackAnalysis(
