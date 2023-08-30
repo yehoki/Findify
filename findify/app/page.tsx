@@ -13,7 +13,6 @@ import EmptyGenreState from './components/genres/EmptyGenreState';
 import RecentlyPlayedTracks from './components/tracks/RecentlyPlayed/RecentlyPlayedTracks';
 import RecentlyPlayedTracksLoadingState from './components/tracks/RecentlyPlayed/RecentlyPlayedTracksLoadingState';
 import MobileMenuProvider from './providers/MobileMenuProvider';
-import getUserInfo from './actions/user/getUserInfo';
 
 interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
