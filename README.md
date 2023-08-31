@@ -5,10 +5,12 @@ Findify is a fully responsive, Spotify client themed web application, using the 
 
 ## Disclaimer
 
-**At the time of writing this (30/08/2023) this application has not yet been approved for quota extension.**
+
+> **At the time of writing this (30/08/2023) this application has not yet been approved for quota extension.**
 **Until then, the Spotify Web API only allows up to 25 users to use the service at a time, each need to be manually added on the platform.**
 **Should you be interested in using the application, feel free to reach out to me, I will be happy to add your user.**
-**In the meantime, here is a YouTube video demonstrating the app in use.**
+**In the meantime, here is a [YouTube video](https://www.youtube.com/watch?v=eMHTDfCbId4&ab_channel=PatrykSienniak) demonstrating the app in use.**
+ 
 
 ## Table of Contents
 
