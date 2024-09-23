@@ -16,6 +16,16 @@ export interface MyTopArtists {
   items: ArtistObject[];
 }
 
+export interface MyPlaylists {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  total: number;
+  previous: string | null;
+  items: SimplifiedPlaylistObject[];
+}
+
 export interface SearchReturnObject<
   ItemObject extends TrackObject | SimplifiedAlbumObject | ArtistObject
 > {
@@ -102,6 +112,40 @@ export interface ArtistObject {
   images?: ImageObject[];
   name: string;
   popularity: number;
+  type: string;
+  uri: string;
+}
+
+export interface SimplifiedPlaylistObject {
+  collaborative: boolean;
+  description: string;
+  external_urls: {
+    spotify: string;
+  }
+  href: string;
+  id: string;
+  images: ImageObject[];
+  name: string; 
+  owner: {
+    external_urls: {
+      spotify: string;
+    }
+    followers: {
+      href: string | null;
+      total: number;
+    }
+    href: string;
+    id: string;
+    type: string;
+    uri: string;
+    display_name: string | null;
+  }
+  public: boolean;
+  snapshot_id: string;
+  tracks: {
+    href: string;
+    total: number;
+  }
   type: string;
   uri: string;
 }

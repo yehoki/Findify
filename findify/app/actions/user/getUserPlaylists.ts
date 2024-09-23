@@ -1,9 +1,8 @@
-import { MyTopArtists } from '../../types/SpotifyTypes';
+import { MyPlaylists, MyTopArtists } from '../../types/SpotifyTypes';
 import getUserSession from './getUserSession';
 
-export default async function getUserArtists(
+export default async function getUserPlaylists(
   limit = 20,
-  timeRange: 'short_term' | 'medium_term' | 'long_term' = 'medium_term',
   offset = 0
 ) {
   try {
@@ -13,7 +12,7 @@ export default async function getUserArtists(
     }
     const spotifyBaseURL = 'https://api.spotify.com/v1/me';
     const res = await fetch(
-      `${spotifyBaseURL}/top/artists?time_range=${timeRange}&limit=${limit}&offset=${offset}`,
+      `${spotifyBaseURL}/playlists?limit=${limit}&offset=${offset}`,
       {
         headers: {
           Authorization: `Bearer ${
@@ -27,8 +26,8 @@ export default async function getUserArtists(
     if (!res.ok) {
       return null;
     }
-    const userArtists: MyTopArtists = await res.json();
-    return userArtists;
+    const userPlaylists: MyPlaylists = await res.json();
+    return userPlaylists;
   } catch (err: any) {
     console.log(err);
     return null;

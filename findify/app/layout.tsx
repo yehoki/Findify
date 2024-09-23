@@ -6,6 +6,7 @@ import TrackRecommendations from './components/tracks/Recommendations/TrackRecom
 import MobileMenuModal from './components/modals/MobileMenuModal';
 import MobileMenuProvider from './providers/MobileMenuProvider';
 import getUserSession from './actions/user/getUserSession';
+import Link from 'next/link';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -57,6 +58,7 @@ export default async function RootLayout({
   overflow-y-hidden
         "
           >
+            <Link href="/playlists">Playlists</Link>
             <TrackRecommendations session={session} />
           </section>
           <section
