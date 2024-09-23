@@ -68,3 +68,8 @@ export const parseGenre = (genre: string) => {
   const replacesSpaces = replaceUrlSpaces.replaceAll(' ', '%2B');
   return replacesSpaces;
 };
+
+
+export const exportPlaylist = () => {
+  return;
+}
