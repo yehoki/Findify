@@ -58,7 +58,22 @@ export default async function RootLayout({
   overflow-y-hidden
         "
           >
-            <Link href="/playlists">Playlists</Link>
+            <div
+              className="px-2 py1- mt-4 mx-2 rounded-md 
+            hover:bg-[#1a1a1a] transition duration-300 group"
+            >
+              <Link
+                href="/playlists"
+                className="flex items-center justify-between"
+              >
+                <div>
+                  <p className="text-lg text-white font-semibold whitespace-nowrap">
+                    Playlists
+                  </p>
+                </div>
+              </Link>
+            </div>
+
             <TrackRecommendations session={session} />
           </section>
           <section

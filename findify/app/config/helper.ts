@@ -1,3 +1,5 @@
+import { TrackObject } from "../types/SpotifyTypes";
+
 export const parseArtists = (artists: string[]) => {
   if (artists.length === 0) {
     return '';
@@ -68,3 +70,30 @@ export const parseGenre = (genre: string) => {
   const replacesSpaces = replaceUrlSpaces.replaceAll(' ', '%2B');
   return replacesSpaces;
 };
+
+
+export const exportPlaylist = (tracks: TrackObject[]) => {
+  const transformedTracks: string[][] = [];
+  tracks.forEach(track => {
+    const transformedTrack = [
+      track.id,
+      removeCommas(track.name),
+      removeCommas(track.artists[0].name),
+      track.external_urls.spotify
+    ];
+    transformedTracks.push(transformedTrack);
+  })
+  const transformedTracksString = transformedTracks.map(tTrack => tTrack.join(',')).join('\n');
+  const uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(transformedTracksString);
+  const link = document.createElement('a');
+  link.href = uri;
+  link.download = `Playlist.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  return;
+}
+
+export const removeCommas = (text: string) => {
+  return text.replaceAll(',', ' ');
+}

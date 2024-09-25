@@ -262,3 +262,12 @@ export type AudioFeaturesObject = {
   uri: string;
   valence: number;
 };
+
+
+export type exportedPlaylistObject = {
+  externalSpotifyUrl: string;
+  playlistId: string;
+  href: string;
+  name: string;
+  tracks: TrackObject[];
+}
