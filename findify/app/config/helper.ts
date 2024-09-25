@@ -77,8 +77,8 @@ export const exportPlaylist = (tracks: TrackObject[]) => {
   tracks.forEach(track => {
     const transformedTrack = [
       track.id,
-      track.name,
-      track.artists[0].name,
+      removeCommas(track.name),
+      removeCommas(track.artists[0].name),
       track.external_urls.spotify
     ];
     transformedTracks.push(transformedTrack);
@@ -92,4 +92,8 @@ export const exportPlaylist = (tracks: TrackObject[]) => {
   link.click();
   document.body.removeChild(link);
   return;
+}
+
+export const removeCommas = (text: string) => {
+  return text.replaceAll(',', ' ');
 }
