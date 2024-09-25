@@ -28,8 +28,8 @@ const SinglePlaylist: React.FC<SinglePlaylistProps> = ({
   // }, []);
 
   return (
-    <div className="flex flex-row gap-2 items-center">
-      <div className="relative h-[50px] w-[50px] md:w-[75px] md:h-[75px] mb-4 rounded-md shadow-lg z-0">
+    <div className="flex flex-col justify-center items-center">
+      <div className="relative h-[50px] w-[50px] md:w-[75px] md:h-[75px] rounded-md shadow-lg z-0">
         <Image src={imageUrl} alt={`${name} image`} fill />
       </div>
       <div>

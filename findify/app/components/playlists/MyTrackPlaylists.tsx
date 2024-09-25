@@ -40,7 +40,7 @@ const MyTrackPlaylists: React.FC<MyPlaylistsProps> = ({
   }, []);
   return (
     <>
-      <div>
+      {/* <div>
         <input
           className="text-spotifyGreen border-spotifyGreen background-transparent"
           type="file"
@@ -49,17 +49,21 @@ const MyTrackPlaylists: React.FC<MyPlaylistsProps> = ({
           accept=".csv"
           onInput={(e) => handleImport()}
         />
+      </div> */}
+      <div
+        className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 
+                            gap-4 md:gap-2 lg:gap-4">
+        {myPlaylists.items.map((playlist) => (
+          <SinglePlaylist
+            key={playlist.id}
+            name={playlist.name}
+            id={playlist.id}
+            externalSpotifyUrl={playlist.external_urls.spotify}
+            imageUrl={playlist.images[0].url}
+            handleExport={handleExport}
+          />
+        ))}
       </div>
-      {myPlaylists.items.map((playlist) => (
-        <SinglePlaylist
-          key={playlist.id}
-          name={playlist.name}
-          id={playlist.id}
-          externalSpotifyUrl={playlist.external_urls.spotify}
-          imageUrl={playlist.images[0].url}
-          handleExport={handleExport}
-        />
-      ))}
     </>
   );
 };
