@@ -19,7 +19,6 @@ const MyTrackPlaylists: React.FC<MyPlaylistsProps> = ({
   const handleExport = useCallback(
     async (id: string) => {
       const playlistTracks = await getPlaylistTracksById(id, session);
-      console.log(playlistTracks);
       if (!playlistTracks) {
         return;
       }
@@ -27,10 +26,33 @@ const MyTrackPlaylists: React.FC<MyPlaylistsProps> = ({
     },
     [session]
   );
+
+  const handleImport = useCallback(async () => {
+    const fileInput = document.getElementById(
+      'playlist-import'
+    ) as HTMLInputElement;
+    if (fileInput.files === null) {
+      return;
+    }
+    const file = fileInput.files[0];
+    const fileText = await file.text();
+    const newArr = fileText.split('\n').map((row) => row.split(','));
+  }, []);
   return (
     <>
+      <div>
+        <input
+          className="text-spotifyGreen border-spotifyGreen background-transparent"
+          type="file"
+          name="playlist-import"
+          id="playlist-import"
+          accept=".csv"
+          onInput={(e) => handleImport()}
+        />
+      </div>
       {myPlaylists.items.map((playlist) => (
         <SinglePlaylist
+          key={playlist.id}
           name={playlist.name}
           id={playlist.id}
           externalSpotifyUrl={playlist.external_urls.spotify}
